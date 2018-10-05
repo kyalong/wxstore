@@ -1,0 +1,285 @@
+.page1 {
+  display: flex;
+  flex-direction: column;
+  border-bottom: dashed 1px #f6f6f6;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  align-items: flex-start;
+  margin: 1rem 0;
+}
+
+.title {
+  font-size: 30pt;
+  align-self: stretch;
+}
+
+.title::after {
+  display: inline-block;
+  content: '';
+  height: 8px;
+  width: 8px;
+  border: solid 2px #a16b47;
+  border-radius: 8px;
+  position: relative;
+  bottom: 35px;
+  right: -5px;
+}
+
+.subtitle {
+  font-size: 13pt;
+  margin-top: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+swiper-item {
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5pt;
+  margin: 1rem 10px;
+  box-shadow: 0 5px 10px lightgray;
+}
+
+image {
+  background-color: #f6f6f6;
+  width: 100%;
+  height: 100%;
+  border-radius: 5pt;
+}
+
+.item {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 0.5rem;
+}
+
+.itemname {
+  font-size: 13pt;
+}
+
+.price {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a16b47;
+}
+
+.price>text:last-child {
+  color: black;
+  font-size: small;
+  margin-left: 1rem;
+}
+
+.page2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent
+}
+
+.btn {
+  position: fixed;
+  bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.bt {
+  width: 120px;
+  height: 34px;
+  border-radius: 48px;
+  border: 0;
+  color: #fff;
+  font-size: 11pt;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.buy {
+  background-color: #a16b47;
+  margin-left: 0.5rem
+}
+
+.addcart {
+  background-color: silver;
+  margin-right: 0.5rem
+}
+
+.subfilter{
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a16b47;
+  margin: 1rem 0 ;
+}
+.icons{
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icons image{
+  padding: 0 0.5rem;
+  width: 20px;
+  height: 20px;
+  background-color: transparent
+}
+.icon{
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+  align-items: center;
+  background-color: transparent;
+  margin: 0
+}
+.icon>text{
+  padding-top: 0.25rem
+}
+
+.icon::after{
+  border: none;
+}
+.display{
+  display: block;
+  border-radius: 0;
+  background-color: transparent
+}
+
+.mask {
+  /* position: fixed;
+  top: 0;
+  left: 0; */
+  background-color: #000000b3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: larger;
+  background-color:white;
+  width: 100%;
+  height: 80%;
+  border-radius: 10pt 10pt 0pt 0pt;
+}
+
+.l1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: solid 1px #f6f6f6;
+}
+
+.maskimage {
+  width: 100px;
+  height: 100px;
+  border-radius: 0;
+}
+
+.l1>view {
+  align-self: stretch;
+  flex-grow: 1;
+  margin: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around
+}
+.maskprice,.mastitle,.maskstock{
+  color: #a16b47
+}
+
+
+.cancelicon{
+  align-self: flex-start;
+  width: 30px;
+  height: 30px
+}
+
+.ldetail{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: solid 1px #f6f6f6;
+}
+.l2 {
+flex-grow: 1;
+
+}
+
+.l3 {
+  flex-grow: 1
+}
+
+.maskframe{
+  align-self: flex-start;
+  background-color: #f6f6f6;
+  padding: 0.25rem;
+  border-radius: 4pt; 
+  margin: 0.5rem 0.5rem 0 0;
+}
+.l4 {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+   align-items: center;
+}
+.masknum{
+  display: flex;
+  justify-content: space-around;
+  /* font-size: larger */
+ 
+}
+.masknum>text{
+  width: 25px;
+  height: 25px;
+  border: solid 1px #a16b47;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2px;
+  font-weight: bold;
+}
+.masknum>text:nth-child(2){
+  font-size: smaller;
+  color: #a16b47;
+}
+.submit{
+  align-self: center;
+  width: 80%;
+  height: 40px;
+  background-color: #a16b47;
+  border-radius: 80px 80px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: 3rem;
+}

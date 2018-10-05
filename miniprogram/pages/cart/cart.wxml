@@ -1,0 +1,34 @@
+<view>
+  <view class='main'>
+    <view class='title'>购物车</view>
+    <view class='subtitle'>左滑可删除和分享</view>
+  </view>
+</view>
+<checkbox-group>
+  <view class='all' catchtap='selected'>
+    <checkbox value='{{detail._id}}' checked='{{ischecked}}' />
+    <view>全选</view>
+  </view>
+  <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+    <leftmove open='{{isopen}}' itemid='{{detail.cartid}}'>
+      <checkbox value='{{detail._id}}' checked='{{ischecked}}' />
+      <view class='item' data-id='{{detail._id}}'>
+        <image src='{{detail.image[0]}}' class='thum' style='height:{{h/6}}px;width:{{h/6}}px' catchtap='gotodetail' data-id='{{detail._id}}'></image>
+        <view class='price'>
+          <text>{{detail.detail[1]}}</text>
+          <text>尺码:{{detail.detail[2]}}</text>
+          <text>￥{{detail.price}}</text>
+        </view>
+        <view class='num'>
+          <text catchtap='add' data-num='{{detail.num}}'>+</text>
+          <text>{{num<=1?detail.num:num}}</text>
+          <text style='{{detail.num==1&&num<=1?"background-color:#eee":""}}' catchtap='minus' data-num='{{detail.num}}'>-</text>
+        </view>
+      </view>
+    </leftmove>
+  </block>
+</checkbox-group>
+<view class='buy'>
+  <text>合计:￥{{}}</text>
+  <view catchtap='buy'>去结算</view>
+</view>

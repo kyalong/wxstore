@@ -1,0 +1,53 @@
+<!-- <wxs src='shop.wxs' module='m1'/> -->
+<!-- <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''> -->
+<view style='height:{{h}}px'>
+  <view class='h1'>
+    <view class='main'>
+      <view class='title'>格子铺</view>
+      <view class='subtitle'>今日推荐</view>
+    </view>
+    <view class='view' catchtap='changemode'>
+      <block wx:if='{{islist}}'>
+        <image src='../../images/cardview.png'></image>
+      </block>
+      <block wx:else>
+        <image src='../../images/listview.png'></image>
+      </block>
+    </view>
+  </view>
+  <block wx:if='{{islist}}'>
+    <swiper autoplay='true' interval='5000' previous-margin='50px' next-margin='50px' circular='true' style='height:{{0.7*h}}px'>
+      <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+        <swiper-item>
+          <view class='card' style='width:{{0.75*w}}px;height:{{0.65*h}}px' bindtap='itemdetail' data-id='{{detail._id}}'>
+            <image src='{{detail.image[1]}}' mode='aspectFill'></image>
+            <view class='item'>
+              <view class='itemname'>{{detail.detail[1]}}</view>
+              <view class='price'>
+                <text>￥{{detail.price}}</text>
+                <view class='icon' catchtap='addcart' data-id='{{detail._id}}'>
+                  <image src='../../images/cart.png'></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </block>
+  <block wx:else>
+    <scroll-view style='height:{{0.78*h}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true'>
+      <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+        <m1 detail='{{detail}}' h='{{h}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+        <m2 items='{{items2}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+        <m2 items='{{items2}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+      </block>
+      <m1 detail='{{items1[0]}}' h='{{h}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+      <m2 items='{{items2}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+      <m1 detail='{{items1[0]}}' h='{{h}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+      <m3 items='{{items}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+    </scroll-view>
+  </block>
+</view>
+<!-- </block> -->
+<include src='../../utils/template.wxml'></include>

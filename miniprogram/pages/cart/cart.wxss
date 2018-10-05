@@ -1,0 +1,152 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  align-items: flex-start;
+  margin: 1rem 0;
+}
+
+.title {
+  font-size: 30pt;
+  align-self: stretch;
+}
+
+.title::after {
+  display: inline-block;
+  content: '';
+  height: 8px;
+  width: 8px;
+  border: solid 2px #a16b47;
+  border-radius: 8px;
+  position: relative;
+  bottom: 35px;
+  right: -5px;
+}
+
+.subtitle {
+  font-size: 13pt;
+  margin-top: 0.5rem;
+  padding-left: 0.25rem;
+  color: lightgray;
+}
+
+checkbox-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.all {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.all>view {
+  padding-left: 0.5rem;
+}
+
+.checkboxes {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+checkbox {
+  margin-left: 0.5rem;
+}
+
+checkbox .wx-checkbox-input {
+  border-radius: 50%; /* 圆角 */
+  width: 40rpx; /* 背景的宽 */
+  height: 40rpx; /* 背景的高 */
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  border: solid 1px transparent;
+  background: #a16b47;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  border-radius: 50%; /* 圆角 */
+  width: 40rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 40rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 30rpx; /* 对勾大小 30rpx */
+  color: #fff; /* 对勾颜色 白色 */
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.item {
+  flex-grow: 1;
+  display: flex;
+  margin: 1.5rem 0;
+}
+
+.item>image {
+  background-color: #f6f6f6;
+  margin-left: 0.75rem;
+  border-radius: 5pt;
+}
+
+.price {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.5rem;
+  justify-content: space-around;
+}
+
+.price>text:last-child {
+  color: #a16b47;
+}
+
+.num {
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.num>text {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: solid 1px #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.num>text:nth-child(2) {
+  font-size: smaller;
+  color: #a16b47;
+}
+
+
+.buy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buy>text {
+  color: #a16b47;
+  margin-top: 1rem;
+}
+
+.buy>view {
+  background-color: #a16b47;
+  height: 30px;
+  width: 200px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: smaller;
+  color: white;
+  margin: 0.5rem 0 3rem 0;
+}

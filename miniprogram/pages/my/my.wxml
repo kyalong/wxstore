@@ -1,0 +1,32 @@
+<view class="userinfo">
+  <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+  <block wx:else>
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </block>
+</view>
+<view class='bar'>
+  <view class='baritem'>
+    <image src='../../images/pay.png'></image>
+    <text>待付款</text>
+  </view>
+  <view class='baritem'>
+    <image src='../../images/post.png'></image>
+    <text>待发货</text>
+  </view>
+  <view class='baritem'>
+    <image src='../../images/rec.png'></image>
+    <text>待收货</text>
+  </view>
+</view>
+<view class='docker'>
+  <!-- <view class='btn' bindtap='auth' hover-class='hoverc'>收藏夹</view> -->
+  <view class='btn' bindtap='card' hover-class='hoverc'>
+    <text>优惠券</text> </view>
+  <view class='btn' bindtap='address' hover-class='hoverc'>
+    <text>收货地址</text> </view>
+  <view class='btn' bindtap='feedback' hover-class='hoverc'>
+    <text>建议反馈</text> </view>
+  <view class='btn' bindtap='csc' hover-class='hoverc'>
+    <text>联系商家</text> </view>
+</view>

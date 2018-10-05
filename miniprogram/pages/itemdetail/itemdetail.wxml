@@ -1,0 +1,50 @@
+<block wx:for='{{items}}' wx:key=''>
+  <view class='page1' style='height:{{h}}px'>
+    <view class='main'>
+      <view class='title'>{{item.detail[1]}}</view>
+      <view class='subtitle'>{{item.title}}</view>
+    </view>
+    <swiper autoplay='true' interval='3000' previous-margin='50px' next-margin='50px' circular='true' style='height:{{0.5*h}}px'>
+      <block wx:for='{{item.image}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+        <swiper-item>
+          <view class='card' style='width:{{0.75*w}}px;height:{{0.75*w}}px'>
+            <image src='{{detail}}' mode='aspectFill'></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='price'>
+      <text>￥{{item.price}}</text>
+      <text>已售{{item.soldnum}}</text>
+    </view>
+    <view class='icons'>
+      <button class='icon' open-type='share'>
+        <image src='../../images/share.png'></image>
+        <text>分享</text>
+      </button>
+      <!-- <view class='icon'> -->
+      <button open-type='contact' plain='' class='icon' session-from=''>
+        <image src='../../images/csc1.png'></image>
+        <text style='display:block'>客服</text>
+      </button>
+      <!-- </view> -->
+      <!-- <image src=''></image> -->
+    </view>
+  </view>
+</block>
+<view style='height:{{h}}px;' class='page2'>
+  <view class='subfilter'>
+    <text>详情</text>
+    <!-- <text>评价</text> -->
+  </view>
+  <scroll-view style='height:100%;width:{{w}}px' scroll-y='true' scroll-with-animation='true'>
+    <block wx:for='{{imagelist}}' wx:key=''>
+      <image src='{{item}}' class='display' style='height:{{0.75*w}}px;width:{{w}}px'></image>
+    </block>
+  </scroll-view>
+  <view class='btn'>
+    <view class='addcart bt' plain='' catchtap='addcart'>加入购物车</view>
+    <view class='buy bt' plain='' catchtap='buy'>立即购买</view>
+  </view>
+</view>
+<include src='../../utils/template.wxml'></include>

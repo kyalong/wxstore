@@ -1,0 +1,16 @@
+<view class='model2'>
+  <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+    <view class='card' style='height:{{0.56*w}}px;width:{{0.46*w}}px;' bindtap='itemdetail' data-id='{{detail._id}}'>
+      <image src='{{detail.image[0]}}' mode='aspectFill' style=''></image>
+      <view class='item'>
+        <view class='texts'>
+          <text class='itemname'>{{detail.detail[1]}}</text>
+          <text class='price'>￥{{detail.price}}</text>
+        </view>
+        <view class='icon' catchtap='addcart' data-id='{{detail._id}}'>
+          <image src='../../images/cart.png'></image>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

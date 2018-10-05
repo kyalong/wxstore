@@ -1,0 +1,116 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  align-items: flex-start;
+  margin: 1rem 0;
+}
+
+.title {
+  font-size: 30pt;
+  align-self: stretch;
+}
+
+.title::after {
+  display: inline-block;
+  content: '';
+  height: 8px;
+  width: 8px;
+  border: solid 2px #a16b47;
+  border-radius: 8px;
+  position: relative;
+  bottom: 35px;
+  right: -5px;
+}
+
+.address {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem 1.5rem;
+  border-bottom: solid 10px #f6f6f6;
+}
+
+.address>image {
+  align-self: center;
+  width: 30px;
+  height: 30px;
+}
+
+.address>view{
+  display: flex;
+  flex-direction: column;
+
+}
+.address>view text{
+  margin: 0.1rem 0
+}
+.item {
+  display: flex;
+  margin: 1.5rem 0;
+}
+
+.item>image {
+  background-color: #f6f6f6;
+  margin-left: 0.75rem;
+  border-radius: 5pt;
+}
+
+.price {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.5rem;
+  justify-content: space-around;
+}
+
+.price>text:last-child {
+  color: #a16b47;
+}
+
+.num {
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.num>text:last-child{
+  font-size: smaller;
+  color: silver;
+  text-align: right
+}
+.deliver {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-top: solid 1px #f6f6f6;
+  border-bottom: solid 1px #f6f6f6;
+}
+
+.deliver>text:last-child {
+  color: #a16b47;
+}
+
+.mark {
+  padding: 0.5rem 0.75rem;
+  border-bottom: solid 1px #f6f6f6;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  color: #a16b47;
+
+}
+
+.submit {
+  margin-top: 0.5rem;
+  width: 100%;
+  height: 40px;
+  background-color: #a16b47;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0
+}

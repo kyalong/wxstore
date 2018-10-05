@@ -1,0 +1,38 @@
+<view class='mask' style='display: {{popup}};height:{{h}}px;' animation='{{animationData}}'>
+  <view style='height:{{0.2*h}}px;' catchtap='popdown'></view>
+  <block wx:for='{{maskinfo}}' wx:key=''>
+    <view class='info'>
+      <view class='l1'>
+        <image class='maskimage' src='{{item.image[0]}}'></image>
+        <view>
+          <view class='masktitle'>{{item.title}}</view>
+          <view class='maskstock'>剩余库存:{{item.restnum}}件</view>
+          <view class='maskprice'>价格:￥{{item.price}}</view>
+        </view>
+        <image class='cancelicon' src='../../images/cancel.png' catchtap='popdown'></image>
+      </view>
+      <view class='l2 ldetail'>
+        <text>尺码</text>
+        <block>
+          <view class='maskframe'>{{item.detail[2]}}</view>
+        </block>
+      </view>
+      <view class='l3 ldetail'>
+        <text>颜色</text>
+        <block>
+          <view class='maskframe'>{{item.detail[0]}}</view>
+        </block>
+      </view>
+      <view class='l4'>
+        <text>数量</text>
+        <view class='masknum'>
+          <text style='{{masknum==1?"background-color:#eee":""}}' catchtap='minus'>-</text>
+          <text>{{masknum}}</text>
+          <text catchtap='add'>+</text>
+        </view>
+      </view>
+      <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}'>确定</view>
+    </view>
+  </block>
+
+</view>

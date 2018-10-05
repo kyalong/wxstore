@@ -1,0 +1,78 @@
+{
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"appid": "wx5512572fce599c3c",
+	"projectname": "boutique",
+	"libVersion": "2.2.5",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 6,
+			"list": [
+				{
+					"id": -1,
+					"name": "db guide",
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "cart",
+					"pathName": "pages/cart/cart",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "my",
+					"pathName": "pages/my/my",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "order",
+					"pathName": "pages/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "itemdetail",
+					"pathName": "pages/itemdetail/itemdetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "orderlist",
+					"pathName": "pages/orderlist/orderlist",
+					"query": ""
+				},
+				{
+					"id": 6,
+					"name": "zujian",
+					"pathName": "zujian/slider-left/index",
+					"query": ""
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,14 @@
+function tmpfile(fileid) {
+  wx.cloud.getTempFileURL({
+    fileList: fileids,
+    success: function(res){
+      console.log(res.fileList)
+      return res.fileList[0].tempFileURL
+    },
+    fail: console.error
+  })
+}
+
+module.exports = {
+  tmpfile: tmpfile
+}

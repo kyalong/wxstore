@@ -1,0 +1,52 @@
+<form bindsubmit='formsubmit'>
+  <view>
+    <view class='main'>
+      <view class='title'>订单确认</view>
+    </view>
+  </view>
+
+  <block wx:if='{{haveaddr}}'>
+    <view class='address' bindtap='getaddr'>
+      <text>{{address}}</text>
+      <image src='../../images/add.png'></image>
+    </view>
+  </block>
+  <block wx:else>
+    <view class='address' bindtap='getaddr'>
+      <view>
+        <text>{{address}}</text>
+        <text>{{phone}}</text>
+        <text>{{user}}</text>
+      </view>
+      <image src='../../images/choose.png'></image>
+    </view>
+  </block>
+
+
+  <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+    <view class='item' catchtap='selected'>
+      <image src='{{detail[3]}}' class='thum' style='height:{{h/6}}px;width:{{h/6}}px'></image>
+      <view class='price'>
+        <text>{{detail[0]}}</text>
+        <text>尺码:{{detail[1]}}</text>
+
+      </view>
+      <view class='num'>
+        <text>￥{{detail[2]}}</text>
+        <text>x {{detail[4]}}</text>
+      </view>
+    </view>
+  </block>
+  <view class='deliver'>
+    <text>配送方式</text>
+    <text>包邮</text>
+  </view>
+  <view class='mark'>
+    <input placeholder='备注'></input>
+  </view>
+  <view class='total'>
+    <text>合计</text>
+    <text>￥{{total}}</text>
+  </view>
+  <button class='submit' form-type='submit'>提交订单</button>
+</form>
