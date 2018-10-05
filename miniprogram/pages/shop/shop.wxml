@@ -36,15 +36,14 @@
     </swiper>
   </block>
   <block wx:else>
-    <scroll-view style='height:{{0.78*h}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true'>
+    <scroll-view style='height:{{0.79*h}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true'>
       <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
-        <m1 detail='{{detail}}' h='{{h}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+        <m1 detail='{{detail}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         <m2 items='{{items2}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
-
       </block>
-      <m1 detail='{{items1[0]}}' h='{{h}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+      <m1 detail='{{items1[0]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
       <m2 items='{{items2}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
-      <m1 detail='{{items1[0]}}' h='{{h}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+      <m1 detail='{{items1[0]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
       <m3 items='{{items}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
       <m2 items='{{items2}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
     </scroll-view>

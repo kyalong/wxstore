@@ -1,5 +1,5 @@
 <view class='model1'>
-  <view class='card' style='height:{{0.65*h}}px;' bindtap='itemdetail' data-id='{{detail._id}}'>
+  <view class='card' style='height:{{1.414*(w-2*16)*0.889}}px;width:{{(w-2*16)/1}}px;' bindtap='itemdetail' data-id='{{detail._id}}'>
     <image src='{{detail.image[0]}}' mode='aspectFill' style='' lazy-load='true'></image>
     <view class='item'>
       <view class='itemname'>{{detail.detail[1]}}</view>
