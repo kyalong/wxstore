@@ -54,6 +54,9 @@ checkbox-group {
 
 checkbox {
   margin-left: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 
 checkbox .wx-checkbox-input {
@@ -83,7 +86,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 .item {
   flex-grow: 1;
   display: flex;
-  margin: 1.5rem 0;
+  margin: 0.75rem 0;
 }
 
 .item>image {
