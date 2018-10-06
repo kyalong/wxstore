@@ -9,21 +9,25 @@
 .card {
   display: flex;
   flex-direction: column;
-  border: solid 1px #eee; 
-  border-radius: 5px 5px 5px 5px;
+   /* border: solid 1px #eee;  */
+  box-shadow: 0 0 1px silver;
+  border-radius: 5px;
+  z-index: 2
 }
 
 .card>image {
   width: 100%;
   height: 70.7%;
-  z-index: 2;
+  z-index: 1;
+   border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .item {
   flex-grow: 1;
   display: flex;
   justify-content: space-between;
-  padding: 0 0.25rem;
+  padding: 0.25rem 0.25rem;
   font-size: smaller;
   align-items: center;
   /* border: solid 1px #eee; */
@@ -31,6 +35,7 @@
    border-radius: 0 0 5px 5px; */
 }
 .texts{
+  align-self: stretch;
   display: flex;
   flex-direction: column;
   justify-content: space-between
@@ -45,6 +50,7 @@
 }
 
 .icon {
+  align-self: flex-end;
   width: 30px;
   height: 30px;
   border-radius: 50%;
