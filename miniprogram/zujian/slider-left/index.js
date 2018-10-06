@@ -18,9 +18,9 @@ Component({
     itemid: {
       type: String
     },
-    isuse:{
-      type:Boolean,
-      value:false
+    isuse: {
+      type: Boolean,
+      value: false
     },
     // 菜单是否打开了，true表示打开，false表示关闭
     open: {
@@ -34,6 +34,10 @@ Component({
           open
         })
       }
+    },
+    isdel: {
+      type: String,
+      value: 'block'
     }
 
   },
@@ -96,7 +100,10 @@ Component({
     },
     // 点击删除按钮触发的事件
     del: function(e) {
-
+      this.setData({
+        isdel:'none',
+        ids: e.currentTarget.dataset.id
+      })
       db.collection('cart').doc(e.currentTarget.dataset.id).remove().then(
         res => {
           console.log(res)
@@ -116,9 +123,9 @@ Component({
           // })
         }
       )
-      this.triggerEvent('del', {
-        itemid: e.currentTarget.dataset.id
-      })
+      // this.triggerEvent('del', {
+      //   itemid: e.currentTarget.dataset.id
+      // })
     },
     share: function() {
       this.setData({

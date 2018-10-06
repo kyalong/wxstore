@@ -50,4 +50,4 @@
   </block>
 </view>
 <!-- </block> -->
-<include src='../../utils/template.wxml'></include>
+<popcart maskinfo='{{maskinfo}}' popup='{{popup}}' bindpopdown='popdown' animationData='{{animationData}}' bindadd='add' bindminus='minus' bindconfirm='confirm' h='{{h}}' masknum='{{masknum}}'></popcart>

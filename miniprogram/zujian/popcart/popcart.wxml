@@ -1,7 +1,7 @@
-<view class='mask' style='display: {{popup}};height:1334rpx;' animation='{{animationData}}'>
-  <view  catchtap='popdown'></view>
+<view class='mask' style='display:{{popup}};height:{{h}}px;' animation='{{animationData}}'>
+  <view catchtap='popdown' style='flex-grow:1'></view>
   <block wx:for='{{maskinfo}}' wx:key=''>
-    <view class='info' >
+    <view class='info' style='height: {{h / 1.414}}px;'>
       <view class='l1'>
         <image class='maskimage' src='{{item.image[0]}}'></image>
         <view>
@@ -31,7 +31,11 @@
           <text catchtap='add'>+</text>
         </view>
       </view>
-      <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}'>确定</view>
+      <view class='l5'>
+        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}'>确定</view>
+      </view>
+
     </view>
   </block>
+
 </view>

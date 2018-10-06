@@ -7,7 +7,7 @@
     "pages/my/my",
     "pages/order/order",
     "pages/orderlist/orderlist",
-    "zujian/slider-left/index"
+    "zujian/popcart/popcart"
   ],
   "window": {
     "backgroundColor": "#ffffff",

@@ -9,12 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: {
-      sku1: ['真皮', '舒服只因有你', 100, ['../../images/item1.png', '../../images/item5.png', '../../images/item3.png', '../../images/item2.png'], 20],
-    },
+    items: '',
     w: app.globalData.sysw,
-    h: app.globalData.sysh * 1.08,
-    imagelist: ['../../images/item1.png', '../../images/item4.png', '../../images/item3.png', '../../images/item2.png', '../../images/item5.png'],
+    h: app.globalData.sysh,
+    sh:app.globalData.syssh,
+    sw:app.globalData.syssw,
+    imagelist: '',
     popup: 'none',
     maskinfo: '',
     masknum: 1,
@@ -25,9 +25,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   addcart: function(e) {
-
+    console.log(this.data.h)
     let animation = this.animation
-    animation.translateY(-2 * this.data.h).opacity(1).step({
+    animation.translateY(-this.data.h-48).opacity(1).step({
       duration: 200
     })
     // animation.top(0).left(0).opacity(1).step({ duration: 300 })

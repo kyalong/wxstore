@@ -5,14 +5,12 @@
   box-shadow: 0 0 1px silver;
   border-radius: 5pt;
   margin: 16px;
-  z-index: 2
 }
 
 .card>image {
   background-color: #f6f6f6;
   width: 100%;
   height: 80.7%;
-  z-index: 1;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }

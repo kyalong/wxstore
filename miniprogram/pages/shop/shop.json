@@ -4,6 +4,7 @@
   "usingComponents": {
     "m1": "../../zujian/model1/model1",
     "m2": "../../zujian/model2/model2",
-    "m3": "../../zujian/model3/model3"
+    "m3": "../../zujian/model3/model3",
+    "popcart": "../../zujian/popcart/popcart"
   }
 }

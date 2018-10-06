@@ -17,6 +17,8 @@ App({
     let sysinfo = wx.getSystemInfoSync()
     this.globalData.sysw = sysinfo.windowWidth
     this.globalData.sysh = sysinfo.windowHeight
+    this.globalData.syssw = sysinfo.screenWidth
+    this.globalData.syssh = sysinfo.screenHeight
     db.collection('cart').get().then(res=>{
       if(res.data[0]==undefined){
         wx.hideTabBarRedDot({

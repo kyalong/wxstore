@@ -1,4 +1,4 @@
-<movable-area class="slider-left-item" style="width:calc({{openWidth}}px + 750rpx);margin-left:-{{openWidth}}px;">
+<movable-area class="slider-left-item" style="width:calc({{openWidth}}px + 750rpx);margin-left:-{{openWidth}}px;display:{{itemid==ids?isdel:'block'}}" >
   <movable-view class="slider-left-content" damping="100" x="{{x}}" direction="horizontal" bind:touchstart="handleTouchestart" bind:touchend="handleTouchend" bind:change="handleChange" out-of-bounds='true' inertia='true' disabled='{{isuse}}'>
     <slot></slot>
 
