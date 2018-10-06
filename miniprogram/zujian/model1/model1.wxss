@@ -4,7 +4,7 @@
   /* border: solid 1px #eee;  */
   box-shadow: 0 0 1px silver;
   border-radius: 3px;
-  margin:0 16px 16px 16px;
+  margin: 0 16px 16px 16px;
 }
 
 .card>image {
@@ -48,10 +48,13 @@
 .icon>image {
   width: 23px;
   height: 23px;
-  background-color: #f6f6f6;
+  background-color: transparent;
 }
 
+.hoverc {
+  opacity: 0.7;
+}
 
-.hoverc{
-  opacity: 0.7
+.hoverb {
+  background-color: silver;
 }

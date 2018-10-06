@@ -12,7 +12,7 @@
   <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
     <leftmove open='{{isopen}}' itemid='{{detail.cartid}}'>
       <checkbox value='{{detail._id}}' checked='{{ischecked}}' />
-      <view class='item' data-id='{{detail._id}}' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
+      <view class='item' data-id='{{detail._id}}' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time	='100'>
         <image src='{{detail.image[0]}}' class='thum' style='height:{{h/6}}px;width:{{h/6}}px' catchtap='gotodetail' data-id='{{detail._id}}'></image>
         <view class='price'>
           <text>{{detail.detail[1]}}</text>

@@ -76,7 +76,7 @@ swiper-item {
 }
 
 .itemname {
-  /* font-size: 13pt; */
+  font-size: 1rem;
 }
 
 .price {
@@ -84,7 +84,7 @@ swiper-item {
   justify-content: space-between;
   align-items: center;
   color: #a16b47;
-  font-size: smaller;
+  font-size: 1.1rem;
 }
 
 .icon {
@@ -100,10 +100,8 @@ swiper-item {
 .icon>image {
   width: 25px;
   height: 25px;
-  background-color: #f6f6f6;
+  background-color: transparent;
 }
-
-
 
 .end {
   display: flex;
@@ -111,14 +109,22 @@ swiper-item {
   justify-content: center;
   align-items: center;
   padding-bottom: 16px;
-  color: silver
+  color: silver;
 }
 
-.end>text:first-child{
+.end>text:first-child {
   font-size: 1.5rem;
   font-family: little2;
 }
-.end>text:last-child{
+
+.end>text:last-child {
   font-size: 0.9rem;
   font-family: little;
+}
+
+.hoverc {
+  opacity: 0.7;
+}
+.hoverb{
+  background-color: silver
 }

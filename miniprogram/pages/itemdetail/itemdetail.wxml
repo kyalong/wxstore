@@ -39,8 +39,8 @@
       </scroll-view>
     </scroll-view>
     <view class='btn' style='  height: {{w*(1-1/1.414)/(1.618*1.618)}}px'>
-      <view class='addcart bt' plain='' catchtap='addcart'>加入购物车</view>
-      <view class='buy bt' plain='' catchtap='buy'>立即购买</view>
+      <view class='addcart bt' plain='' catchtap='addcart'  hover='true' hover-class='hovera' hover-start-time='50' hover-stay-time	='100'>加入购物车</view>
+      <view class='buy bt' plain='' catchtap='buy'  hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time	='100'>立即购买</view>
     </view>
   </view>
   <!-- <view class='page2'> -->

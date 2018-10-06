@@ -159,6 +159,7 @@ image {
   align-items: center;
   background-color: transparent;
   margin: 0;
+  padding: 0
 }
 
 .icon>view {
@@ -177,3 +178,14 @@ image {
   background-color: transparent;
 }
 
+.hovera{
+  background-color: #a16b47;
+}
+.hoverb{
+  background-color: silver
+}
+
+.button-hover {
+  background-color: silver;
+  opacity: 0.7
+}
