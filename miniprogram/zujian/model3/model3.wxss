@@ -62,3 +62,7 @@
   height: 20px;
   background-color: #f6f6f6;
 }
+
+.hoverc{
+  opacity: 0.7
+}

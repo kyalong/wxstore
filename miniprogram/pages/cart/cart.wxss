@@ -152,3 +152,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   color: white;
   margin: 0.5rem 0 3rem 0;
 }
+
+.hoverc{
+  opacity: 0.618
+}

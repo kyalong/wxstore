@@ -21,12 +21,12 @@
 </view>
 <view class='docker'>
   <!-- <view class='btn' bindtap='auth' hover-class='hoverc'>收藏夹</view> -->
-  <view class='btn' bindtap='card' hover-class='hoverc'>
+  <view class='btn' bindtap='card' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
     <text>优惠券</text> </view>
-  <view class='btn' bindtap='address' hover-class='hoverc'>
+  <view class='btn' bindtap='address' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
     <text>收货地址</text> </view>
-  <view class='btn' bindtap='feedback' hover-class='hoverc'>
+  <view class='btn' bindtap='feedback' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
     <text>建议反馈</text> </view>
-  <view class='btn' bindtap='csc' hover-class='hoverc'>
+  <view class='btn' bindtap='csc' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
     <text>联系商家</text> </view>
 </view>
