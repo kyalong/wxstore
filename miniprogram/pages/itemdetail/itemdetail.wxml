@@ -1,11 +1,10 @@
 <block wx:for='{{items}}' wx:key=''>
   <view class='page1' style='height:{{h+48}}px'>
     <view class='main' style='{{w*(1-1/1.414)}}px'>
-      <view class='title'>{{item.detail[1]}}</view>
-      <view class='subtitle'>{{item.title}}</view>
+      <view class='title'>{{item.title}}</view>
+      <view class='subtitle'>{{item.detail[1]}}</view>
     </view>
     <scroll-view style='height:{{h-w*(1-1/1.414)*(1+0/(1.618*1.618))}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true'>
-
       <swiper autoplay='true' interval='3000' previous-margin='50px' next-margin='50px' circular='true' style='height:{{w/1.414+40}}px'>
         <block wx:for='{{item.image}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
           <swiper-item>
@@ -29,8 +28,6 @@
           <view>客服</view>
         </button>
       </view>
-
-
       <view class='subfilter'>
         <text>详情</text>
         <!-- <text>评价</text> -->

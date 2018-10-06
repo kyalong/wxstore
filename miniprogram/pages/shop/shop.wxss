@@ -37,7 +37,7 @@ page {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  align-items: center
+  align-items: center;
 }
 
 .view>image {
@@ -59,7 +59,7 @@ swiper-item {
   box-shadow: 0 5px 10px lightgray;
 }
 
-.card>image{
+.card>image {
   background-color: #f6f6f6;
   width: 100%;
   height: 70.7%;
@@ -84,7 +84,7 @@ swiper-item {
   justify-content: space-between;
   align-items: center;
   color: #a16b47;
-  font-size: smaller
+  font-size: smaller;
 }
 
 .icon {
@@ -105,124 +105,20 @@ swiper-item {
 
 
 
-.mask {
-  /* position: fixed;
-  top: 0;
-  left: 0; */
-  background-color: #000000b3;
+.end {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-size: larger;
-  background-color: white;
-  width: 100%;
-  height: 80%;
-  border-radius: 10pt 10pt 0pt 0pt;
-}
-
-.l1 {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0.5rem;
-  border-bottom: solid 1px #f6f6f6;
-}
-
-.maskimage {
-  width: 100px;
-  height: 100px;
-  border-radius: 0;
-}
-
-.l1>view {
-  align-self: stretch;
-  flex-grow: 1;
-  margin: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.maskprice, .mastitle, .maskstock {
-  color: #a16b47;
-}
-
-.cancelicon {
-  align-self: flex-start;
-  width: 30px;
-  height: 30px;
-  background-color: transparent;
-}
-
-.ldetail {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0.5rem;
-  border-bottom: solid 1px #f6f6f6;
-}
-
-.l2 {
-  flex-grow: 1;
-}
-
-.l3 {
-  flex-grow: 1;
-}
-
-.maskframe {
-  align-self: flex-start;
-  background-color: #f6f6f6;
-  padding: 0.25rem;
-  border-radius: 4pt;
-  margin: 0.5rem 0.5rem 0 0;
-}
-
-.l4 {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem;
-  align-items: center;
-}
-
-.masknum {
-  display: flex;
-  justify-content: space-around;
-  /* font-size: larger */
-}
-
-.masknum>text {
-  width: 25px;
-  height: 25px;
-  border: solid 1px #a16b47;
-  display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 2px;
-  font-weight: bold;
+  padding-bottom: 16px;
+  color: silver
 }
 
-.masknum>text:nth-child(2) {
-  font-size: smaller;
-  color: #a16b47;
+.end>text:first-child{
+  font-size: 1.5rem;
+  font-family: little2;
 }
-
-.submit {
-  align-self: center;
-  width: 80%;
-  height: 40px;
-  background-color: #a16b47;
-  border-radius: 80px 80px 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  margin-top: 3rem;
+.end>text:last-child{
+  font-size: 0.9rem;
+  font-family: little;
 }

@@ -86,12 +86,11 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 .item {
   flex-grow: 1;
   display: flex;
-  margin: 0.75rem 0;
+  margin: 0.75rem 0.5rem;
 }
 
 .item>image {
   background-color: #f6f6f6;
-  margin-left: 0.75rem;
   border-radius: 5pt;
 }
 
@@ -101,6 +100,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   flex-direction: column;
   padding-left: 0.5rem;
   justify-content: space-around;
+  font-size: 0.9rem
 }
 
 .price>text:last-child {
@@ -108,7 +108,6 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 }
 
 .num {
-  margin-right: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

@@ -1,7 +1,8 @@
-/**app.wxss**/
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-} 
+@font-face {
+  font-family: 'little';
+  src: url('https://cloud-minapp-18353.cloud.ifanrusercontent.com/1g8qQjjAkmnXQgKD.ttf');
+}
+@font-face {
+  font-family: 'little2';
+  src: url('https://cloud-minapp-18353.cloud.ifanrusercontent.com/1g8qKXNodIZWRDBE.ttf');
+}
