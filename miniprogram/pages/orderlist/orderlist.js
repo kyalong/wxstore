@@ -24,28 +24,25 @@ Page({
       success: res => {
         if (e.currentTarget.dataset.title == 0) {
           db.collection('order').orderBy('serinum', 'desc').get().then(res => {
-           
-            setTimeout(() => {
-              this.setData({
-                totop: 0,
-                detail: res.data
-              })
-              wx.hideLoading()
-              return
-            }, 50)
-
+            this.setData({
+              totop: 0,
+              detail: res.data
+            })
+            wx.hideLoading()
+          })
+        } else {
+          db.collection('order').orderBy('serinum', 'desc').where({
+            status: Number(e.currentTarget.dataset.title) - 1
+          }).get().then(res => {
+            this.setData({
+              totop: 0,
+              title: e.currentTarget.dataset.title,
+              detail: res.data
+            })
+            wx.hideLoading()
           })
         }
-        db.collection('order').orderBy('serinum', 'desc').where({
-          status: Number(e.currentTarget.dataset.title) - 1
-        }).get().then(res => {
-          this.setData({
-            totop: 0,
-            title: e.currentTarget.dataset.title,
-            detail: res.data
-          })
-          wx.hideLoading()
-        })
+
       }
     })
 
@@ -64,26 +61,26 @@ Page({
       success: res => {
         if (options.status == 0) {
           db.collection('order').orderBy('serinum', 'desc').get().then(res => {
-            setTimeout(() => {
-              this.setData({
-                title: options.status,
-                detail: res.data
-              })
-              wx.hideLoading()
-              return
-            }, 50)
+
+            this.setData({
+              title: options.status,
+              detail: res.data
+            })
+            wx.hideLoading()
 
           })
-        }
-        db.collection('order').where({
-          status: Number(options.status) - 1
-        }).orderBy('serinum', 'desc').get().then(res => {
-          this.setData({
-            title: options.status,
-            detail: res.data
+        } else {
+          db.collection('order').where({
+            status: Number(options.status) - 1
+          }).orderBy('serinum', 'desc').get().then(res => {
+            this.setData({
+              title: options.status,
+              detail: res.data
+            })
+            wx.hideLoading()
           })
-          wx.hideLoading()
-        })
+        }
+
       }
     })
   },
