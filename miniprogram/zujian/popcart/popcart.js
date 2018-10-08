@@ -1,12 +1,16 @@
 // zujian/popcart/popcart.js
-const app=getApp()
+const app = getApp()
+const db = wx.cloud.database({
+  env: 'boutique10'
+})
+const _ = db.command
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    h:{
-      type:Number,
+    h: {
+      type: Number,
     },
     maskinfo: {
       type: Array
@@ -25,8 +29,7 @@ Component({
   /**
    * 组件的初始数据
    */
-  data: {
-  },
+  data: {},
   lifetimes: {},
   /**
    * 组件的方法列表
@@ -35,15 +38,38 @@ Component({
     popdown: function(e) {
       this.triggerEvent('popdown')
     },
-    add: function (e) {
+    add: function(e) {
       this.triggerEvent('add')
     },
-    minus: function (e) {
+    minus: function(e) {
       this.triggerEvent('minus')
     },
-    confirm: function (e) {
-      
-      this.triggerEvent('confirm')
+    confirm: function(e) {
+      db.collection('cart').add({
+        data: {
+          title: e.currentTarget.dataset.title,
+          itemid: e.currentTarget.dataset.id,
+          num: e.currentTarget.dataset.num,
+          size: e.currentTarget.dataset.size,
+          color: e.currentTarget.dataset.color,
+          image: e.currentTarget.dataset.image,
+          price: e.currentTarget.dataset.price,
+
+        }
+      }).then(res => {
+        wx.showToast({
+          title: '添加购物车成功',
+          icon: 'success',
+          mask: true
+        })
+      })
+      // this.triggerEvent('confirm', {
+      //   title: e.currentTarget.dataset.title,
+      //   itemid: e.currentTarget.dataset.id,
+      //   num: e.currentTarget.dataset.num,
+      //   size: e.currentTarget.dataset.size,
+      //   color: e.currentTarget.dataset.color
+      // })
     },
   }
 })

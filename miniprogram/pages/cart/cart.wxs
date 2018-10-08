@@ -1,0 +1,8 @@
+function json(data) {
+  var s = JSON.stringify(data)
+  return s
+}
+
+module.exports = {
+  json: json
+}

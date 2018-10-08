@@ -1,0 +1,14 @@
+var map = ['待付款', '待发货', '待收货', '已完成']
+
+function counts(data) {
+  var s = 0
+  for (var i = 0; i < data.length; i++) {
+    s += data[i].num
+  }
+  return s
+}
+
+module.exports = {
+  map: map,
+  counts: counts
+}

@@ -1,11 +1,11 @@
 <movable-area class="slider-left-item" style="width:calc({{openWidth}}px + 750rpx);margin-left:-{{openWidth}}px;display:{{itemid==ids?isdel:'block'}}" >
-  <movable-view class="slider-left-content" damping="100" x="{{x}}" direction="horizontal" bind:touchstart="handleTouchestart" bind:touchend="handleTouchend" bind:change="handleChange" out-of-bounds='true' inertia='true' disabled='{{isuse}}'>
+  <movable-view class="slider-left-content" damping="100" x="{{x}}" direction="horizontal" bind:touchstart="handleTouchestart" bind:touchend="handleTouchend" bind:change="handleChange" out-of-bounds='true' inertia='true' disabled='{{isuse}}' bindtap='handletap'>
     <slot></slot>
 
   </movable-view>
   <view class='slider-left-handle'>
     <view class='del_share' style='width:{{openWidth}}px'>
-      <view class='del bt' bind:tap="del" data-id='{{itemid}}'>
+      <view class='del bt' bind:tap="del" data-id='{{itemid}}' data-items='{{tems}}'>
         删除
       </view>
       <button class='share bt' bindtap='share' open-type='share'>

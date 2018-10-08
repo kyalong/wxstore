@@ -3,28 +3,34 @@ const app = getApp()
 const db = wx.cloud.database({
   env: 'boutique10'
 })
+const _ = db.command
+var tomorrow = function(i) {
+  const date = new Date()
+  return (date.getFullYear() * 10000000 + (date.getMonth() + 1) * 100000 + date.getDate() * 1000) + i
+}
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+
   data: {
-    items: {
-      sku1: ['真皮', 36, 100, '../../images/item1.png', 10],
-      sku2: ['牛皮', 37, 1200, '../../images/item2.png', 1],
-      sku3: ['真皮', 42, 1100, '../../images/item3.png', 2],
-      sku4: ['真皮', 35, 1000, '../../images/item4.png', 3],
-    },
+    items: '',
     w: app.globalData.sysw,
     h: app.globalData.sysh,
-    total: 1000,
     address: '新增收货地址',
     haveaddr: true,
-  },
+    addressid: ''
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
+  },
+  selected: function(e) {
+    wx.navigateTo({
+      url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.id,
+    })
+  },
+  backhome: function() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   getaddr: function() {
     wx.chooseAddress({
       success: (res) => {
@@ -48,28 +54,68 @@ Page({
       }
     })
   },
-  formsubmit:function(e){
-    console.log(e)
-    wx.requestPayment({
-      timeStamp: '',
-      nonceStr: '',
-      package: '',
-      signType: '',
-      paySign: '',
-      success:res=>{
-        console.log(res)
+  formsubmit: function(e) {
+    // console.log(e.currentTarget.dataset.items)
+    let status = 3
+    db.collection('orderseri').get().then(
+      res => {
+        let serinumid = res.data[0]._id
+        db.collection('order').add({
+          data: {
+            serinum: tomorrow(res.data[0].num),
+            createtime: Date.parse(new Date()),
+            paytime: '',
+            delivertime: '',
+            recievetime: '',
+            rebacktime: '',
+            commenttime: '',
+            addressid: this.data.addressid,
+            itemslist: e.currentTarget.dataset.items,
+            status: status,
+            total: e.currentTarget.dataset.total
+          }
+        }).then(res => {
+          // console.log(res)
+          wx.navigateTo({
+            url: '../orderlist/orderlist?status=' + (status + 1),
+          })
+          db.collection('orderseri').doc(serinumid).update({
+            data: {
+              num: _.inc(1)
+            }
+          }).then(data => {})
+
+        })
+
       }
-    })
+    )
+
+    // wx.requestPayment({
+    //   timeStamp: '',
+    //   nonceStr: '',
+    //   package: '',
+    //   signType: '',
+    //   paySign: '',
+    //   success: res => {
+    //     console.log(res)
+    //   }
+    // })
+
   },
   onLoad: function(options) {
+    this.setData({
+      h: wx.getSystemInfoSync().windowHeight - 64,
+      items: JSON.parse(options.itemlist),
+      total: options.total
+    })
     db.collection('user').get().then(res => {
-      // console.log(res.data)
       if (res.data[0]) {
         this.setData({
           haveaddr: false,
           address: res.data[0].address,
           phone: res.data[0].phone,
-          user: res.data[0].user
+          user: res.data[0].user,
+          addressid: res.data[0]._id
         })
       }
     })

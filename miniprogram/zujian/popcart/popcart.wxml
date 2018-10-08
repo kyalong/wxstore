@@ -32,7 +32,7 @@
         </view>
       </view>
       <view class='l5'>
-        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}'>确定</view>
+        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}' data-size='{{item.detail[2]}}' data-color='{{item.detail[0]}}' data-title='{{item.detail[1]}}' data-image='{{item.image[0]}}' data-price='{{item.price}}'>确定</view>
       </view>
 
     </view>

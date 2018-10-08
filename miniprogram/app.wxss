@@ -6,3 +6,10 @@
   font-family: 'little2';
   src: url('https://cloud-minapp-18353.cloud.ifanrusercontent.com/1g8qKXNodIZWRDBE.ttf');
 }
+
+.title{
+  font-family: little2
+}
+/* .subtitle{
+  font-family: little2
+} */

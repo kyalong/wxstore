@@ -1,18 +1,21 @@
-<form bindsubmit='formsubmit'>
+<view class='view' catchtap='backhome'>
+  <image src='../../images/choose.png'></image>
+</view>
+<scroll-view style='height:{{h}}px;' scroll-y='true' enable-back-to-top='true'>
+
   <view>
     <view class='main'>
       <view class='title'>订单确认</view>
     </view>
   </view>
-
   <block wx:if='{{haveaddr}}'>
-    <view class='address' bindtap='getaddr'>
+    <view class='address' bindtap='getaddr' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time='100'>
       <text>{{address}}</text>
       <image src='../../images/add.png'></image>
     </view>
   </block>
   <block wx:else>
-    <view class='address' bindtap='getaddr'>
+    <view class='address' bindtap='getaddr' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time='100'>
       <view>
         <text>{{address}}</text>
         <text>{{phone}}</text>
@@ -21,25 +24,27 @@
       <image src='../../images/choose.png'></image>
     </view>
   </block>
-
-
   <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
-    <view class='item' catchtap='selected'>
-      <image src='{{detail[3]}}' class='thum' style='height:{{h/6}}px;width:{{h/6}}px'></image>
+    <view class='item' catchtap='selected' data-id='{{detail.itemid}}'>
+      <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px'></image>
       <view class='price'>
-        <text>{{detail[0]}}</text>
-        <text>尺码:{{detail[1]}}</text>
-
+        <text>{{detail.title}}</text>
+        <text>尺码:{{detail.size}}</text>
+        <text>颜色:{{detail.color}}</text>
       </view>
       <view class='num'>
-        <text>￥{{detail[2]}}</text>
-        <text>x {{detail[4]}}</text>
+        <text>￥{{detail.price}}</text>
+        <text>x {{detail.num}}</text>
       </view>
     </view>
   </block>
   <view class='deliver'>
     <text>配送方式</text>
     <text>包邮</text>
+  </view>
+  <view class='deliver'>
+    <text>红包优惠券</text>
+    <text>10元</text>
   </view>
   <view class='mark'>
     <input placeholder='备注'></input>
@@ -48,5 +53,6 @@
     <text>合计</text>
     <text>￥{{total}}</text>
   </view>
-  <button class='submit' form-type='submit'>提交订单</button>
-</form>
+  <button class='submit' bindtap='formsubmit' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-items='{{items}}' data-total='{{total}}'>提交订单</button>
+
+</scroll-view>

@@ -5,16 +5,12 @@ var tmp = require('../../utils/tmp.js')
 const db = wx.cloud.database({
   env: 'boutique10'
 })
-const _=db.command
+const _ = db.command
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     items: '',
     w: app.globalData.sysw,
-    h: app.globalData.sysh,
+    h: wx.getSystemInfoSync().windowHeight - 64,
     popup: 'none',
     maskinfo: '',
     masknum: 1,
@@ -23,76 +19,89 @@ Page({
 
   },
   itemdetail: function(e) {
-    if (e.currentTarget.dataset.id){
+    if (e.currentTarget.dataset.id) {
       wx.navigateTo({
         url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.id,
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: '../itemdetail/itemdetail?itemid=' + e.detail.itemid,
       })
     }
-   
+
   },
-  changemode:function(e){
-    if (this.data.islist){
+  changemode: function(e) {
+    console.log(this._observer)
+    if (this.data.islist) {
       this.setData({
-        islist: false
+        islist: false,
       })
-    }else{
+      this._observer = wx.createIntersectionObserver(this)
+      this._observer.relativeTo('.view').observe('.intersection', (res) => {
+        if (res.intersectionRatio > 0) {
+          this.setData({
+            title: '今日推荐',
+            opc: 1
+          })
+        } else {
+          this.setData({
+            title: '',
+            opc: 0
+          })
+        }
+      })
+    } else {
+      if (this._observer) {
+        this._observer.disconnect()
+      }
       this.setData({
-        islist: true
+        islist: true,
+        title: '',
+        opc: 0
       })
     }
-    
-  },  /**
+
+  },
+  /**
    * 生命周期函数--监听页面加载
    */
   async tmps() {
     return await db.collection('item').where({
-      createdate: _.in(['20181001', '20181002', '20181003']) 
+      createdate: _.in(['20181001', '20181002', '20181003'])
     }).get()
   },
   addcart: function(e) {
     let animation = this.animation
-    // animation.height(this.data.h).backgroundColor('#000000b3').step({
-    //   duration: 150
-    // })
+
     animation.translateY(-this.data.h).opacity(1).step({
       duration: 200
     })
-    if (e.currentTarget.dataset.id){
+    if (e.currentTarget.dataset.id) {
       db.collection('item').doc(e.currentTarget.dataset.id).get().then(res => {
         this.setData({
           maskinfo: [res.data],
           popup: 'flex',
-          // animationData: animation.export(),
         })
         setTimeout(() => {
           this.setData({
-            // maskinfo: [res.data],
-            // popup: false,
             animationData: animation.export(),
           })
         }, 100)
       })
-    }else{
+    } else {
       db.collection('item').doc(e.detail.itemid).get().then(res => {
         this.setData({
           maskinfo: [res.data],
           popup: 'flex',
-          // animationData: animation.export(),
         })
         setTimeout(() => {
           this.setData({
-            // maskinfo: [res.data],
-            // popup: false,
             animationData: animation.export(),
           })
         }, 100)
       })
     }
-    
+
 
   },
   popdown: function() {
@@ -100,8 +109,8 @@ Page({
     animation.translateY(0).step({
       duration: 300
     })
-    // animation.height(0).backgroundColor('transparent').step()
     this.setData({
+      masknum: 1,
       animationData: animation.export(),
     })
     setTimeout(() => {
@@ -109,22 +118,8 @@ Page({
         popup: 'none',
       })
     }, 100)
+  },
 
-  },
-  confirm: function(e) {
-    db.collection('cart').add({
-      data: {
-        itemid: e.currentTarget.dataset.id,
-        num: 1
-      }
-    }).then(res => {
-      wx.showToast({
-        title: '添加购物车成功',
-        icon: 'success',
-        mask: true
-      })
-    })
-  },
   add: function(e) {
     this.setData({
       masknum: this.data.masknum + 1
@@ -139,7 +134,7 @@ Page({
     }
   },
   onLoad: function(options) {
-
+    
   },
 
   /**
@@ -151,14 +146,15 @@ Page({
       success: () => {
         this.tmps().then(res => {
           this.setData({
-            items: res.data.slice(0,3),
-            items2:res.data.slice(8,10),
-            items1: res.data.slice(10,11)
+            items: res.data.slice(3, 6),
+            items2: res.data.slice(8, 10),
+            items1: res.data.slice(10, 11)
           })
           wx.hideLoading()
         })
       }
     })
+   
   },
 
   /**
@@ -170,16 +166,31 @@ Page({
       timingFunction: 'linear',
     })
     this.animation = animation
-
-    // this.items()
+    this._observer = wx.createIntersectionObserver(this)
+    this._observer.relativeTo('.view').observe('.intersection', (res) => {
+      if (res.intersectionRatio > 0) {
+        this.setData({
+          title: '今日推荐',
+          opc: 1
+        })
+      } else {
+        this.setData({
+          title: '',
+          opc: 0
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-    if(this.data.popup=='flex'){
+    if (this.data.popup == 'flex') {
       this.popdown()
+    }
+    if (this._observer) {
+      this._observer.disconnect()
     }
   },
 

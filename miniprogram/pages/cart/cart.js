@@ -4,6 +4,7 @@ const app = getApp()
 const db = wx.cloud.database({
   env: 'boutique10'
 })
+var len = ''
 Page({
 
   /**
@@ -13,63 +14,131 @@ Page({
     items: '',
     w: app.globalData.sysw,
     h: app.globalData.sysh,
-    total: 1000,
-    ischecked: true,
+    ischecked: false,
+    isall: false,
     num: 1,
     cnum: 1,
     isopen: false,
+    newitems: ''
   },
-
-  buy: function(e) {
-    wx.navigateTo({
-      url: '../order/order',
-    })
-  },
-  cartlist: function() {
-    let _this=this
-    return new Promise(function(resolve, reject) {
-      db.collection('cart').get().then((res) => {
-        if (res.data[0] == undefined) {
-          wx.hideTabBarRedDot({
-            index: 1,
-          })
-          _this.setData({
-            ischecked: false
-          })
-        } else {
-          wx.showTabBarRedDot({
-            index: 1,
-          })
-          _this.setData({
-            ischecked: true
-          })
-        }
-        let arr = []
-        for (let i of res.data) {
-          (function(i) {
-            db.collection('item').doc(i.itemid).get().then(res => {
-              res.data.num = i.num
-              res.data.cartid = i._id
-              arr.push(res.data)
-            })
-          })(i)
-
-        }
-        resolve(arr)
-
-      })
-    })
-  },
-  selected: function(e) {
-    if (this.data.ischecked) {
+  check: function(e) {
+    if (e.detail.value.length == len) {
       this.setData({
-        ischecked: false
+        isall: true
       })
     } else {
       this.setData({
-        ischecked: true
+        isall: false,
       })
     }
+    this.setData({
+      total: (function(data) {
+        let total = 0
+        for (let i of data) {
+          total += JSON.parse(i).price * JSON.parse(i).num
+        }
+        return total
+      })(e.detail.value),
+      newitems: (function(data) {
+        let total = []
+        for (let i of data) {
+          let s = JSON.parse(i)
+          s.cartid = s._id
+          s.userid = s._openid
+          delete s._id
+          delete s._openid
+          total.push(s)
+        }
+        console.log(total)
+        return total
+      })(e.detail.value)
+    })
+  },
+  all: function() {
+
+  },
+  buy: function(e) {
+    let list = ''
+    if (this.data.newitems == '') {
+      list = (function(data) {
+        let total = []
+        for (let i of data) {
+          i.cartid = i._id
+          i.userid = i._openid
+          delete i._id
+          delete i._openid
+          total.push(i)
+        }
+        return JSON.stringify(total)
+      })(this.data.items)
+    } else {
+      list = e.currentTarget.dataset.list
+    }
+    wx.navigateTo({
+      url: '../order/order?itemlist=' + list + '&total=' + e.currentTarget.dataset.total,
+    })
+  },
+  cartlist: function() {
+    let _this = this
+    db.collection('cart').orderBy('itemid','desc').get().then((res) => {
+      if (res.data[0] == undefined) {
+        wx.hideTabBarRedDot({
+          index: 1,
+        })
+        _this.setData({
+          ischecked: false,
+          isall: false
+        })
+      } else {
+        wx.showTabBarRedDot({
+          index: 1,
+        })
+        _this.setData({
+          ischecked: true,
+          isall: true
+        })
+
+        len = res.data.length
+        this.setData({
+          items: res.data,
+          total: (function(res) {
+            let total = 0
+            for (let i of res) {
+              total += i.price * i.num
+            }
+            return total
+          })(res.data)
+        })
+
+      }
+      wx.hideLoading()
+    })
+  },
+  selected: function(e) {
+    if (this.data.isall) {
+      this.setData({
+        ischecked: false,
+        isall: false,
+        total: 0
+      })
+    } else {
+      this.setData({
+        ischecked: true,
+        isall: true,
+        total: (function(res) {
+          let total = 0
+          for (let i of res) {
+            total += i.price * i.num
+          }
+          return total
+        })(this.data.items)
+      })
+    }
+  },
+  backhome: function() {
+    wx.switchTab({
+      url: '../shop/shop',
+    })
   },
   gotodetail: function(e) {
     if (this.data.isopen) {
@@ -83,43 +152,37 @@ Page({
   },
 
   add: function(e) {
+    let id = e.currentTarget.dataset.id
+    for (let i of this.data.items) {
+      if (i._id == id) {
+        i.num += 1
+      }
+    }
     this.setData({
-      num: e.currentTarget.dataset.num + this.data.num
+      items: this.data.items
     })
   },
   minus: function(e) {
-    let s = this.data.num
-    if (s > 1) {
-      this.setData({
-        num: s - 1
-      })
-    } else if (e.currentTarget.dataset.num > 1) {
-      this.data.cnum += 1
-      this.setData({
-        num: e.currentTarget.dataset.num - this.data.cnum
-      })
+    let id = e.currentTarget.dataset.id
+    for (let i of this.data.items) {
+      if (i._id == id) {
+        i.num -= 1
+      }
     }
-  },
-  refresh: function() {
-    this.cartlist().then(res => {
-      setTimeout(() => {
-        res.sort((a, b) => {
-          return b.itemid - a.itemid
-        })
-        this.setData({
-          items: res
-        })
-        wx.hideLoading()
-      }, 1500)
+    this.setData({
+      items: this.data.items
     })
-  },
 
+
+  },
   onLoad: function(options) {
     let animation = wx.createAnimation({
       duration: 200,
       timingFunction: 'linear',
     })
     this.animation = animation
+
+
   },
 
   /**
@@ -136,8 +199,21 @@ Page({
     wx.showLoading({
       title: '拼命加载中',
       success: () => {
-        // console.log(Promise.all(this.cartlist()))
-        this.refresh()
+        this.cartlist()
+      }
+    })
+    this._observer = wx.createIntersectionObserver()
+    this._observer.relativeTo('.view').observe('.intersection', (res) => {
+      if (res.intersectionRatio > 0) {
+        this.setData({
+          title: '购物车',
+          opc: 1
+        })
+      } else {
+        this.setData({
+          title: '',
+          opc: 0
+        })
       }
     })
   },
@@ -156,23 +232,28 @@ Page({
         })
       }
     })
+    if (this._observer) {
+      this._observer.disconnect()
+    }
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    if (this._observer) {
+      this._observer.disconnect()
+    }
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    this.refresh()
-    setTimeout(()=>{
+    this.cartlist()
+    setTimeout(() => {
       wx.stopPullDownRefresh()
-    },1500)
+    }, 1500)
   },
 
   /**

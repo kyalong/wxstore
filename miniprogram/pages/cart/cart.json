@@ -1,6 +1,7 @@
 {
+  "disableScroll": true,
   "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark",
+  "backgroundTextStyle": "light",
   "usingComponents": {
     "leftmove": "../../zujian/slider-left/index"
   }

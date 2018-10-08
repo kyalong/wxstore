@@ -1,32 +1,46 @@
+<view class='view' catchtap='backhome' >
+  <!-- <image src='../../images/choose.png'></image> -->
+</view>
 <view class="userinfo">
-  <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+  <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+    <image src='../../images/my3.png' class="userinfo-avatar"></image>
+    <text>获取头像昵称</text>
+  </button>
   <block wx:else>
     <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </block>
 </view>
+<view class='orderbar' catchtap='gotodetail' data-status='0' >
+  <text>我的订单</text>
+  <text>全部订单</text>
+</view>
 <view class='bar'>
-  <view class='baritem'>
+  <view class='baritem' catchtap='gotodetail' data-status='1'>
     <image src='../../images/pay.png'></image>
     <text>待付款</text>
   </view>
-  <view class='baritem'>
+  <view class='baritem' catchtap='gotodetail' data-status='2'>
     <image src='../../images/post.png'></image>
     <text>待发货</text>
   </view>
-  <view class='baritem'>
+  <view class='baritem' catchtap='gotodetail' data-status='3'>
     <image src='../../images/rec.png'></image>
     <text>待收货</text>
+  </view>
+  <view class='baritem' catchtap='gotodetail' data-status='4'>
+    <image src='../../images/sign.png'></image>
+    <text>已完成</text>
   </view>
 </view>
 <view class='docker'>
   <!-- <view class='btn' bindtap='auth' hover-class='hoverc'>收藏夹</view> -->
-  <view class='btn' bindtap='card' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
+  <view class='btn' bindtap='card' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
     <text>优惠券</text> </view>
-  <view class='btn' bindtap='address' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
+  <view class='btn' bindtap='address' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
     <text>收货地址</text> </view>
-  <view class='btn' bindtap='feedback' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
+  <view class='btn' bindtap='feedback' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
     <text>建议反馈</text> </view>
-  <view class='btn' bindtap='csc' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time	='50'>
+  <view class='btn' bindtap='csc' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
     <text>联系商家</text> </view>
 </view>

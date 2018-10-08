@@ -9,6 +9,11 @@ Page({
     hasUserInfo:false,
     canIUse:true,
   },
+  gotodetail:function(e){
+    wx.navigateTo({
+      url: '../orderlist/orderlist?status=' + e.currentTarget.dataset.status,
+    })
+  },
   address:function(e){
     wx.chooseAddress({
       success:res=>{

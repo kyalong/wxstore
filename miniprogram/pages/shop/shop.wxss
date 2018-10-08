@@ -4,6 +4,41 @@ page {
   /* justify-content: flex-start */
 }
 
+.view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px
+
+}
+::-webkit-scrollbar{
+  display: none
+}
+
+.view>image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 30px 16px 10px;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+}
+.view>text{
+  text-align: center;
+  font-size: 1rem;
+  margin: 30px 16px 12px;
+  font-family: little2;
+  transition: all 0.5s linear
+}
+
+.h1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem 0;
+  /* align-items: center; */
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -33,29 +68,15 @@ page {
   padding-left: 0.25rem;
 }
 
-.h1 {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  align-items: center;
-}
-
-.view>image {
-  width: 30px;
-  height: 30px;
-  background-color: transparent;
-}
-
 swiper-item {
   display: flex;
-  align-items: center;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   border-radius: 5pt;
-  margin: 1rem 8px;
+  margin: 0 8px;
   box-shadow: 0 5px 10px lightgray;
 }
 
@@ -125,6 +146,7 @@ swiper-item {
 .hoverc {
   opacity: 0.7;
 }
-.hoverb{
-  background-color: silver
+
+.hoverb {
+  background-color: silver;
 }

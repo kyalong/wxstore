@@ -18,6 +18,9 @@ Component({
     itemid: {
       type: String
     },
+    items: {
+      type: Array
+    },
     isuse: {
       type: Boolean,
       value: false
@@ -64,6 +67,14 @@ Component({
       this.data.currentX = x
       // console.log(this.data.moveInstance)
     },
+    handletap: function() {
+      if (this.data.open) {
+        this.setData({
+          open: false
+        })
+        return
+      }
+    },
     handleTouchend: function() {
       // 如果松开手指的时候，已经被拖拽到最左边或者最右边，则不处理
       if (this.data.currentX === 0) {
@@ -100,8 +111,14 @@ Component({
     },
     // 点击删除按钮触发的事件
     del: function(e) {
+      // let items = e.currentTarget.dataset.items
+      // for (let i in items) {
+      //   if (items[i].itemid == e.currentTarget.dataset.id) {
+      //     items.splice(i, 1)
+      //   }
+      // }
       this.setData({
-        isdel:'none',
+        isdel: 'none',
         ids: e.currentTarget.dataset.id
       })
       db.collection('cart').doc(e.currentTarget.dataset.id).remove().then(
@@ -110,17 +127,11 @@ Component({
           this.setData({
             open: false
           })
-          // wx.showLoading({
-          //   title: '更新购物车',
-          //   success:()=>{
           wx.startPullDownRefresh({
             success: res => {
               wx.hideLoading()
-              wx.stopPullDownRefresh()
             }
           })
-          // }
-          // })
         }
       )
       // this.triggerEvent('del', {

@@ -1,34 +1,49 @@
-<view>
-  <view class='main'>
-    <view class='title'>购物车</view>
-    <view class='subtitle'>左滑可删除和分享</view>
-  </view>
+<wxs src='cart.wxs' module='m1' />
+<view class='view' catchtap='backhome'>
+  <text style='opacity:{{opc}}'>{{title}}</text>
+  <!-- <image src='../../images/choose.png'></image> -->
 </view>
-<checkbox-group>
-  <view class='all' catchtap='selected'>
-    <checkbox value='{{detail._id}}' checked='{{ischecked}}' />
-    <view>全选</view>
-  </view>
-  <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
-    <leftmove open='{{isopen}}' itemid='{{detail.cartid}}'>
-      <checkbox value='{{detail._id}}' checked='{{ischecked}}' />
-      <view class='item' data-id='{{detail._id}}' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time	='100'>
-        <image src='{{detail.image[0]}}' class='thum' style='height:{{h/6}}px;width:{{h/6}}px' catchtap='gotodetail' data-id='{{detail._id}}'></image>
-        <view class='price'>
-          <text>{{detail.detail[1]}}</text>
-          <text>尺码:{{detail.detail[2]}}</text>
-          <text>￥{{detail.price}}</text>
-        </view>
-        <view class='num'>
-          <text catchtap='add' data-num='{{detail.num}}'>+</text>
-          <text>{{num<=1?detail.num:num}}</text>
-          <text style='{{detail.num==1&&num<=1?"background-color:#eee":""}}' catchtap='minus' data-num='{{detail.num}}'>-</text>
-        </view>
+<scroll-view style='height:{{h-64-80}}px;' scroll-y='true' enable-back-to-top='true' class="scroll-view">
+  <view class='intersection'>
+    <view class='main' style='height:{{w*(1-1/1.414)}}px'>
+      <view class='title'>购物车</view>
+      <view class='subtitle'>左滑可删除和分享</view>
+    </view>
+    <view class='all' catchtap='selected'>
+      <checkbox checked='{{isall}}' />
+      <view catchtap='backhome'>
+        <image src='../../images/home1.png'></image>
+        <text style='font-family:little2'>咫尺铺</text>
       </view>
-    </leftmove>
-  </block>
-</checkbox-group>
-<view class='buy'>
-  <text>合计:￥{{}}</text>
-  <view catchtap='buy'>去结算</view>
+    </view>
+    <checkbox-group bindchange='check'>
+      <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+        <leftmove open='{{isopen}}' itemid='{{detail._id}}' items='{{items}}'>
+          <checkbox value='{{m1.json(detail)}}' checked='{{ischecked}}' />
+          <view class='item' data-id='{{detail._id}}' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time='100'>
+            <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px' catchtap='gotodetail' data-id='{{detail.itemid}}'></image>
+            <view class='price'>
+              <text>{{detail.title}}</text>
+              <text>尺码:{{detail.size}}</text>
+              <text>颜色:{{detail.color}}</text>
+              <text>￥{{detail.price}}</text>
+            </view>
+            <view class='num'>
+              <text catchtap='add' data-id='{{detail._id}}'>+</text>
+              <text>{{detail.num}}</text>
+              <text style='{{detail.num==1&&cnum<=1?"background-color:#eee":""}}' catchtap='minus' data-id='{{detail._id}}'>-</text>
+            </view>
+          </view>
+        </leftmove>
+      </block>
+    </checkbox-group>
+    <view class='end'>
+      <text>咫尺杂货铺</text>
+      <text>天涯若比邻</text>
+    </view>
+  </view>
+</scroll-view>
+<view class='detail'>
+  <text>合计:￥{{total}}</text>
+  <view class='buy' catchtap='buy' data-list='{{m1.json(newitems)}}' data-total='{{total}}' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100'>去结算</view>
 </view>

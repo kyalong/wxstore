@@ -1,4 +1,8 @@
 //app.js
+var tomorrow = function(i) {
+  const date = new Date()
+  return (date.getFullYear() * 10000000 + (date.getMonth() + 1) * 100000 + date.getDate() * 1000) + i
+}
 App({
   onLaunch: function() {
     require('/sdk/sdk-v1.8.1')
@@ -19,25 +23,44 @@ App({
     this.globalData.sysh = sysinfo.windowHeight
     this.globalData.syssw = sysinfo.screenWidth
     this.globalData.syssh = sysinfo.screenHeight
-    db.collection('cart').get().then(res=>{
-      if(res.data[0]==undefined){
+    db.collection('cart').get().then(res => {
+      if (res.data[0] == undefined) {
         wx.hideTabBarRedDot({
           index: 1,
         })
-      }
-      else{
+      } else {
         wx.showTabBarRedDot({
           index: 1,
         })
       }
     })
 
+    db.collection('orderseri').where({
+      date: String(tomorrow(0) / 1000)
+    }).get().then(res => {
+      console.log(res)
+      if (res.data.length > 0) {
+        this.globalData.count = res.data[0]._id
+        console.log('获取当前订单号')
+      } else {
+        db.collection('orderseri').add({
+          data: {
+            'date': String(tomorrow(0) / 1000),
+            'num': 1
+          }
+        }).then(res => {
+          console.log(res)
+          this.globalData.count=res._id
+        })
+      }
+    })
   },
   globalData: {
     sysw: '',
     sysh: '',
     init: '',
-    cartlist:'',
-    userInfo:''
+    cartlist: '',
+    userInfo: '',
+    count: ''
   }
 })

@@ -12,22 +12,25 @@ Page({
     items: '',
     w: app.globalData.sysw,
     h: app.globalData.sysh,
-    sh:app.globalData.syssh,
-    sw:app.globalData.syssw,
+    sh: app.globalData.syssh,
+    sw: app.globalData.syssw,
     imagelist: '',
     popup: 'none',
     maskinfo: '',
     masknum: 1,
     animationData: '',
   },
-
+  backhome:function(){
+    wx.navigateBack({
+      delta:1
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   addcart: function(e) {
-    console.log(this.data.h)
     let animation = this.animation
-    animation.translateY(-this.data.h-48).opacity(1).step({
+    animation.translateY(-this.data.h).opacity(1).step({
       duration: 200
     })
     // animation.top(0).left(0).opacity(1).step({ duration: 300 })
@@ -54,6 +57,7 @@ Page({
     })
     // animation.height(0).backgroundColor('transparent').step()
     this.setData({
+      masknum: 1,
       animationData: animation.export(),
     })
     setTimeout(() => {
@@ -61,21 +65,6 @@ Page({
         popup: 'none',
       })
     }, 100)
-
-  },
-  confirm: function(e) {
-    db.collection('cart').add({
-      data: {
-        itemid: e.currentTarget.dataset.id,
-        num: 1
-      }
-    }).then(res => {
-      wx.showToast({
-        title: '添加购物车成功',
-        icon: 'success',
-        mask: true
-      })
-    })
   },
   add: function(e) {
     this.setData({
@@ -96,6 +85,9 @@ Page({
     })
   },
   onLoad: function(options) {
+    this.setData({
+      h:wx.getSystemInfoSync().windowHeight-64
+    })
     db.collection('item').doc(options.itemid).get().then(res => {
       this.setData({
         items: [res.data],
