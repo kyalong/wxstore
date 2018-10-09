@@ -1,7 +1,7 @@
 <view class='view' catchtap='backhome'>
   <image src='../../images/choose.png'></image>
 </view>
-<scroll-view style='height:{{h}}px;' scroll-y='true' enable-back-to-top='true'>
+<scroll-view style='height:{{h-40}}px;' scroll-y='true' enable-back-to-top='true'>
 
   <view>
     <view class='main'>
@@ -44,15 +44,14 @@
   </view>
   <view class='deliver'>
     <text>红包优惠券</text>
-    <text>10元</text>
+    <text>{{costoff}}元</text>
   </view>
   <view class='mark'>
     <input placeholder='备注'></input>
   </view>
   <view class='total'>
     <text>合计</text>
-    <text>￥{{total}}</text>
+    <text>￥{{total-costoff}}</text>
   </view>
-  <button class='submit' bindtap='formsubmit' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-items='{{items}}' data-total='{{total}}'>提交订单</button>
-
 </scroll-view>
+<button class='submit' bindtap='formsubmit' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-items='{{items}}' data-total='{{total-costoff}}'>提交订单</button>

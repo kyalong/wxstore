@@ -29,12 +29,25 @@ Component({
   /**
    * 组件的初始数据
    */
-  data: {},
+  data: {
+    color: 0,
+    size: 0
+  },
   lifetimes: {},
   /**
    * 组件的方法列表
    */
   methods: {
+    choosecolor: function(e) {
+      this.setData({
+        color:e.currentTarget.dataset.color
+      })
+    },
+    choosesize: function (e) {
+      this.setData({
+        size: e.currentTarget.dataset.size
+      })
+    },
     popdown: function(e) {
       this.triggerEvent('popdown')
     },

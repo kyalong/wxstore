@@ -1,29 +1,32 @@
 // miniprogram/pages/my/my.js
-const app=getApp()
+const app = getApp()
+const db = wx.cloud.database({
+  env: 'boutique10'
+})
+const _ = db.command
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    hasUserInfo:false,
-    canIUse:true,
+    hasUserInfo: false,
+    canIUse: true,
+    statusnum: [0, 0, 0, 0]
   },
-  gotodetail:function(e){
+  gotodetail: function(e) {
     wx.navigateTo({
       url: '../orderlist/orderlist?status=' + e.currentTarget.dataset.status,
     })
   },
-  address:function(e){
+  address: function(e) {
     wx.chooseAddress({
-      success:res=>{
+      success: res => {
         console.log(res)
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function(options) {
     if (app.globalData.userInfo) {
       this.setData({
@@ -72,7 +75,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    db.collection('order').get().then(res => {
+      let count = [0, 0, 0, 0]
+      for (let i of res.data) {
+        if (i.status == 0) {
+          count[0] += 1
+        } else if (i.status == 1) {
+          count[1] += 1
+        } else if (i.status == 2) {
+          count[2] += 1
+        } else if (i.status == 3) {
+          count[3] += 1
+        }
+      }
+      this.setData({
+        statusnum: count
+      })
+    })
   },
 
   /**

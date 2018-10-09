@@ -21,11 +21,11 @@
           <view class='card' style='width:{{w/1.414}}px;height:{{w}}px' bindtap='itemdetail' data-id='{{detail._id}}' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time='100'>
             <image src='{{detail.image[1]}}' mode='aspectFill'></image>
             <view class='item'>
-              <view class='itemname'>{{detail.detail[1]}}</view>
+              <view class='itemname'>{{detail.subtitle}}</view>
               <view class='price'>
                 <text>￥{{detail.price}}</text>
                 <view class='icon' catchtap='addcart' data-id='{{detail._id}}' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' hover-stop-propagation='true'>
-                  <image src='../../images/cart.png'></image>
+                  <image src='../../images/cart2.png'></image>
                 </view>
               </view>
             </view>

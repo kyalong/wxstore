@@ -1,23 +1,22 @@
-.view{
+.view {
   height: 64px;
   width: 100%;
   position: fixed;
-  top:0;
+  top: 0;
   left: 0;
   /* background-color: white; */
-  z-index: 2
+  z-index: 2;
 }
-
 
 .userinfo {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(750rpx / 1.618)
+  height: calc(750rpx / 1.618);
 }
 
-.userinfo>button{
+.userinfo>button {
   background-color: transparent;
   display: flex;
   flex-direction: column;
@@ -25,17 +24,19 @@
   align-items: center;
   color: #a16b47;
   font-family: little;
-  margin-top: 64px
+  margin-top: 64px;
 }
-.userinfo>button::after{
-  border: none
+
+.userinfo>button::after {
+  border: none;
 }
+
 .userinfo-avatar {
   width: 150rpx;
   height: 150rpx;
   margin: 20rpx;
   border-radius: 50%;
-  box-shadow: 0 0 10px #a16b47
+  box-shadow: 0 0 10px #a16b47;
 }
 
 .userinfo-nickname {
@@ -63,10 +64,12 @@
   border-top: solid 10px #f6f6f6;
   align-items: center;
 }
-.orderbar>text:last-child{
+
+.orderbar>text:last-child {
   font-size: small;
 }
-.orderbar>text:last-child::after{
+
+.orderbar>text:last-child::after {
   text-align: right;
   content: '';
   display: inline-block;
@@ -83,11 +86,12 @@
   justify-content: space-around;
   border-bottom: solid 10px #f6f6f6;
   padding: 1rem 0;
+  align-items: center
 }
 
 .bar image {
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
 }
 
 .bar text {
@@ -98,8 +102,26 @@
 .baritem {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.newbaritem[data-num]::before {
+  content: attr(data-num);
+  display: inline-flex;
+  height: 18px;
+  width: 18px;
+  border: solid 1px #a16b47;
+  background-color: white;
+  border-radius: 50%;
+  position: relative;
+  top: 10px;
+  left: 15px;
+  font-size: small;
+  color: #a16b47;
   justify-content: center;
   align-items: center;
+  z-index: 2
 }
 
 .btn {

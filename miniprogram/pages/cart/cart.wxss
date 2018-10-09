@@ -14,18 +14,14 @@ page {
   justify-content: center;
   height: 64px;
   width: 100%;
-  /* position: fixed; */
-  /* top: 0; */
-  /* left: 0; */
-  /* background-color: white; */
-  /* z-index: 2; */
-  
+  /* position: fixed; *//* top: 0; *//* left: 0; *//* background-color: white; *//* z-index: 2; */
 }
-.view>text{
+
+.view>text {
   font-size: 1rem;
   margin: 30px 16px 12px;
   font-family: little2;
-  transition: all 0.5s linear
+  transition: all 0.5s linear;
 }
 
 .main {
@@ -224,6 +220,35 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 .end>text:last-child {
   font-size: 0.9rem;
   font-family: little;
+}
+
+.tips {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: gainsboro;
+  font-family: little;
+  font-size: 20pt;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: -1
+}
+
+.tipview {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  border: solid 1px #a16b47;
+  color: #a16b47;
+}
+
+.tiphover {
+  color: white;
+  background-color: #a16b47;
 }
 
 .hoverc {

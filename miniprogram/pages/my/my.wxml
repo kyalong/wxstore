@@ -1,4 +1,4 @@
-<view class='view' catchtap='backhome' >
+<view class='view' catchtap='backhome'>
   <!-- <image src='../../images/choose.png'></image> -->
 </view>
 <view class="userinfo">
@@ -11,24 +11,24 @@
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </block>
 </view>
-<view class='orderbar' catchtap='gotodetail' data-status='0' >
+<view class='orderbar' catchtap='gotodetail' data-status='0'>
   <text>我的订单</text>
   <text>全部订单</text>
 </view>
 <view class='bar'>
-  <view class='baritem' catchtap='gotodetail' data-status='1'>
+  <view class='{{statusnum[0]==0?"baritem":"baritem newbaritem"}}' catchtap='gotodetail' data-status='1' data-num='{{statusnum[0]}}'>
     <image src='../../images/pay.png'></image>
     <text>待付款</text>
   </view>
-  <view class='baritem' catchtap='gotodetail' data-status='2'>
+  <view class='{{statusnum[1]==0?"baritem":"baritem newbaritem"}}' catchtap='gotodetail' data-status='2' data-num='{{statusnum[1]}}'>
     <image src='../../images/post.png'></image>
     <text>待发货</text>
   </view>
-  <view class='baritem' catchtap='gotodetail' data-status='3'>
+  <view class='{{statusnum[2]==0?"baritem":"baritem newbaritem"}}' catchtap='gotodetail' data-status='3' data-num='{{statusnum[2]}}'>
     <image src='../../images/rec.png'></image>
     <text>待收货</text>
   </view>
-  <view class='baritem' catchtap='gotodetail' data-status='4'>
+  <view class='{{statusnum[3]==0?"baritem":"baritem newbaritem"}}' catchtap='gotodetail' data-status='4' data-num='{{statusnum[3]}}'>
     <image src='../../images/sign.png'></image>
     <text>已完成</text>
   </view>

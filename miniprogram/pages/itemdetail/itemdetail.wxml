@@ -1,3 +1,4 @@
+<wxs src='m.wxs' module='m' />
 <view class='view' catchtap='backhome'>
     <image src='../../images/choose.png'></image>
 </view>
@@ -5,7 +6,7 @@
   <view class='page1' style='height:{{h}}px'>
     <view class='main' style='{{w*(1-1/1.414)}}px'>
       <view class='title'>{{item.title}}</view>
-      <view class='subtitle'>{{item.detail[1]}}</view>
+      <view class='subtitle'>{{item.subtitle}}</view>
     </view>
     <scroll-view style='height:{{h-w*(1-1/1.414)*(1+0/(1.618*1.618))}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true' enable-back-to-top='true'>
       <swiper autoplay='true' interval='3000' previous-margin='50px' next-margin='50px' circular='true' style='height:{{w/1.414+40}}px'>
@@ -19,7 +20,7 @@
       </swiper>
       <view class='price'>
         <text>￥{{item.price}}</text>
-        <text>已售{{item.soldnum}}</text>
+        <text>已售{{m.sum(item.detail)}}</text>
       </view>
       <view class='icons'>
         <button class='icon' open-type='share'>

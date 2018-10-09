@@ -4,12 +4,11 @@ const app = getApp()
 const db = wx.cloud.database({
   env: 'boutique10'
 })
+const _ = db.command
 var len = ''
+var currentlist = ''
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     items: '',
     w: app.globalData.sysw,
@@ -19,9 +18,18 @@ Page({
     num: 1,
     cnum: 1,
     isopen: false,
-    newitems: ''
+    newitems: '',
+    total: '',
+    isnull:false
   },
   check: function(e) {
+    currentlist = (function(data) {
+      let arr = []
+      for (let i of data) {
+        arr.push(JSON.parse(i))
+      }
+      return arr
+    })(e.detail.value)
     if (e.detail.value.length == len) {
       this.setData({
         isall: true
@@ -49,7 +57,6 @@ Page({
           delete s._openid
           total.push(s)
         }
-        console.log(total)
         return total
       })(e.detail.value)
     })
@@ -80,14 +87,16 @@ Page({
   },
   cartlist: function() {
     let _this = this
-    db.collection('cart').orderBy('itemid','desc').get().then((res) => {
+    db.collection('cart').orderBy('itemid', 'desc').get().then((res) => {
+      console.log(res.data[0])
       if (res.data[0] == undefined) {
         wx.hideTabBarRedDot({
           index: 1,
         })
         _this.setData({
-          ischecked: false,
-          isall: false
+          isall: false,
+          isnull:false,
+          items:''
         })
       } else {
         wx.showTabBarRedDot({
@@ -95,9 +104,9 @@ Page({
         })
         _this.setData({
           ischecked: true,
-          isall: true
+          isall: true,
+          isnull: true
         })
-
         len = res.data.length
         this.setData({
           items: res.data,
@@ -109,7 +118,6 @@ Page({
             return total
           })(res.data)
         })
-
       }
       wx.hideLoading()
     })
@@ -153,25 +161,70 @@ Page({
 
   add: function(e) {
     let id = e.currentTarget.dataset.id
+    db.collection('cart').doc(id).update({
+      data: {
+        num: _.inc(1)
+      }
+    })
+    let totals = 0
     for (let i of this.data.items) {
       if (i._id == id) {
         i.num += 1
+        for (let j of currentlist) {
+          if (id == j._id) {
+            j.num = i.num
+            totals += j.price * j.num
+          } else {
+            totals += j.price * j.num
+          }
+        }
       }
     }
     this.setData({
-      items: this.data.items
+      items: this.data.items,
+      total: currentlist[0] ? totals : (function(res) {
+        let total = 0
+        for (let i of res) {
+          total += i.price * i.num
+        }
+        return total
+      })(this.data.items)
     })
   },
   minus: function(e) {
     let id = e.currentTarget.dataset.id
+    db.collection('cart').doc(e.currentTarget.dataset.id).update({
+      data: {
+        num: _.inc(-1)
+      }
+    })
+    let totals = 0
     for (let i of this.data.items) {
-      if (i._id == id) {
+      if (i._id == id && i.num > 1) {
         i.num -= 1
+        for (let j of currentlist) {
+          if (id == j._id) {
+            j.num = i.num
+            totals += j.price * j.num
+          } else {
+            totals += j.price * j.num
+          }
+        }
+      } else if (i._id == id && i.num == 1) {
+        totals = this.data.total
       }
     }
     this.setData({
-      items: this.data.items
+      items: this.data.items,
+      total: currentlist[0] ? totals : (function(res) {
+        let total = 0
+        for (let i of res) {
+          total += i.price * i.num
+        }
+        return total
+      })(this.data.items)
     })
+
 
 
   },
@@ -196,23 +249,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    let itemnum = ''
     wx.showLoading({
       title: '拼命加载中',
       success: () => {
         this.cartlist()
       }
     })
+    db.collection('cart').count().then(res => {
+      itemnum = res.total
+    })
     this._observer = wx.createIntersectionObserver()
     this._observer.relativeTo('.view').observe('.intersection', (res) => {
       if (res.intersectionRatio > 0) {
         this.setData({
           title: '购物车',
-          opc: 1
+          opc: 1,
+          itemnum:'('+itemnum+')'
         })
       } else {
         this.setData({
           title: '',
-          opc: 0
+          opc: 0,
+          itemnum: ''
         })
       }
     })

@@ -17,7 +17,8 @@ Page({
     h: app.globalData.sysh,
     address: '新增收货地址',
     haveaddr: true,
-    addressid: ''
+    addressid: '',
+    costoff: 400
 
 
   },
@@ -56,7 +57,14 @@ Page({
   },
   formsubmit: function(e) {
     // console.log(e.currentTarget.dataset.items)
-    let status = 3
+    let status = 0
+    let idlist = (function(data) {
+      let arr = []
+      for (let i of data) {
+        arr.push(i.cartid)
+      }
+      return arr
+    })(e.currentTarget.dataset.items)
     db.collection('orderseri').get().then(
       res => {
         let serinumid = res.data[0]._id
@@ -79,17 +87,23 @@ Page({
           wx.navigateTo({
             url: '../orderlist/orderlist?status=' + (status + 1),
           })
+          wx.cloud.callFunction({
+            name: 'removecart',
+            data: {
+              idlist: idlist
+            }
+          }).then(res => {
+            console.log('清空购物车')
+          })
+
           db.collection('orderseri').doc(serinumid).update({
             data: {
               num: _.inc(1)
             }
           }).then(data => {})
-
         })
-
       }
     )
-
     // wx.requestPayment({
     //   timeStamp: '',
     //   nonceStr: '',

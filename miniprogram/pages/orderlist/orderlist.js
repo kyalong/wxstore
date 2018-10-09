@@ -1,6 +1,5 @@
 // miniprogram/pages/orderlist/orderlist.js
 const app = getApp()
-
 const db = wx.cloud.database({
   env: 'boutique10'
 })
@@ -48,8 +47,17 @@ Page({
 
   },
   backhome: function() {
-    wx.navigateBack({
-      delta: 1
+    wx.switchTab({
+     url:'../my/my'
+    })
+  },
+  gotodetail: function(e) {
+
+  },
+  gotoitem: function(e) {
+    console.log(e.currentTarget.dataset.itemid)
+    wx.navigateTo({
+      url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.itemid,
     })
   },
   /**

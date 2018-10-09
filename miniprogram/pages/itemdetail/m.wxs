@@ -1,0 +1,14 @@
+function sum(data) {
+  var arr = 0
+  for (var i = 0; i < data.length; i++) {
+    for (var j = 0; j < data[i][4].length; j++) {
+      arr += data[i][4][j][0]
+    }
+  }
+  console.log(arr)
+  return arr
+}
+
+module.exports = {
+  sum: sum
+}

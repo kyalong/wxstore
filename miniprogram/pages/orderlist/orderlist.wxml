@@ -20,15 +20,15 @@
   <block wx:else>
     <scroll-view scroll-y scroll-into-view="{{toview}}" enable-back-to-top="true" style='height:{{h-64-77-37}}px;' scroll-with-animation='true' class='scroll-view' scroll-top='{{totop}}'>
       <block wx:for="{{detail}}" wx:key='id'>
-        <view class='main' id='s{{item._id}}'>
+        <view class='main' id='s{{item._id}}' catchtap='gotodetail'>
           <view class='card serinum'>
             <text class='svgicon'></text>
             <text>订单号: {{item.serinum}}</text>
             <text>{{m.map[item.status]}}</text>
           </view>
           <block wx:for='{{item.itemslist}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
-            <view class='item' catchtap='selected'>
-              <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px'></image>
+            <view class='item'>
+              <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px' catchtap='gotoitem' data-itemid='{{detail.itemid}}'></image>
               <view class='price'>
                 <text>{{detail.title}}</text>
                 <text>尺码:{{detail.size}}</text>
@@ -45,13 +45,16 @@
             <text>合计:￥ {{item.total}}</text>
           </view>
           <view class='card status'>
-            <!-- <button id='modify' bindtap='modify' data-num='{{item.id}}' plain='true'>
-            <text>修改订单</text>
-          </button> -->
+            <button id='modify' bindtap='modify' data-num='{{item._id}}' wx:if='{{item.status==0?true:false}}'>
+              <text>确认支付</text>
+            </button>
             <button id='del' bindtap='status' data-num='{{item._id}}' wx:if='{{item.status==0||item.status==1?true:false}}'>
               取消订单
             </button>
-            <button id='done' bindtap='status' data-num='{{item._id}}' wx:if='{{item.status==3?false:true}}'>
+            <button id='deliver' bindtap='status' data-num='{{item._id}}' wx:if='{{item.status==2||item.status==3?true:false}}'>
+              查看物流
+            </button>
+            <button id='done' bindtap='status' data-num='{{item._id}}' wx:if='{{item.status==2?true:false}}'>
               确认收货
             </button>
           </view>

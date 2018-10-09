@@ -4,11 +4,11 @@
       <image src='{{detail.image[0]}}' mode='aspectFill' style='' lazy-load='true'></image>
       <view class='item'>
         <view class='texts'>
-          <view class='itemname'>{{detail.detail[1]}}</view>
+          <view class='itemname'>{{detail.subtitle}}</view>
           <view class='price'>￥{{detail.price}}</view>
         </view>
         <!-- <view class='icon' catchtap='addcart' data-id='{{detail._id}}'>
-          <image src='../../images/cart.png'></image>
+          <image src='../../images/cart2.png'></image>
         </view> -->
       </view>
     </view>
