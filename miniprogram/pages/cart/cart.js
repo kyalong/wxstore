@@ -88,7 +88,6 @@ Page({
   cartlist: function() {
     let _this = this
     db.collection('cart').orderBy('itemid', 'desc').get().then((res) => {
-      console.log(res.data[0])
       if (res.data[0] == undefined) {
         wx.hideTabBarRedDot({
           index: 1,

@@ -38,7 +38,6 @@ App({
     db.collection('orderseri').where({
       date: String(tomorrow(0) / 1000)
     }).get().then(res => {
-      console.log(res)
       if (res.data.length > 0) {
         this.globalData.count = res.data[0]._id
         console.log('获取当前订单号')
@@ -49,7 +48,6 @@ App({
             'num': 1
           }
         }).then(res => {
-          console.log(res)
           this.globalData.count=res._id
         })
       }

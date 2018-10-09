@@ -65,12 +65,12 @@ Page({
       }
       return arr
     })(e.currentTarget.dataset.items)
-    db.collection('orderseri').get().then(
+    db.collection('orderseri').doc(app.globalData.count).get().then(
       res => {
-        let serinumid = res.data[0]._id
+        let serinumid = res.data._id
         db.collection('order').add({
           data: {
-            serinum: tomorrow(res.data[0].num),
+            serinum: tomorrow(res.data.num),
             createtime: Date.parse(new Date()),
             paytime: '',
             delivertime: '',

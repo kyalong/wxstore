@@ -25,7 +25,8 @@ Page({
           db.collection('order').orderBy('serinum', 'desc').get().then(res => {
             this.setData({
               totop: 0,
-              detail: res.data
+              detail: res.data,
+              title: e.currentTarget.dataset.title
             })
             wx.hideLoading()
           })
