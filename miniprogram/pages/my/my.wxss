@@ -59,14 +59,13 @@
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0.5rem;
-  font-size: smaller;
   border-bottom: solid 1px #f6f6f6;
   border-top: solid 10px #f6f6f6;
   align-items: center;
 }
 
 .orderbar>text:last-child {
-  font-size: small;
+  font-size: smaller;
 }
 
 .orderbar>text:last-child::after {
@@ -85,13 +84,12 @@
   display: flex;
   justify-content: space-around;
   border-bottom: solid 10px #f6f6f6;
-  padding: 1rem 0;
-  align-items: center
+  padding: 0.5rem 0;
 }
 
 .bar image {
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
 }
 
 .bar text {
@@ -108,20 +106,23 @@
 
 .newbaritem[data-num]::before {
   content: attr(data-num);
-  display: inline-flex;
-  height: 18px;
-  width: 18px;
-  border: solid 1px #a16b47;
-  background-color: white;
+  display: flex;
+  height: 15px;
+  width: 15px;
+  border: solid 2px transparent;
   border-radius: 50%;
   position: relative;
-  top: 10px;
-  left: 15px;
+  top: 12px;
+  left: 13px;
   font-size: small;
   color: #a16b47;
   justify-content: center;
   align-items: center;
-  z-index: 2
+  z-index: 10;
+  /* color: transparent; */
+  background-image: linear-gradient(-166.5deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)),
+                      linear-gradient(13.5deg, #d87d28, #a16b47);
+  background-clip: content-box, border-box;
 }
 
 .btn {
