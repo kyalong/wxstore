@@ -32,6 +32,11 @@ Page({
       this.setData({
         isall: true
       })
+    } else if (e.detail.value.length == 0) {
+      this.setData({
+        isall: false,
+        ischecked: false,
+      })
     } else {
       this.setData({
         isall: false,
@@ -59,12 +64,9 @@ Page({
       })(e.detail.value)
     })
   },
-  all: function() {
-
-  },
   buy: function(e) {
     let list = ''
-    if (this.data.newitems == '') {
+    if (this.data.isall) {
       list = (function(data) {
         let total = []
         for (let i of data) {
@@ -76,13 +78,21 @@ Page({
         }
         return JSON.stringify(total)
       })(this.data.items)
-
     } else {
       list = e.currentTarget.dataset.list
     }
-    wx.navigateTo({
-      url: '../order/order?itemlist=' + list + '&total=' + e.currentTarget.dataset.total,
-    })
+    if (JSON.parse(list).length == 0) {
+      wx.showModal({
+        title: '请至少选择一个宝贝',
+        content: '快选快选我',
+        showCancel:false
+      })
+    } else {
+      wx.navigateTo({
+        url: '../order/order?itemlist=' + list + '&total=' + e.currentTarget.dataset.total,
+      })
+    }
+
   },
   cartlist: function() {
     let _this = this

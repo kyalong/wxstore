@@ -68,54 +68,62 @@ Page({
       }
       return arr
     })(e.currentTarget.dataset.items)
-    db.collection('orderseri').doc(app.globalData.count).get().then(
-      res => {
-        let serinumid = res.data._id
-        db.collection('order').add({
-          data: {
-            serinum: tomorrow(res.data.num),
-            createtime: Date.parse(new Date()),
-            paytime: '',
-            delivertime: '',
-            recievetime: '',
-            rebacktime: '',
-            commenttime: '',
-            addressid: this.data.addressid,
-            itemslist: e.currentTarget.dataset.items,
-            status: Number(status),
-            total: e.currentTarget.dataset.total,
-            actualtotal: e.currentTarget.dataset.actualtotal,
-          }
-        }).then(res => {
-          // console.log(res)
-          wx.showLoading({
-            title: '拼命下单中',
-            success: res => {
-              wx.cloud.callFunction({
-                name: 'removecart',
-                data: {
-                  idlist: idlist
-                }
-              }).then(res => {
-                console.log('清空购物车')
-                wx.navigateTo({
-                  url: '../orderlist/orderlist?status=' + (status + 1),
-                  success: res => {
-                    wx.hideLoading()
-                  }
-                })
-              })
-            }
-          })
-
-          db.collection('orderseri').doc(serinumid).update({
+    if (this.data.addressid) {
+      db.collection('orderseri').doc(app.globalData.count).get().then(
+        res => {
+          let serinumid = res.data._id
+          db.collection('order').add({
             data: {
-              num: _.inc(1)
+              serinum: tomorrow(res.data.num),
+              createtime: Date.parse(new Date()),
+              paytime: '',
+              delivertime: '',
+              recievetime: '',
+              rebacktime: '',
+              commenttime: '',
+              addressid: this.data.addressid,
+              itemslist: e.currentTarget.dataset.items,
+              status: Number(status),
+              total: e.currentTarget.dataset.total,
+              actualtotal: e.currentTarget.dataset.actualtotal,
             }
-          }).then(data => {})
-        })
-      }
-    )
+          }).then(res => {
+            // console.log(res)
+            wx.showLoading({
+              title: '拼命下单中',
+              success: res => {
+                wx.cloud.callFunction({
+                  name: 'removecart',
+                  data: {
+                    idlist: idlist
+                  }
+                }).then(res => {
+                  console.log('清空购物车')
+                  wx.navigateTo({
+                    url: '../orderlist/orderlist?status=' + (status + 1),
+                    success: res => {
+                      wx.hideLoading()
+                    }
+                  })
+                })
+              }
+            })
+
+            db.collection('orderseri').doc(serinumid).update({
+              data: {
+                num: _.inc(1)
+              }
+            }).then(data => {})
+          })
+        }
+      )
+    } else {
+      wx.showModal({
+        title: '请填写收货地址',
+        content: '点击+按钮添加',
+        showCancel: false
+      })
+    }
     // wx.requestPayment({
     //   timeStamp: '',
     //   nonceStr: '',

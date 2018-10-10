@@ -50,7 +50,9 @@ Page({
   status: function(e) {
     db.collection('order').doc(e.currentTarget.dataset.num).update({
       data: {
-        status: Number(e.currentTarget.dataset.status)
+        status: Number(e.currentTarget.dataset.status),
+        paytime: e.currentTarget.dataset.status == 1 ? Date.parse(new Date()) : '',
+        recievetime: e.currentTarget.dataset.status == 3 ? Date.parse(new Date()) : ''
       }
     }).then(res => {
       db.collection('order').orderBy('serinum', 'desc').where({
