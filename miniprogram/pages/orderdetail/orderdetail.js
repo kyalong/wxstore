@@ -18,32 +18,42 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-
+  wuliu: function() {
+    wx.navigateTo({
+      url: '../wuliu/wuliu',
+    })
+  },
   backhome: function() {
     wx.navigateBack({
       delta: 1
     })
   },
-  dial:function(e){
+  dial: function(e) {
     wx.makePhoneCall({
-      phoneNumber:'12345678901'
+      phoneNumber: '12345678901'
     })
   },
-  wechat: function (e) { 
-  },
+  wechat: function(e) {},
   onLoad: function(options) {
     this.setData({
       h: wx.getSystemInfoSync().windowHeight
     })
-    db.collection('order').doc(options.orderid).get().then(res => {
-      db.collection('user').doc(res.data.addressid).get().then(re=>{
-        this.setData({
-          detail: [res.data],
-          addrs:[re.data]
+    wx.showLoading({
+      title: '我跑我跑跑跑',
+      success: () => {
+        db.collection('order').doc(options.orderid).get().then(res => {
+          db.collection('user').doc(res.data.addressid).get().then(re => {
+            this.setData({
+              detail: [res.data],
+              addrs: [re.data]
+            })
+            wx.hideLoading()
+          })
+
         })
-      })
-     
+      }
     })
+
   },
 
   /**

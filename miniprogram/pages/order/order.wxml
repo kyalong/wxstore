@@ -44,7 +44,7 @@
   </view>
   <view class='deliver'>
     <text>红包优惠券</text>
-    <text>{{costoff}}元</text>
+    <text>￥{{costoff}}</text>
   </view>
   <view class='mark'>
     <input placeholder='备注'></input>
@@ -54,4 +54,4 @@
     <text>￥{{total-costoff}}</text>
   </view>
 </scroll-view>
-<button class='submit' bindtap='formsubmit' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-items='{{items}}' data-total='{{total}}' data-actualtotal='{{total-costoff}}'>提交订单</button>
+<button class='submit' bindtap='formsubmit' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-items='{{items}}' data-total='{{total}}' data-actualtotal='{{total-costoff}}' data-='{{addressid}}'>提交订单</button>

@@ -36,7 +36,7 @@
       },
       {
         "pagePath": "pages/my/my",
-        "text": "我的洞天",
+        "text": "私人洞府",
         "iconPath": "images/my1.png",
         "selectedIconPath": "images/my.png"
       }
