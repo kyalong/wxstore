@@ -5,7 +5,6 @@ var tomorrow = function(i) {
 }
 App({
   onLaunch: function() {
-    require('/sdk/sdk-v1.8.1')
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {

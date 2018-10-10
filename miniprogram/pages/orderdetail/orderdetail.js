@@ -30,7 +30,6 @@ Page({
     })
   },
   wechat: function (e) { 
-    
   },
   onLoad: function(options) {
     this.setData({
@@ -58,7 +57,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this._observer = wx.createIntersectionObserver()
+    this._observer.relativeTo('.view').observe('.intersection', (res) => {
+      if (res.intersectionRatio > 0) {
+        this.setData({
+          title: '订单详情',
+          opc: 1,
+        })
+      } else {
+        this.setData({
+          title: '',
+          opc: 0,
+        })
+      }
+    })
   },
 
   /**

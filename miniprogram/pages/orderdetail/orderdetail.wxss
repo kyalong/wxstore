@@ -1,14 +1,28 @@
 .view {
   display: flex;
-  height: 64px;
+  justify-content: center;
+  align-items: center;
+  height: 64px
+
 }
 
 .view>image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 30px 16px 10px;
   width: 24px;
   height: 24px;
   background-color: transparent;
   transform: rotate(180deg);
-  margin: 26px 16px 8px;
+}
+
+.view>text {
+  text-align: center;
+  font-size: 1rem;
+  margin: 30px 16px 12px;
+  font-family: little2;
+  transition: all 0.5s linear;
 }
 
 .main {
@@ -47,7 +61,7 @@
 }
 
 .wuliu>text {
-  padding:0 0.5rem;
+  padding: 0 0.5rem;
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
