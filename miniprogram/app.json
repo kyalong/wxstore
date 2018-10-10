@@ -8,7 +8,8 @@
     "pages/order/order",
     "pages/orderlist/orderlist",
     "zujian/popcart/popcart",
-    "pages/orderdetail/orderdetail"
+    "pages/orderdetail/orderdetail",
+    "pages/wuliu/wu'liu"
   ],
   "window": {
     "backgroundColor": "#ffffff",

@@ -1,2 +1,109 @@
-<!--miniprogram/pages/orderdetail/orderdetail.wxml-->
-<text>miniprogram/pages/orderdetail/orderdetail.wxml</text>
+<wxs src='../orderlist/m.wxs' module='m' />
+<wxs src='time.wxs' module='m1' />
+<view class='view' catchtap='backhome'>
+  <image src='../../images/choose.png'></image>
+</view>
+<scroll-view style='height:{{h-64}}px;' scroll-y='true' enable-back-to-top='true'>
+  <view>
+    <view class='main'>
+      <view class='title'>订单详情</view>
+    </view>
+  </view>
+  <view class='wuliu' catchtap='wuliu'>
+    <image src='../../images/rec.png' style='height:30px;width:30px;'></image>
+    <text>物流信息</text>
+    <image src='../../images/choose.png' style='height:30px;width:30px;'></image>
+  </view>
+  <block wx:for="{{addrs}}" wx:key=''>
+    <view class='address' bindtap='getaddr' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time='100'>
+      <image src='../../images/loc.png'></image>
+      <view>
+        <text> {{item.address}}</text>
+        <text>{{item.phone}}</text>
+        <text>{{item.user}}</text>
+      </view>
+
+    </view>
+  </block>
+  <block wx:for="{{detail}}" wx:key='id'>
+    <view class='mains' id='s{{item._id}}' catchtap='gotodetail' wx:if='{{item.status==9?false:true}}' data-orderid='{{item._id}}'>
+      <view class='card serinum'>
+        <text class='svgicon'></text>
+        <text>订单号: {{item.serinum}}</text>
+        <text>{{m.map[item.status]}}</text>
+      </view>
+      <block wx:for='{{item.itemslist}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+        <view class='item'>
+          <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px' catchtap='gotoitem' data-itemid='{{detail.itemid}}'></image>
+          <view class='price'>
+            <text>{{detail.title}}</text>
+            <text>尺码:{{detail.size}}</text>
+            <text>颜色:{{detail.color}}</text>
+          </view>
+          <view class='num'>
+            <text>￥{{detail.price}}</text>
+            <text>x {{detail.num}}</text>
+          </view>
+        </view>
+      </block>
+      <view class='card loan'>
+        <text>共{{m.counts(item.itemslist)}}件商品</text>
+        <!-- <text>合计:￥ {{item.total}}</text> -->
+      </view>
+    </view>
+
+    <view class='deliver'>
+      <text>配送方式</text>
+      <text>包邮</text>
+    </view>
+    <view class='deliver'>
+      <text>红包优惠券</text>
+      <text>-{{item.total-item.actualtotal}}元</text>
+    </view>
+    <view class='total'>
+      <text>总价</text>
+      <text>￥{{item.total}}</text>
+    </view>
+    <view class='actualtotal'>
+      <text>实付</text>
+      <text>￥{{item.actualtotal}}</text>
+    </view>
+    <!-- <view class='mark'>
+    <input placeholder='备注'></input>
+  </view> -->
+
+    <view class='orderinfo'>
+      <text>订单信息</text>
+      <view class='infoitem'>
+        <text>订单编号:</text>
+        <text>{{item.serinum}}</text>
+      </view>
+      <view class='infoitem'>
+        <text>创建时间:</text>
+        <text>{{m1.time(item.createtime)}}</text>
+      </view>
+      <view class='infoitem'>
+        <text>付款时间:</text>
+        <text>{{m1.time(item.paytime)}}</text>
+      </view>
+      <view class='infoitem'>
+        <text>发货时间:</text>
+        <text>{{m1.time(item.delivertime)}}</text>
+      </view>
+      <view class='infoitem'>
+        <text>签收时间:</text>
+        <text>{{m1.time(item.recievetime)}}</text>
+      </view>
+      <view class='contact' catchtap='wechat'>
+        <view style='border-right:solid 1px #f6f6f6'>
+          <image src='../../images/csc2.png'></image> 商家微信</view>
+        <view catchtap='dial'>
+          <image src='../../images/phone.png'></image> 拨打电话</view>
+      </view>
+    </view>
+  </block>
+  <view class='end'>
+    <text>咫尺杂货铺</text>
+    <text>天涯若比邻</text>
+  </view>
+</scroll-view>

@@ -79,14 +79,13 @@ Page({
             commenttime: '',
             addressid: this.data.addressid,
             itemslist: e.currentTarget.dataset.items,
-            status: status,
-            total: e.currentTarget.dataset.total
+            status: Number(status),
+            total: e.currentTarget.dataset.total,
+            actualtotal: e.currentTarget.dataset.actualtotal,
           }
         }).then(res => {
           // console.log(res)
-          wx.navigateTo({
-            url: '../orderlist/orderlist?status=' + (status + 1),
-          })
+
           wx.cloud.callFunction({
             name: 'removecart',
             data: {
@@ -94,8 +93,10 @@ Page({
             }
           }).then(res => {
             console.log('清空购物车')
+            wx.navigateTo({
+              url: '../orderlist/orderlist?status=' + (status + 1),
+            })
           })
-
           db.collection('orderseri').doc(serinumid).update({
             data: {
               num: _.inc(1)

@@ -31,9 +31,9 @@ Page({
             wx.hideLoading()
           })
         } else {
-          db.collection('order').orderBy('serinum', 'desc').where({
+          db.collection('order').where({
             status: Number(e.currentTarget.dataset.title) - 1
-          }).get().then(res => {
+          }).orderBy('serinum', 'desc').get().then(res => {
             this.setData({
               totop: 0,
               title: e.currentTarget.dataset.title,
@@ -47,16 +47,37 @@ Page({
     })
 
   },
+  status: function(e) {
+    db.collection('order').doc(e.currentTarget.dataset.num).update({
+      data: {
+        status: Number(e.currentTarget.dataset.status)
+      }
+    }).then(res => {
+      db.collection('order').orderBy('serinum', 'desc').where({
+        status: e.currentTarget.dataset.status == 9 ? Number(this.data.title) - 1 : Number(e.currentTarget.dataset.status)
+      }).get().then(res => {
+
+        this.setData({
+          title: e.currentTarget.dataset.status == 9 ? this.data.title : Number(e.currentTarget.dataset.status) + 1,
+          detail: res.data
+        })
+      })
+    })
+  },
+  deliver: function(e) {},
+  done: function(e) {},
+
   backhome: function() {
     wx.switchTab({
-     url:'../my/my'
+      url: '../my/my'
     })
   },
   gotodetail: function(e) {
-
+    wx.navigateTo({
+      url: '../orderdetail/orderdetail?orderid=' + e.currentTarget.dataset.orderid,
+    })
   },
   gotoitem: function(e) {
-    console.log(e.currentTarget.dataset.itemid)
     wx.navigateTo({
       url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.itemid,
     })
@@ -70,7 +91,6 @@ Page({
       success: res => {
         if (options.status == 0) {
           db.collection('order').orderBy('serinum', 'desc').get().then(res => {
-
             this.setData({
               title: options.status,
               detail: res.data
@@ -82,6 +102,7 @@ Page({
           db.collection('order').where({
             status: Number(options.status) - 1
           }).orderBy('serinum', 'desc').get().then(res => {
+            console.log(res.data)
             this.setData({
               title: options.status,
               detail: res.data
