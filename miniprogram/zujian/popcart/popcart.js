@@ -33,22 +33,28 @@ Component({
     color: 0,
     size: 0
   },
-  lifetimes: {},
+  lifetimes: {
+
+  },
   /**
    * 组件的方法列表
    */
   methods: {
     choosecolor: function(e) {
       this.setData({
-        color:e.currentTarget.dataset.color
+        color: e.currentTarget.dataset.color
       })
     },
-    choosesize: function (e) {
+    choosesize: function(e) {
       this.setData({
         size: e.currentTarget.dataset.size
       })
     },
     popdown: function(e) {
+      this.setData({
+        color: 0,
+        size: 0
+      })
       this.triggerEvent('popdown')
     },
     add: function(e) {

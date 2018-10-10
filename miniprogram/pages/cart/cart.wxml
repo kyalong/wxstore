@@ -33,7 +33,7 @@
             <view class='num'>
               <text catchtap='add' data-id='{{detail._id}}'>+</text>
               <text>{{detail.num}}</text>
-              <text style='{{detail.num==1&&cnum<=1?"background-color:#eee":""}}' catchtap='minus' data-id='{{detail._id}}'>-</text>
+              <text style='{{detail.num==1?"background-color:#eee":""}}' catchtap='minus' data-id='{{detail._id}}'>-</text>
             </view>
           </view>
         </leftmove>

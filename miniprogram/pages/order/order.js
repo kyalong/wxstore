@@ -85,18 +85,26 @@ Page({
           }
         }).then(res => {
           // console.log(res)
-
-          wx.cloud.callFunction({
-            name: 'removecart',
-            data: {
-              idlist: idlist
-            }
-          }).then(res => {
-            console.log('清空购物车')
-            wx.navigateTo({
-              url: '../orderlist/orderlist?status=' + (status + 1),
+        wx.showLoading({
+          title: '拼命下单中',
+          success:res=>{
+            wx.cloud.callFunction({
+              name: 'removecart',
+              data: {
+                idlist: idlist
+              }
+            }).then(res => {
+              console.log('清空购物车')
+              wx.navigateTo({
+                url: '../orderlist/orderlist?status=' + (status + 1),
+                success:res=>{
+                  wx.hideLoading()
+                }
+              })
             })
-          })
+          }
+        })
+          
           db.collection('orderseri').doc(serinumid).update({
             data: {
               num: _.inc(1)
@@ -118,6 +126,7 @@ Page({
 
   },
   onLoad: function(options) {
+    console.log(options)
     this.setData({
       h: wx.getSystemInfoSync().windowHeight - 64,
       items: JSON.parse(options.itemlist),
@@ -154,7 +163,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
   },
 
   /**

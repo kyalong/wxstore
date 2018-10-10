@@ -15,12 +15,10 @@ Page({
     h: app.globalData.sysh,
     ischecked: false,
     isall: false,
-    num: 1,
-    cnum: 1,
     isopen: false,
     newitems: '',
     total: '',
-    isnull:false
+    isnull: false
   },
   check: function(e) {
     currentlist = (function(data) {
@@ -78,6 +76,7 @@ Page({
         }
         return JSON.stringify(total)
       })(this.data.items)
+
     } else {
       list = e.currentTarget.dataset.list
     }
@@ -94,8 +93,8 @@ Page({
         })
         _this.setData({
           isall: false,
-          isnull:false,
-          items:''
+          isnull: false,
+          items: ''
         })
       } else {
         wx.showTabBarRedDot({
@@ -104,8 +103,11 @@ Page({
         _this.setData({
           ischecked: true,
           isall: true,
-          isnull: true
+          isnull: true,
+          newitems: '',
+          total: '',
         })
+        currentlist = ''
         len = res.data.length
         this.setData({
           items: res.data,
@@ -181,7 +183,7 @@ Page({
     }
     this.setData({
       items: this.data.items,
-      total: currentlist[0] ? totals : (function(res) {
+      total: currentlist[0] != undefined ? totals : (function(res) {
         let total = 0
         for (let i of res) {
           total += i.price * i.num
@@ -192,15 +194,15 @@ Page({
   },
   minus: function(e) {
     let id = e.currentTarget.dataset.id
-    db.collection('cart').doc(e.currentTarget.dataset.id).update({
-      data: {
-        num: _.inc(-1)
-      }
-    })
     let totals = 0
     for (let i of this.data.items) {
       if (i._id == id && i.num > 1) {
         i.num -= 1
+        db.collection('cart').doc(e.currentTarget.dataset.id).update({
+          data: {
+            num: _.inc(-1)
+          }
+        })
         for (let j of currentlist) {
           if (id == j._id) {
             j.num = i.num
@@ -264,7 +266,7 @@ Page({
         this.setData({
           title: '购物车',
           opc: 1,
-          itemnum:'('+itemnum+')'
+          itemnum: '(' + itemnum + ')'
         })
       } else {
         this.setData({
@@ -280,6 +282,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
+
     db.collection('cart').get().then(res => {
       if (res.data[0] == undefined) {
         this.setData({
@@ -292,6 +295,7 @@ Page({
     })
     if (this._observer) {
       this._observer.disconnect()
+
     }
   },
 
@@ -301,6 +305,7 @@ Page({
   onUnload: function() {
     if (this._observer) {
       this._observer.disconnect()
+
     }
   },
 
