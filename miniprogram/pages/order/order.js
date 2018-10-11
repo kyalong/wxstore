@@ -137,11 +137,25 @@ Page({
 
   },
   onLoad: function(options) {
-    this.setData({
-      h: wx.getSystemInfoSync().windowHeight - 64,
-      items: JSON.parse(options.itemlist),
-      total: options.total
-    })
+    if (options.cartid) {
+      db.collection('cart').doc(options.cartid).get().then(res => {
+        res.data.cartid = res.data._id
+        res.data.userid = res.data._openid
+        delete res.data._id
+        delete res.data._openid
+        this.setData({
+          h: wx.getSystemInfoSync().windowHeight - 64,
+          items: [res.data],
+          total: res.data.price * res.data.num
+        })
+      })
+    } else {
+      this.setData({
+        h: wx.getSystemInfoSync().windowHeight - 64,
+        items: JSON.parse(options.itemlist),
+        total: options.total
+      })
+    }
     db.collection('user').get().then(res => {
       if (res.data[0]) {
         this.setData({

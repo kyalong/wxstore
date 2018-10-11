@@ -31,7 +31,6 @@ Page({
 
   },
   changemode: function(e) {
-    console.log(this._observer)
     if (this.data.islist) {
       this.setData({
         islist: false,
@@ -134,13 +133,6 @@ Page({
     }
   },
   onLoad: function(options) {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
     wx.showLoading({
       title: '拼命加载中',
       success: () => {
@@ -150,14 +142,20 @@ Page({
             items2: res.data.slice(8, 10),
             items1: res.data.slice(10, 11)
           })
-          wx.hideLoading()
+          wx.hideLoading()          
         })
+
       }
     })
-   
   },
 
   /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+  },
+
+  /** 
    * 生命周期函数--监听页面显示
    */
   onShow: function() {

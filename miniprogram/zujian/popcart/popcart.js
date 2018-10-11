@@ -76,19 +76,20 @@ Component({
 
         }
       }).then(res => {
+        this.triggerEvent('confirm', {
+          // title: e.currentTarget.dataset.title,
+          cartid: res._id,
+          // num: e.currentTarget.dataset.num,
+          // size: e.currentTarget.dataset.size,
+          // color: e.currentTarget.dataset.color
+        })
         wx.showToast({
           title: '添加购物车成功',
           icon: 'success',
           mask: true
         })
       })
-      // this.triggerEvent('confirm', {
-      //   title: e.currentTarget.dataset.title,
-      //   itemid: e.currentTarget.dataset.id,
-      //   num: e.currentTarget.dataset.num,
-      //   size: e.currentTarget.dataset.size,
-      //   color: e.currentTarget.dataset.color
-      // })
+     
     },
   }
 })

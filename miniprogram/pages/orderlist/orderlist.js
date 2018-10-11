@@ -104,7 +104,6 @@ Page({
           db.collection('order').where({
             status: Number(options.status) - 1
           }).orderBy('serinum', 'desc').get().then(res => {
-            console.log(res.data)
             this.setData({
               title: options.status,
               detail: res.data

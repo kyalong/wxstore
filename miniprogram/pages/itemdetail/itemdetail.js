@@ -20,9 +20,9 @@ Page({
     masknum: 1,
     animationData: '',
   },
-  backhome:function(){
+  backhome: function() {
     wx.navigateBack({
-      delta:1
+      delta: 1
     })
   },
   /**
@@ -33,17 +33,15 @@ Page({
     animation.translateY(-this.data.h).opacity(1).step({
       duration: 200
     })
-    // animation.top(0).left(0).opacity(1).step({ duration: 300 })
     db.collection('item').doc(e.currentTarget.dataset.id).get().then(res => {
       this.setData({
+        // zhijie: '',
         maskinfo: [res.data],
         popup: 'flex',
-        // animationData: animation.export(),
       })
       setTimeout(() => {
         this.setData({
-          // maskinfo: [res.data],
-          // popup: false,
+
           animationData: animation.export(),
         })
       }, 100)
@@ -55,7 +53,6 @@ Page({
     animation.translateY(0).step({
       duration: 200
     })
-    // animation.height(0).backgroundColor('transparent').step()
     this.setData({
       masknum: 1,
       animationData: animation.export(),
@@ -80,34 +77,60 @@ Page({
     }
   },
   buy: function(e) {
+    let animation = this.animation
+    animation.translateY(-this.data.h).opacity(1).step({
+      duration: 200
+    })
+    db.collection('item').doc(e.currentTarget.dataset.id).get().then(res => {
+      this.setData({
+        // zhijie: e.currentTarget.dataset.zhijie,
+        maskinfo: [res.data],
+        popup: 'flex',
+      })
+      setTimeout(() => {
+        this.setData({
+          animationData: animation.export(),
+        })
+      }, 100)
+    })
+  },
+  confirm: function(e) {
     wx.navigateTo({
-      url: '../order/order',
+      url: '../order/order?cartid=' + e.detail.cartid,
     })
   },
   onLoad: function(options) {
     this.setData({
-      h:wx.getSystemInfoSync().windowHeight-64
+      h: wx.getSystemInfoSync().windowHeight - 64
     })
     db.collection('item').doc(options.itemid).get().then(res => {
       this.setData({
         items: [res.data],
         imagelist: res.data.image
       })
-    })
+      this._observer = wx.createIntersectionObserver()
+      this._observer.relativeTo('.view').observe('.intersection', (res) => {
+        if (res.intersectionRatio > 0) {
+          this.setData({
+            title: '宝贝Plus',
+            opc: 1,
 
+          })
+        } else {
+          this.setData({
+            title: '',
+            opc: 0,
+          })
+        }
+      })
+    })
+  
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
     let animation = wx.createAnimation({
       duration: 200,
       timingFunction: 'linear',
@@ -116,10 +139,17 @@ Page({
   },
 
   /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+   
+  },
+
+  /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    this.popdown()
   },
 
   /**
