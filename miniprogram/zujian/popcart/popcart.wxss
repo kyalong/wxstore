@@ -49,6 +49,11 @@
   height: 30px;
 }
 
+scroll-view {
+  display: flex;
+  flex-direction: column;
+}
+
 .ldetail {
   display: flex;
   flex-direction: column;

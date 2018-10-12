@@ -56,7 +56,7 @@
         <m1s detail='{{items3[7]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         <m2 items='{{m.fen(items3,8,2)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         <!-- <m3 items='{{m.fen(items3,3,3)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' /> -->
-        <m1s detail='{{items3[10]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+        <!-- <m1s detail='{{items3[10]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' /> -->
         <view class='end'>
           <text>咫尺杂货铺</text>
           <text>天涯若比邻</text>

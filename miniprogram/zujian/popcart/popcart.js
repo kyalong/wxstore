@@ -44,6 +44,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    preview:function(e){
+      wx.previewImage({
+        urls:[e.currentTarget.dataset.urls]
+      })
+    },
     choosecolor: function(e) {
       this.setData({
         color: e.currentTarget.dataset.color

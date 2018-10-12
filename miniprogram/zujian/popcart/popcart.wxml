@@ -3,7 +3,7 @@
   <block wx:for='{{maskinfo}}' wx:key=''>
     <view class='info' style='height: {{h*0.8}}px;'>
       <view class='l1'>
-        <image class='maskimage' src='{{item.detail[color][5]}}'></image>
+        <image class='maskimage' src='{{item.detail[color][5]}}' catchtap='preview' data-urls='{{item.detail[color][5]}}'></image>
         <view>
           <view class='masktitle'>{{item.title}}</view>
           <view class='maskstock'>剩余库存:{{item.detail[color][4][size][2]}}件</view>
@@ -11,22 +11,24 @@
         </view>
         <image class='cancelicon' src='../../images/cancel.png' catchtap='popdown'></image>
       </view>
-      <view class='l2 ldetail'>
-        <text>颜色</text>
-        <view>
-          <block wx:for='{{item.detail}}' wx:for-item='skus' wx:key=''>
-            <view style='{{index==color?"background-color:#a16b47;color:#fff":""}}' class='maskframe' data-color='{{index}}' catchtap='choosecolor'>{{skus[1]}}</view>
-          </block>
+      <scroll-view scroll-y style='height:{{h*0.8*0.52}}px;width:100%'>
+        <view class='l2 ldetail'>
+          <text>颜色</text>
+          <view>
+            <block wx:for='{{item.detail}}' wx:for-item='skus' wx:key=''>
+              <view style='{{index==color?"background-color:#a16b47;color:#fff":""}}' class='maskframe' data-color='{{index}}' catchtap='choosecolor'>{{skus[1]}}</view>
+            </block>
+          </view>
         </view>
-      </view>
-      <view class='l3 ldetail'>
-        <text>尺码</text>
-        <view>
-          <block wx:for='{{item.detail[color][2]}}' wx:for-item='sizes' wx:key=''>
-            <view style='{{index==size?"background-color:#a16b47;color:#fff":""}}' class='maskframe' data-size='{{index}}' catchtap='choosesize'>{{sizes}}</view>
-          </block>
+        <view class='l3 ldetail'>
+          <text>尺码</text>
+          <view>
+            <block wx:for='{{item.detail[color][2]}}' wx:for-item='sizes' wx:key=''>
+              <view style='{{index==size?"background-color:#a16b47;color:#fff":""}}' class='maskframe' data-size='{{index}}' catchtap='choosesize'>{{sizes}}</view>
+            </block>
+          </view>
         </view>
-      </view>
+      </scroll-view>
       <view class='l4'>
         <text>数量</text>
         <view class='masknum'>
@@ -36,7 +38,8 @@
         </view>
       </view>
       <view class='l5'>
-        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}' data-size='{{item.detail[color][2][size]}}' data-color='{{item.detail[color][1]}}' data-title='{{item.title}}' data-image='{{item.detail[color][5]}}' data-price='{{item.detail[color][3]}}' data-zhijie='{{zhijie}}' data-sku='{{item.sku}}'>确定</view>
+        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}' data-size='{{item.detail[color][2][size]}}' data-color='{{item.detail[color][1]}}' data-title='{{item.title}}' data-image='{{item.detail[color][5]}}' data-price='{{item.detail[color][3]}}'
+          data-zhijie='{{zhijie}}' data-sku='{{item.sku}}'>确定</view>
       </view>
       <!-- </block> -->
     </view>
