@@ -31,12 +31,14 @@ behaviors: [common],
     methods: {
       addcart: function(e) {
         this.triggerEvent('addcart', {
-          itemid: e.currentTarget.dataset.id
+          itemid: e.currentTarget.dataset.id,
+          sku: e.currentTarget.dataset.sku
         })
       },
       itemdetail: function(e) {
         this.triggerEvent('itemdetail', {
-          itemid: e.currentTarget.dataset.id
+          itemid: e.currentTarget.dataset.id,
+          sku: e.currentTarget.dataset.sku
         })
       },
     }

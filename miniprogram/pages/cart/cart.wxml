@@ -23,7 +23,7 @@
         <leftmove open='{{isopen}}' itemid='{{detail._id}}' items='{{items}}'>
           <checkbox value='{{m1.json(detail)}}' checked='{{ischecked}}' />
           <view class='item' data-id='{{detail._id}}' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time='100'>
-            <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px' catchtap='gotodetail' data-id='{{detail.itemid}}'></image>
+            <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px' catchtap='gotodetail' data-id='{{detail.itemid}}' data-sku='{{detail.sku}}'></image>
             <view class='price'>
               <text>{{detail.title}}</text>
               <text>尺码:{{detail.size}}</text>

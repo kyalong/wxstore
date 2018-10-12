@@ -12,7 +12,7 @@
           <view class='subtitle'>{{item.subtitle}}</view>
         </view>
         <swiper autoplay='true' interval='5000' previous-margin='50px' next-margin='50px' circular='true' style='height:{{w/1.414+40}}px'>
-          <block wx:for='{{item.image}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+          <block wx:for='{{imagelist}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
             <swiper-item>
               <view class='card' style='width:{{w/1.414}}px;height:{{w/1.414}}px'>
                 <image src='{{detail}}' mode='aspectFill'></image>
@@ -39,16 +39,16 @@
           <!-- <text>评价</text> -->
         </view>
         <block wx:for='{{imagelist}}' wx:key=''>
-          <image src='{{item}}' class='display' style='height:{{w/1.414}}px;width:{{w}}px'></image>
+          <image src='{{item}}' class='display' style='height:{{index<3?w:w/1.414}}px;width:{{w}}px'></image>
         </block>
       </view>
     </scroll-view>
     <view class='btn' style='height:48px'>
-      <view class='addcart bt' plain='' catchtap='addcart' hover='true' hover-class='hovera' hover-start-time='50' hover-stay-time='100' data-id='{{item._id}}'>加入购物车</view>
-      <view class='buy bt' plain='' catchtap='buy' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-zhijie='1' data-id='{{item._id}}'>立即购买</view>
+      <view class='addcart bt' plain='' catchtap='addcart' hover='true' hover-class='hovera' hover-start-time='50' hover-stay-time='100' data-id='{{item._id}}' data-sku='{{item.sku}}'>加入购物车</view>
+      <view class='buy bt' plain='' catchtap='addcart' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-zhijie='1' data-id='{{item._id}}' data-sku='{{item.sku}}'>立即购买</view>
     </view>
   </view>
   <!-- <view class='page2'> -->
-  <popcart maskinfo='{{maskinfo}}' popup='{{popup}}' bindpopdown='popdown' animationData='{{animationData}}' bindadd='add' bindminus='minus' bindconfirm='confirm' h='{{h}}' masknum='{{masknum}}'></popcart>
+  <popcart maskinfo='{{maskinfo}}' popup='{{popup}}' bindpopdown='popdown' animationData='{{animationData}}' bindadd='add' bindminus='minus' bindconfirm='confirm' h='{{h}}' masknum='{{masknum}}' zhijie='{{zhijie}}'></popcart>
   <!-- </view> -->
 </block>

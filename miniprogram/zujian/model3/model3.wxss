@@ -39,12 +39,12 @@
 }
 
 .itemname {
-  font-size: 3.3vw;
+  font-size: x-small;
 }
 
 .price {
   color: #a16b47;
-  font-size: 3.6vw
+  font-size: x-small
 }
 
 .icon {

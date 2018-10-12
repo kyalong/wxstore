@@ -1,7 +1,7 @@
 function tmpfile(fileid) {
   wx.cloud.getTempFileURL({
     fileList: fileids,
-    success: function(res){
+    success: function(res) {
       console.log(res.fileList)
       return res.fileList[0].tempFileURL
     },
@@ -9,6 +9,14 @@ function tmpfile(fileid) {
   })
 }
 
+function fenzu(data, i, step) {
+  if (data) {
+    var init = i
+    return data.slice(init, init + step)
+  } 
+}
+
 module.exports = {
-  tmpfile: tmpfile
+  tmpfile: tmpfile,
+  fen: fenzu
 }

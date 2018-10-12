@@ -1,7 +1,7 @@
 // miniprogram/pages/shop/shop.js
 import regeneratorRuntime from '../../utils/runtime.js'
 const app = getApp()
-var tmp = require('../../utils/tmp.js')
+var util = require('../../utils/util.js')
 const db = wx.cloud.database({
   env: 'boutique10'
 })
@@ -10,7 +10,7 @@ Page({
   data: {
     items: '',
     w: app.globalData.sysw,
-    h: wx.getSystemInfoSync().windowHeight - 64,
+    h: app.globalData.sysh - 64,
     popup: 'none',
     maskinfo: '',
     masknum: 1,
@@ -21,11 +21,11 @@ Page({
   itemdetail: function(e) {
     if (e.currentTarget.dataset.id) {
       wx.navigateTo({
-        url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.id,
+        url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.id + '&sku=' + e.currentTarget.dataset.sku,
       })
     } else {
       wx.navigateTo({
-        url: '../itemdetail/itemdetail?itemid=' + e.detail.itemid,
+        url: '../itemdetail/itemdetail?itemid=' + e.detail.itemid + '&sku=' + e.detail.sku,
       })
     }
 
@@ -66,41 +66,62 @@ Page({
    */
   async tmps() {
     return await db.collection('item').where({
-      createdate: _.in(['20181001', '20181002', '20181003'])
-    }).get()
+      createdate: _.in(['20181012', '20181002', '20181003'])
+    }).skip(50).get()
   },
   addcart: function(e) {
     let animation = this.animation
-
     animation.translateY(-this.data.h).opacity(1).step({
       duration: 200
     })
-    if (e.currentTarget.dataset.id) {
-      db.collection('item').doc(e.currentTarget.dataset.id).get().then(res => {
+    let sku = e.detail.sku ? e.detail.sku : e.currentTarget.dataset.sku
+    wx.getStorage({
+      key: 'cache',
+      success: res => {
         this.setData({
-          maskinfo: [res.data],
-          popup: 'flex',
+          maskinfo: [(function(data, sku) {
+            for (let i of data) {
+              if (i.sku == sku) {
+                return i
+              }
+            }
+          })(res.data, sku)],
+          popup: 'flex'
         })
         setTimeout(() => {
           this.setData({
             animationData: animation.export(),
           })
         }, 100)
-      })
-    } else {
-      db.collection('item').doc(e.detail.itemid).get().then(res => {
-        this.setData({
-          maskinfo: [res.data],
-          popup: 'flex',
-        })
-        setTimeout(() => {
-          this.setData({
-            animationData: animation.export(),
+      },
+      fail: res => {
+        if (e.currentTarget.dataset.id) {
+          db.collection('item').doc(e.currentTarget.dataset.id).get().then(res => {
+            this.setData({
+              maskinfo: [res.data],
+              popup: 'flex',
+            })
+            setTimeout(() => {
+              this.setData({
+                animationData: animation.export(),
+              })
+            }, 100)
           })
-        }, 100)
-      })
-    }
-
+        } else {
+          db.collection('item').doc(e.detail.itemid).get().then(res => {
+            this.setData({
+              maskinfo: [res.data],
+              popup: 'flex',
+            })
+            setTimeout(() => {
+              this.setData({
+                animationData: animation.export(),
+              })
+            }, 100)
+          })
+        }
+      }
+    })
 
   },
   popdown: function() {
@@ -133,16 +154,36 @@ Page({
     }
   },
   onLoad: function(options) {
+    this.setData({
+      h: wx.getSystemInfoSync().windowHeight
+    })
     wx.showLoading({
       title: '拼命加载中',
+      mask: true,
       success: () => {
-        this.tmps().then(res => {
+        wx.cloud.callFunction({
+          name: 'getdata'
+        }).then(res => {
+          let newdatas = util.random(res.result.data)
+
           this.setData({
-            items: res.data.slice(3, 6),
-            items2: res.data.slice(8, 10),
-            items1: res.data.slice(10, 11)
+            items: newdatas.slice(0, 16),
+            items2: (function(data) {
+              let arr = []
+              let t = data.length / 2
+              let i = 0
+              while (i < t) {
+                let s1 = data.shift()
+                let s2 = data.shift()
+                arr.push([s1, s2])
+                i += 1
+              }
+              return arr
+            })(newdatas.slice(16, 48)),
+            items3: newdatas.slice(48, 59)
           })
-          wx.hideLoading()          
+          wx.setStorageSync('cache', newdatas)
+          wx.hideLoading()
         })
 
       }
@@ -152,13 +193,15 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-  },
+  onReady: function() {},
 
   /** 
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.setData({
+      h: wx.getSystemInfoSync().windowHeight - 64
+    })
     let animation = wx.createAnimation({
       duration: 200,
       timingFunction: 'linear',

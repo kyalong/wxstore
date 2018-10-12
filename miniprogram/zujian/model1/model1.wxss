@@ -24,7 +24,7 @@
 }
 
 .itemname {
-  font-size: 1rem;
+  font-size: medium;
 }
 
 .price {
@@ -32,7 +32,7 @@
   justify-content: space-between;
   align-items: center;
   color: #a16b47;
-  font-size: 1.2rem;
+  font-size: medium;
 }
 
 .icon {

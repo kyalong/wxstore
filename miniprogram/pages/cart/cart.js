@@ -166,7 +166,7 @@ Page({
       })
     }
     wx.navigateTo({
-      url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.id,
+      url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.id + '&sku=' + e.currentTarget.dataset.sku,
     })
   },
 
@@ -263,6 +263,7 @@ Page({
     let itemnum = ''
     wx.showLoading({
       title: '拼命加载中',
+      mask:true,
       success: () => {
         this.cartlist()
       }

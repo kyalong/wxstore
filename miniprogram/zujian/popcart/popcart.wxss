@@ -1,13 +1,10 @@
 .mask {
-  /* position: fixed;
-  top: 0;
-  left: 0; */
   background-color: #000000b3;
-  /* display: flex; */
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
 }
+
 
 .info {
   display: flex;
@@ -39,6 +36,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: smaller;
 }
 
 .maskprice, .mastitle, .maskstock {
@@ -54,18 +52,24 @@
 .ldetail {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 0.5rem;
   border-bottom: solid 1px #f6f6f6;
+  font-size: medium;
 }
 
 .ldetail>view{
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  font-size: medium;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  margin: 0.25rem 0;
 }
 .l2 {
   flex-grow: 1;
 }
+
 
 .l3 {
   flex-grow: 1;
@@ -75,8 +79,8 @@
   align-self: flex-start;
   background-color: #f6f6f6;
   padding: 0.25rem;
-  border-radius: 4pt;
   margin: 0.5rem 0.5rem 0 0;
+  border-radius: 4pt;
 }
 
 .l4 {

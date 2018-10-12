@@ -97,7 +97,7 @@ swiper-item {
 }
 
 .itemname {
-  font-size: 1rem;
+  font-size: medium;
 }
 
 .price {
@@ -105,7 +105,7 @@ swiper-item {
   justify-content: space-between;
   align-items: center;
   color: #a16b47;
-  font-size: 1.1rem;
+  font-size: medium
 }
 
 .icon {

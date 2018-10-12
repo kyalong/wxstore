@@ -18,7 +18,7 @@ Page({
     address: '新增收货地址',
     haveaddr: true,
     addressid: '',
-    costoff: 400
+    costoff: 20
 
 
   },
