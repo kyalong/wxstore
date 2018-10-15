@@ -161,7 +161,7 @@ Page({
         wx.cloud.callFunction({
           name: 'getdata',
           data: {
-            class: '男装'
+            class: '女鞋'
           }
         }).then(res => {
           // let newdatas = util.random(res.result.data)
