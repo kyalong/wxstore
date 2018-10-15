@@ -3,7 +3,7 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 const db = cloud.database({
-  env:'boutique10'
+  env: 'boutique1'
 })
 const _ = db.command
 

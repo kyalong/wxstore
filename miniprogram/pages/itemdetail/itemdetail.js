@@ -1,7 +1,7 @@
 // miniprogram/pages/itemdetail/itemdetail.js
 const app = getApp()
 const db = wx.cloud.database({
-  env: 'boutique10'
+  env: 'boutique1'
 })
 Page({
 

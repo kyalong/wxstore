@@ -1,8 +1,4 @@
-// pages/wuliu/wuliu.js
-const db =wx.cloud.database({
-  env: 'boutique1'
-})
-const _ = db.command
+// miniprogram/pages/csc/csc.js
 Page({
 
   /**
@@ -11,7 +7,29 @@ Page({
   data: {
 
   },
+  goback: function(e) {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  adduser: function(e) {
+    wx.saveImageToPhotosAlbum({
+      filePath: '/images/cscs.png',
+      success: (res) => {
 
+        wx.showToast({
+          title: '保存成功，马上联系',
+          duration: 1000,
+          success: (res) => {
+
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,7 +1,7 @@
 // miniprogram/pages/my/my.js
 const app = getApp()
 const db = wx.cloud.database({
-  env: 'boutique10'
+  env: 'boutique1'
 })
 const _ = db.command
 Page({
@@ -14,6 +14,11 @@ Page({
     canIUse: true,
     statusnum: [0, 0, 0, 0],
     manager: ''
+  },
+  csc: function(e) {
+    wx.navigateTo({
+      url: '../csc/csc',
+    })
   },
   backend: function() {
     wx.redirectTo({
@@ -63,11 +68,13 @@ Page({
   },
   getUserInfo: function(e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    if (e.detail.userInfo) {
+      app.globalData.userInfo = e.detail.userInfo
+      this.setData({
+        userInfo: e.detail.userInfo,
+        hasUserInfo: true
+      })
+    }
   },
 
   /**

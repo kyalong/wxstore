@@ -20,7 +20,7 @@
           <view class='spulist'>
             <block wx:for='{{spulist}}' wx:key=''>
               <view class='spu'>
-                <image src='{{item.fistimage}}'></image>
+                <image src='{{item.fistimage}}' lazy-load='true'></image>
                 <view>
                   <text>来源:{{item.shop}}</text>
                   <text>名称:{{item.subtitle}}</text>

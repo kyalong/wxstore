@@ -1,7 +1,7 @@
 // miniprogram/pages/orderdetail/orderdetail.js
 const app = getApp()
 const db = wx.cloud.database({
-  env: 'boutique10'
+  env: 'boutique1'
 })
 const _ = db.command
 Page({
@@ -35,7 +35,11 @@ Page({
       phoneNumber: '12345678901'
     })
   },
-  wechat: function(e) {},
+  wechat: function(e) {
+    wx.navigateTo({
+      url: '/pages/csc/csc',
+    })
+  },
   onLoad: function(options) {
     this.setData({
       h: wx.getSystemInfoSync().windowHeight

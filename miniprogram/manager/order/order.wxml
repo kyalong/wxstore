@@ -1,6 +1,6 @@
 <wxs src='m.wxs' module='m' />
 <view class='view'>
-  <image src='../../images/choose.png' catchtap='backhome'></image>
+  <image src='../../images/choose.png' catchtap='backhome' lazy-load='true'></image>
 </view>
 
 <view class='maintitle'>

@@ -1,7 +1,7 @@
 // miniprogram/manager/order/order.js
 const app = getApp()
 const db = wx.cloud.database({
-  env: 'boutique10'
+  env: 'boutique1'
 })
 const _ = db.command
 Page({

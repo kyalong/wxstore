@@ -1,7 +1,7 @@
 // miniprogram/pages/order/order.js
 const app = getApp()
 const db = wx.cloud.database({
-  env: 'boutique10'
+  env: 'boutique1'
 })
 const _ = db.command
 var tomorrow = function(i) {
@@ -60,6 +60,19 @@ Page({
   },
   formsubmit: function(e) {
     // console.log(e.currentTarget.dataset.items)
+    // if (!app.globalData.userInfo) {
+    //   wx.getUserInfo({
+    //     success: (res) => {
+    //       app.globalData.userInfo = res.userInfo
+    //     },
+    //     fail:(res)=>{
+    //       wx.showModal({
+    //         title: '下单前需要登录',
+    //         content: '',  
+    //       })
+    //     }
+    //   })
+    // }
     let status = 0
     let idlist = (function(data) {
       let arr = []
@@ -116,7 +129,7 @@ Page({
                       console.log(res.result)
                       wx.request({
                         url: res.result,
-                        success:res=>{
+                        success: res => {
                           console.log(res)
                         }
                       })
@@ -139,7 +152,7 @@ Page({
                           wx.hideLoading()
                         }
                       })
-                 
+
                     }
                   })
 

@@ -3,7 +3,7 @@ import regeneratorRuntime from '../../utils/runtime.js'
 const app = getApp()
 var util = require('../../utils/util.js')
 const db = wx.cloud.database({
-  env: 'boutique10'
+  env: 'boutique1'
 })
 const _ = db.command
 Page({
@@ -161,12 +161,12 @@ Page({
         wx.cloud.callFunction({
           name: 'getdata',
           data: {
-            class: '女鞋'
+            class: '男装'
           }
         }).then(res => {
           // let newdatas = util.random(res.result.data)
           let newdatas = (function(data, gp) {
-            if (gp==9) {
+            if (gp == 9) {
               return data
             }
             let arr = []
@@ -194,8 +194,14 @@ Page({
             })(newdatas.slice(16, 48)),
             items3: newdatas.slice(48, 59)
           })
-          wx.setStorageSync('cache', newdatas)
-          wx.hideLoading()
+          wx.setStorage({
+            key: 'cache',
+            data: newdatas,
+            success: () => {
+              wx.hideLoading()
+            }
+          })
+
         })
 
       }

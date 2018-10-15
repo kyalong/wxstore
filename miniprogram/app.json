@@ -13,7 +13,8 @@
     "manager/order/order",
     "manager/item/item",
     "manager/income/income",
-    "manager/index/index"
+    "manager/index/index",
+    "pages/csc/csc"
   ],
   "window": {
     "backgroundColor": "#ffffff",

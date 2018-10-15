@@ -10,12 +10,12 @@ App({
     } else {
       wx.cloud.init({
         traceUser: true,
-        env: 'boutique10'
+        env: 'boutique1'
       })
 
     }
     const db = wx.cloud.database({
-      env: 'boutique10'
+      env: 'boutique1'
     })
     let sysinfo = wx.getSystemInfoSync()
     this.globalData.sysw = sysinfo.windowWidth
