@@ -160,12 +160,23 @@ Page({
       success: () => {
         wx.cloud.callFunction({
           name: 'getdata',
-          data:{
-            class:'男装'
+          data: {
+            class: '男装'
           }
         }).then(res => {
           // let newdatas = util.random(res.result.data)
-          let newdatas = res.result.data
+          let newdatas = (function(data, gp) {
+            if (gp==9) {
+              return data
+            }
+            let arr = []
+            for (let i of data) {
+              if (i.group == gp) {
+                arr.push(i)
+              }
+            }
+            return arr
+          })(res.result.data, 9)
 
           this.setData({
             items: newdatas.slice(0, 16),

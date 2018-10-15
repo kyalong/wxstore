@@ -21,7 +21,11 @@ Page({
     feature: 0,
     list: true
   },
-
+  backhome: function (e) {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   feature: function(e) {
     this.setData({
       feature: e.currentTarget.dataset.feature,
@@ -50,7 +54,6 @@ Page({
             class: '男装'
           }
         }).then(res => {
-          console.log(res)
           this.setData({
             spulist: res.result.data,
             spucount: res.result.data.length
