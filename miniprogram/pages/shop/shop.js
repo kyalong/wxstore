@@ -164,7 +164,8 @@ Page({
             class:'男装'
           }
         }).then(res => {
-          let newdatas = util.random(res.result.data)
+          // let newdatas = util.random(res.result.data)
+          let newdatas = res.result.data
 
           this.setData({
             items: newdatas.slice(0, 16),

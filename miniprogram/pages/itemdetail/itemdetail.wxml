@@ -1,14 +1,14 @@
 <wxs src='m.wxs' module='m' />
 <wxs src='../../zujian/m.wxs' module='m1' />
 
-<view class='view' >
+<view class='view'>
   <image src='../../images/choose.png' catchtap='backhome'></image>
   <text style='opacity:{{opc}}'>{{title}}</text>
 </view>
 <block wx:for='{{items}}' wx:key=''>
   <view class='page1' style='height:{{h}}px'>
     <scroll-view style='height:{{h-48}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true' enable-back-to-top='true'>
-      <view class='intersection' >
+      <view class='intersection'>
         <view class='main'>
           <view class='title'>{{item.title}}</view>
           <view class='subtitle'>{{item.subtitle}}</view>
@@ -23,6 +23,7 @@
           </block>
         </swiper>
         <view class='price'>
+          <text style='text-decoration: line-through;color:grey;font-size:smaller'>￥{{item.price}}</text>
           <text>￥{{m1.fix(item.price)}}</text>
           <text>已售{{m.sum(item.detail)}}</text>
         </view>

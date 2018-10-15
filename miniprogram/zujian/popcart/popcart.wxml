@@ -1,3 +1,4 @@
+<wxs src='../../zujian/m.wxs' module='m1' />
 <view class='mask' style='display:{{popup}};height:{{h}}px;' animation='{{animationData}}'>
   <view catchtap='popdown' style='flex-grow:1'></view>
   <block wx:for='{{maskinfo}}' wx:key=''>
@@ -7,7 +8,10 @@
         <view>
           <view class='masktitle'>{{item.title}}</view>
           <view class='maskstock'>剩余库存:{{item.detail[color][4][size][2]}}件</view>
-          <view class='maskprice'>价格:￥{{item.detail[color][3]}}</view>
+          <view class='maskprice'>价格:
+            <text style='text-decoration: line-through;color:grey;font-size:smaller'>￥{{item.detail[color][3]}}</text>
+            <text>￥{{m1.fix(item.detail[color][3])}}</text>
+          </view>
         </view>
         <image class='cancelicon' src='../../images/cancel.png' catchtap='popdown'></image>
       </view>
@@ -38,8 +42,8 @@
         </view>
       </view>
       <view class='l5'>
-        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}' data-size='{{item.detail[color][2][size]}}' data-sizeindex='{{size}}' data-colorindex='{{color}}' data-color='{{item.detail[color][1]}}' data-title='{{item.title}}' data-image='{{item.detail[color][5]}}' data-price='{{item.detail[color][3]}}'
-          data-zhijie='{{zhijie}}' data-sku='{{item.sku}}' data-shop='{{item.shop}}'>确定</view>
+        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}' data-size='{{item.detail[color][2][size]}}' data-sizeindex='{{size}}' data-colorindex='{{color}}' data-color='{{item.detail[color][1]}}' data-title='{{item.title}}'
+          data-image='{{item.detail[color][5]}}' data-price='{{item.detail[color][3]}}' data-zhijie='{{zhijie}}' data-sku='{{item.sku}}' data-shop='{{item.shop}}'>确定</view>
       </view>
       <!-- </block> -->
     </view>

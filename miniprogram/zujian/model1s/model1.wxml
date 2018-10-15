@@ -5,8 +5,8 @@
     <view class='item'>
       <view class='itemname'>{{detail.subtitle}}</view>
       <view class='price'>
-         <text style='text-decoration: line-through;color:grey;font-size:smaller'>￥{{m.fix(detail.price)}}</text>
-        <text>￥{{m.fix(detail.price*0.8)}}</text>
+         <text style='text-decoration: line-through;color:grey;font-size:smaller'>￥{{detail.price}}</text>
+        <text>￥{{m.fix(detail.price)}}</text>
         <view>
         <view class='icon' catchtap='addcart' data-id='{{detail._id}}' data-sku='{{detail.sku}}'>
           <image src='../../images/cart2.png'></image>
