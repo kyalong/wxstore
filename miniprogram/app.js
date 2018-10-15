@@ -51,6 +51,11 @@ App({
         })
       }
     })
+    wx.cloud.callFunction({
+      name:'login'
+    }).then(res=>{
+      this.globalData.userid = res.result.openid
+    })
   },
   globalData: {
     sysw: '',
@@ -58,6 +63,7 @@ App({
     init: '',
     cartlist: '',
     userInfo: '',
-    count: ''
+    count: '',
+    userid:''
   }
 })

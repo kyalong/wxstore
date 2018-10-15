@@ -1,0 +1,4 @@
+<view class='view'>
+  <image src='../../images/choose.png' catchtap='backhome'></image>
+  <text>财务管理</text>
+</view>

@@ -1,6 +1,6 @@
 <wxs src='m.wxs' module='m' />
-<view class='view' catchtap='backhome'>
-  <image src='../../images/choose.png'></image>
+<view class='view' >
+  <image src='../../images/choose.png' catchtap='backhome'></image>
 </view>
 
 <view class='maintitle'>
@@ -28,7 +28,7 @@
           </view>
           <block wx:for='{{item.itemslist}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
             <view class='item'>
-              <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px' catchtap='gotoitem' data-itemid='{{detail.itemid}}'></image>
+              <image src='{{detail.image}}' class='thum' style='height:{{h/7}}px;width:{{h/7}}px' catchtap='gotoitem' data-itemid='{{detail.itemid}}' data-sku='{{detail.sku}}'></image>
               <view class='price'>
                 <text>{{detail.title}}</text>
                 <text>尺码:{{detail.size}}</text>

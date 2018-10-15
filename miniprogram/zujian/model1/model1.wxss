@@ -29,12 +29,18 @@
 
 .price {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   color: #a16b47;
   font-size: medium;
 }
 
+.price>view{
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 .icon {
   width: 33px;
   height: 33px;

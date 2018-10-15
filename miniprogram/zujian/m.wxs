@@ -1,0 +1,7 @@
+function fix(num) {
+  let newnum = Number(num)
+  return newnum.toFixed(0)
+}
+module.exports = {
+  fix: fix
+}

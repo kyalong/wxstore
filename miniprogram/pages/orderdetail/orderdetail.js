@@ -15,9 +15,11 @@ Page({
     costoff: 400
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  gotoitem: function (e) {
+    wx.navigateTo({
+      url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.itemid + '&sku=' + e.currentTarget.dataset.sku,
+    })
+  },
   wuliu: function() {
     wx.navigateTo({
       url: '../wuliu/wuliu',

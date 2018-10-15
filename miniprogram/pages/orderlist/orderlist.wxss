@@ -4,12 +4,16 @@
   align-items: flex-end;
 }
 
+
 .view>image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 30px 16px 10px;
   width: 24px;
   height: 24px;
   background-color: transparent;
   transform: rotate(180deg);
-  margin: 26px 16px 8px;
 }
 
 .maintitle {

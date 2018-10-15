@@ -154,15 +154,15 @@ Page({
     }
   },
   onLoad: function(options) {
-    this.setData({
-      h: wx.getSystemInfoSync().windowHeight
-    })
     wx.showLoading({
       title: '拼命加载中',
       mask: true,
       success: () => {
         wx.cloud.callFunction({
-          name: 'getdata'
+          name: 'getdata',
+          data:{
+            class:'男装'
+          }
         }).then(res => {
           let newdatas = util.random(res.result.data)
 

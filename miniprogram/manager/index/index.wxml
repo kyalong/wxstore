@@ -1,0 +1,13 @@
+<view class='view'>
+  <!-- <image src='../../images/choose.png' catchtap='backhome'></image> -->
+  <text>后台管理</text>
+</view>
+
+<view class='main'>
+  <block wx:for='{{title}}' wx:key=''>
+    <view class='navi' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50' catchtap='goto' data-index='{{index}}'>
+      <text>{{item[0]}}</text>
+      <text style='color:gray'>{{item[1]}}</text>
+    </view>
+  </block>
+</view>

@@ -34,6 +34,12 @@
   color: #a16b47;
   font-size: medium;
 }
+.price>view{
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 
 .icon {
   width: 35px;

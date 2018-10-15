@@ -89,9 +89,12 @@ Page({
             }
           }).then(res => {
             // console.log(res)
-            wx.showLoading({
-              title: '拼命下单中',
-              success: res => {
+            wx.showModal({
+              title: '支付订单',
+              content: '',
+              cancelText: '待会支付',
+              confirmText: '去支付',
+              success: (res) => {
                 wx.cloud.callFunction({
                   name: 'removecart',
                   data: {
@@ -99,13 +102,49 @@ Page({
                   }
                 }).then(res => {
                   console.log('清空购物车')
-                  wx.navigateTo({
-                    url: '../orderlist/orderlist?status=' + (status + 1),
-                    success: res => {
-                      wx.hideLoading()
+                  wx.clearStorageSync()
+                  wx.cloud.callFunction({
+                    name: 'changestock',
+                    data: {
+                      items: e.currentTarget.dataset.items
                     }
                   })
                 })
+                if (res.confirm) {
+                  wx.scanCode({
+                    success: (res) => {
+                      console.log(res.result)
+                      wx.request({
+                        url: res.result,
+                        success:res=>{
+                          console.log(res)
+                        }
+                      })
+                      console.log('ok')
+                      wx.navigateTo({
+                        url: '../orderlist/orderlist?status=' + (status + 2),
+                        success: res => {
+                          wx.hideLoading()
+                        }
+                      })
+                    }
+                  })
+                } else {
+                  wx.showLoading({
+                    title: '拼命下单中',
+                    success: res => {
+                      wx.navigateTo({
+                        url: '../orderlist/orderlist?status=' + (status + 1),
+                        success: res => {
+                          wx.hideLoading()
+                        }
+                      })
+                 
+                    }
+                  })
+
+                }
+
               }
             })
 
@@ -150,9 +189,11 @@ Page({
         })
       })
     } else {
+      let newitemlist = JSON.parse(options.itemlist)
+      newitemlist.shop = decodeURIComponent(newitemlist.shop)
       this.setData({
         h: wx.getSystemInfoSync().windowHeight - 64,
-        items: JSON.parse(options.itemlist),
+        items: newitemlist,
         total: options.total
       })
     }

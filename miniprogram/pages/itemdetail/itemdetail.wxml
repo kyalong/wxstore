@@ -1,6 +1,8 @@
 <wxs src='m.wxs' module='m' />
-<view class='view' catchtap='backhome'>
-  <image src='../../images/choose.png'></image>
+<wxs src='../../zujian/m.wxs' module='m1' />
+
+<view class='view' >
+  <image src='../../images/choose.png' catchtap='backhome'></image>
   <text style='opacity:{{opc}}'>{{title}}</text>
 </view>
 <block wx:for='{{items}}' wx:key=''>
@@ -21,7 +23,7 @@
           </block>
         </swiper>
         <view class='price'>
-          <text>￥{{item.price}}</text>
+          <text>￥{{m1.fix(item.price)}}</text>
           <text>已售{{m.sum(item.detail)}}</text>
         </view>
         <view class='icons'>

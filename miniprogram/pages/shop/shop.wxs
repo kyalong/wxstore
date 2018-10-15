@@ -13,10 +13,9 @@ function fenzu(data, i, step) {
   if (data) {
     var init = i
     return data.slice(init, init + step)
-  } 
+  }
 }
-
 module.exports = {
   tmpfile: tmpfile,
-  fen: fenzu
+  fen: fenzu,
 }

@@ -81,7 +81,7 @@ Page({
   },
   gotoitem: function(e) {
     wx.navigateTo({
-      url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.itemid,
+      url: '../itemdetail/itemdetail?itemid=' + e.currentTarget.dataset.itemid + '&sku=' + e.currentTarget.dataset.sku,
     })
   },
   /**

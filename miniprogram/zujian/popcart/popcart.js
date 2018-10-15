@@ -46,7 +46,7 @@ Component({
   methods: {
     preview:function(e){
       wx.previewImage({
-        urls:[e.currentTarget.dataset.urls]
+        urls:[e.currentTarget.dataset.urls.replace(/\d{3}x\d{3}/,'800x800')]
       })
     },
     choosecolor: function(e) {
@@ -82,7 +82,10 @@ Component({
           color: e.currentTarget.dataset.color,
           image: e.currentTarget.dataset.image,
           price: e.currentTarget.dataset.price,
-          sku:e.currentTarget.dataset.sku
+          shop: encodeURIComponent(e.currentTarget.dataset.shop),
+          sku:e.currentTarget.dataset.sku,
+          colorindex: e.currentTarget.dataset.colorindex,
+          sizeindex: e.currentTarget.dataset.colorindex,
 
         }
       }).then(res => {

@@ -45,26 +45,46 @@ Page({
       duration: 200
     })
     let sku = e.detail.sku ? e.detail.sku : e.currentTarget.dataset.sku
+    let id = e.currentTarget.dataset.id
     wx.getStorage({
       key: 'cache',
       success: res => {
-        this.setData({
-          maskinfo: [(function(data, sku) {
+        try {
+          (function (data, sku) {
             for (let i of data) {
               if (i.sku == sku) {
                 return i
               }
             }
-          })(res.data, sku)],
-          popup: 'flex'
-        })
-        setTimeout(() => {
+          })(res.data, sku)[0]
           this.setData({
-            animationData: animation.export(),
+            maskinfo: [(function(data, sku) {
+              for (let i of data) {
+                if (i.sku == sku) {
+                  return i
+                }
+              }
+
+            })(res.data, sku)],
+            popup: 'flex'
           })
-        }, 100)
+        } catch(e) {
+          db.collection('item').doc(id).get().then(res => {
+            this.setData({
+              maskinfo: [res.data],
+              popup: 'flex',
+            })
+          })
+        } finally {
+          setTimeout(() => {
+            this.setData({
+              animationData: animation.export(),
+            })
+          }, 100)
+        }
       },
-      fail: () => {
+      fail: (res) => {
+        console.log(res)
         db.collection('item').doc(e.currentTarget.dataset.id).get().then(res => {
           this.setData({
             maskinfo: [res.data],
@@ -121,7 +141,6 @@ Page({
     wx.getStorage({
       key: 'cache',
       success: res => {
-        
         let data = (function(data, sku) {
           for (let i of data) {
             if (i.sku == sku) {
@@ -129,25 +148,47 @@ Page({
             }
           }
         })(res.data, options.sku)
-        this.setData({
-          items: [data],
-          imagelist: data.image.slice(1, )
-        })
         this._observer = wx.createIntersectionObserver()
-        this._observer.relativeTo('.view').observe('.intersection', (res) => {
-          if (res.intersectionRatio > 0) {
-            this.setData({
-              title: '宝贝Plus',
-              opc: 1,
+        try {
+          this.setData({
+            items: [data],
+            imagelist: data.image.slice(1, )
+          })
+          this._observer.relativeTo('.view').observe('.intersection', (res) => {
+            if (res.intersectionRatio > 0) {
+              this.setData({
+                title: '宝贝Plus',
+                opc: 1,
+              })
+            } else {
+              this.setData({
+                title: '',
+                opc: 0,
+              })
+            }
+          })
 
-            })
-          } else {
+        } catch (e) {
+          db.collection('item').doc(options.itemid).get().then(res => {
             this.setData({
-              title: '',
-              opc: 0,
+              items: [res.data],
+              imagelist: res.data.image.slice(1, )
             })
-          }
-        })
+            this._observer.relativeTo('.view').observe('.intersection', (res) => {
+              if (res.intersectionRatio > 0) {
+                this.setData({
+                  title: '宝贝Plus',
+                  opc: 1,
+                })
+              } else {
+                this.setData({
+                  title: '',
+                  opc: 0,
+                })
+              }
+            })
+          })
+        }
       },
       fail: res => {
         db.collection('item').doc(options.itemid).get().then(res => {
@@ -185,9 +226,7 @@ Page({
           })
         })
       },
-      complete: () => {
-        
-      }
+      complete: () => {}
     })
 
 
@@ -222,7 +261,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    
+
   },
 
   /**

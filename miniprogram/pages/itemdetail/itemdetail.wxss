@@ -196,6 +196,8 @@ image {
   background-color: transparent;
 }
 
+
+
 .hovera {
   background-color: #a16b47;
 }

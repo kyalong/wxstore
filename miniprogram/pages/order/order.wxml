@@ -1,5 +1,5 @@
-<view class='view' catchtap='backhome'>
-  <image src='../../images/choose.png'></image>
+<view class='view' >
+  <image src='../../images/choose.png' catchtap='backhome'></image>
 </view>
 <scroll-view style='height:{{h-40}}px;' scroll-y='true' enable-back-to-top='true'>
 

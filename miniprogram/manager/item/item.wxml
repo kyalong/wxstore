@@ -1,0 +1,60 @@
+<wxs src='m.wxs' module='m' />
+<view class='view'>
+  <image src='../../images/choose.png' catchtap='backhome'></image>
+  <text>商品管理</text>
+</view>
+<view class='page1'>
+  <view class='main'>
+    <block wx:for='{{features}}' wx:key=''>
+      <view class='feature' data-feature='{{index}}' hover='true' hover-class='hoverc' catchtap='feature' style='{{feature==index?"background-color: #a16b47;color: white;":""}}'>{{item}}</view>
+    </block>
+  </view>
+  <view class='addspu' wx:if='{{list&&feature==0}}'>
+    <text catchtap='addspu'>发布商品</text>
+    <text>共计:{{spucount}}件商品</text>
+  </view>
+  <scroll-view scroll-y style='height:{{h-64-48-64}}px'>
+    <block wx:if='{{list}}'>
+      <view class='content'>
+        <block wx:if='{{feature==0}}'>
+          <view class='spulist'>
+            <block wx:for='{{spulist}}' wx:key=''>
+              <view class='spu'>
+                <image src='{{item.fistimage}}'></image>
+                <view>
+                  <text>来源:{{item.shop}}</text>
+                  <text>名称:{{item.subtitle}}</text>
+                  <view>
+                    <text>售价:￥{{item.price}}</text>
+                    <text>已售:{{m.sum(item.detail,0)}}</text>
+                    <text>剩余:{{m.sum(item.detail,1)}}</text>
+                    <text>库存:{{m.sum(item.detail,2)}}</text>
+                  </view>
+                  <view>
+                    <text>上架日期:{{item.createdate}}</text>
+                    <text>展示栏:{{item.group}}</text>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+        <block wx:else>
+        </block>
+      </view>
+    </block>
+    <block wx:else>
+      <form bindsubmit='submit' bindreset='reset'>
+        <block wx:for='{{finput}}' wx:key=''>
+          <view class='finput'>{{index}}:
+            <input name='{{item}}'></input>
+          </view>
+        </block>
+        <view class='btns'>
+          <button form-type='submit' class='btn'>发布</button>
+          <button form-type='reset' class='btn'>清空</button>
+        </view>
+      </form>
+    </block>
+  </scroll-view>
+</view>

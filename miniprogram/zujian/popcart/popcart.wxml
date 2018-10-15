@@ -38,8 +38,8 @@
         </view>
       </view>
       <view class='l5'>
-        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}' data-size='{{item.detail[color][2][size]}}' data-color='{{item.detail[color][1]}}' data-title='{{item.title}}' data-image='{{item.detail[color][5]}}' data-price='{{item.detail[color][3]}}'
-          data-zhijie='{{zhijie}}' data-sku='{{item.sku}}'>确定</view>
+        <view class='submit' catchtap='confirm' data-id='{{item._id}}' data-num='{{masknum}}' data-size='{{item.detail[color][2][size]}}' data-sizeindex='{{size}}' data-colorindex='{{color}}' data-color='{{item.detail[color][1]}}' data-title='{{item.title}}' data-image='{{item.detail[color][5]}}' data-price='{{item.detail[color][3]}}'
+          data-zhijie='{{zhijie}}' data-sku='{{item.sku}}' data-shop='{{item.shop}}'>确定</view>
       </view>
       <!-- </block> -->
     </view>

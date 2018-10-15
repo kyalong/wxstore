@@ -1,0 +1,149 @@
+.view {
+  width: 100%;
+  display: flex;
+  height: 64px;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.view>image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 30px 16px 10px;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  transform: rotate(180deg);
+}
+
+.view>text {
+  font-size: 1rem;
+  margin: 30px 16px 12px;
+  font-family: little2;
+  transition: all 0.5s linear;
+}
+
+.main {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.5rem 0;
+  /* padding: 0.5rem 0; */
+  border-bottom: solid 1px #f6f6f6;
+  height: calc(48px - 1rem);
+  font-size: medium;
+}
+
+/* .feature {
+  border: solid 1px #a16b47;
+  color: #a16b47;
+  padding: 0.25rem 0.5rem;
+  font-size: small;
+  border-radius: 5pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.feature {
+  align-self: stretch;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.content {
+  font-size: medium;
+}
+
+.addspu {
+  height: calc(64px - 0.5rem - 10px);
+  display: flex;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 10px #f6f6f6;
+}
+
+.addspu>text:first-child {
+  border: solid 1px #a16b47;
+  color: #a16b47;
+  border-radius: 3pt;
+  padding: 0.25rem;
+}
+
+.spulist {
+  display: flex;
+  flex-direction: column;
+}
+
+.spu {
+  border: solid 1px #f6f6f6;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.spu image {
+  height: 75px;
+  width: 75px;
+  padding: 0.5rem;
+}
+
+.spu>view {
+  width: calc(100% - 75px - 1.5rem);
+  display: flex;
+  flex-direction: column;
+  font-size: smaller;
+  padding-right: 0.5rem;
+  justify-content: space-evenly
+}
+
+.spu>view>text:nth-child(-n+2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spu>view>view{
+  display: flex;
+  justify-content: space-between
+}
+
+form{
+  
+}
+.finput{
+  margin: 0.5rem;
+  border-bottom: solid 1px #a16b47
+}
+
+.btns{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.btn{
+  width: 100px;
+  height: 48px;
+  border: solid 1px #a16b47;
+  color: #a16b47;
+  background-color: white;
+  
+}
+.button-hover{
+  background-color: #a16b47;
+  color: white
+}
+
+.hoverc {
+  background-color: #a16b47;
+  color: white;
+}

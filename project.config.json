@@ -10,7 +10,7 @@
 	},
 	"appid": "wx5512572fce599c3c",
 	"projectname": "boutique",
-	"libVersion": "2.2.5",
+	"libVersion": "2.3.0",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 9,
 			"list": [
 				{
 					"id": -1,
@@ -81,7 +81,13 @@
 				{
 					"id": -1,
 					"name": "wuliu",
-					"pathName": "pages/wuliu/wuliu"
+					"pathName": "pages/wuliu/wuliu",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "管理首页",
+					"pathName": "manager/index/index"
 				}
 			]
 		}

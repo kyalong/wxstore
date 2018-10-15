@@ -17,7 +17,7 @@ exports.main = async(event, context) => {
   const tasks = []
   for (let i = 0; i < batchTimes; i++) {
     const promise = db.collection('item').where({
-      class:'男装'
+      class: event.class
     }).skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
     tasks.push(promise)
   }
@@ -26,6 +26,7 @@ exports.main = async(event, context) => {
     return {
       data: acc.data.concat(cur.data),
       errMsg: acc.errMsg,
+      count: countResult
     }
   })
 }

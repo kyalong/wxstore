@@ -1,12 +1,16 @@
+<wxs src='../../zujian/m.wxs' module='m' />
 <view class='model1'>
-  <view class='card' style='height:{{(1.414-0.414*0.414)*(w-2*16)}}px;width:{{(w-2*16)}}px;' bindtap='itemdetail' data-id='{{detail._id}}'  data-sku='{{detail.sku}}' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time='100'>
+  <view class='card' style='height:{{(1.414-0.414*0.414)*(w-2*16)}}px;width:{{(w-2*16)}}px;' bindtap='itemdetail' data-id='{{detail._id}}' data-sku='{{detail.sku}}' hover='true' hover-class='hoverc' hover-start-time='50' hover-stay-time='100'>
     <image src='{{detail.fistimage}}' mode='aspectFill' style='' lazy-load='true'></image>
     <view class='item'>
       <view class='itemname'>{{detail.subtitle}}</view>
       <view class='price'>
-        <text>￥{{detail.price}}</text>
-        <view class='icon' catchtap='addcart' data-id='{{detail._id}}' data-sku='{{detail.sku}}' hover-start-time='50' hover-stay-time='100' hover='true' hover-class='hoverb'>
-          <image src='../../images/cart2.png'></image>
+        <text style='text-decoration: line-through;color:grey;font-size:smaller'>￥{{m.fix(detail.price)}}</text>
+        <text>￥{{m.fix(detail.price*0.8)}}</text>
+        <view>
+          <view class='icon' catchtap='addcart' data-id='{{detail._id}}' data-sku='{{detail.sku}}' hover-start-time='50' hover-stay-time='100' hover='true' hover-class='hoverb'>
+            <image src='../../images/cart2.png'></image>
+          </view>
         </view>
       </view>
     </view>

@@ -12,7 +12,13 @@ Page({
   data: {
     hasUserInfo: false,
     canIUse: true,
-    statusnum: [0, 0, 0, 0]
+    statusnum: [0, 0, 0, 0],
+    manager: ''
+  },
+  backend: function() {
+    wx.redirectTo({
+      url: '/manager/index/index',
+    })
   },
   gotodetail: function(e) {
     wx.navigateTo({
@@ -68,7 +74,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    this.setData({
+      manager: app.globalData.userid
+    })
   },
 
   /**
