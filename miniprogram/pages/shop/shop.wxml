@@ -52,9 +52,9 @@
             <view class='subtitle'>今日推荐</view>
           </view>
         </view>
-        <block wx:for='{{items1}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+        <block wx:for='{{items1?items1:items1tmp}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
           <m1 detail='{{detail}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
-          <m2 items='{{items2[sku]}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+          <m2 items='{{items2?items2[sku]:items2tmp[sku]}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         </block>
         <!-- <m1 detail='{{items3[0]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         <m2 items='{{m.fen(items3,1,2)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
@@ -64,11 +64,13 @@
         <m2 items='{{m.fen(items3,8,2)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' /> -->
         <!-- <m3 items='{{m.fen(items3,3,3)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' /> -->
         <!-- <m1s detail='{{items3[10]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' /> -->
+
         <view class='end'>
           <text>咫尺杂货铺</text>
           <text>天涯若比邻</text>
         </view>
       </view>
+      <!-- <progress activeColor='#a16b47' stroke-width='1' percent='{{progress}}' active='true'></progress> -->
     </scroll-view>
   </block>
 </view>

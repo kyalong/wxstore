@@ -21,7 +21,7 @@ Page({
     feature: 0,
     list: true
   },
-  backhome: function (e) {
+  backhome: function(e) {
     wx.navigateBack({
       delta: 1
     })
@@ -29,7 +29,7 @@ Page({
   feature: function(e) {
     this.setData({
       feature: e.currentTarget.dataset.feature,
-      list:true
+      list: true
     })
   },
   addspu: function(e) {
@@ -47,16 +47,17 @@ Page({
     wx.showLoading({
       title: '全速加载中',
       mask: true,
-      success: res => {
+      success: () => {
         wx.cloud.callFunction({
           name: 'getdata',
           data: {
-            class: '男装'
+            isall: 'all',
+            next: 100
           }
         }).then(res => {
+          console.log(res.result)
           this.setData({
             spulist: res.result.data,
-            spucount: res.result.data.length
           })
           wx.hideLoading()
         })

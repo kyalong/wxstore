@@ -14,6 +14,7 @@
     </view>
   </block>
 </view>
+<!-- <progress activeColor='#a16b47' stroke-width='1' percent='{{progress}}' active='true' style='width:100%'></progress> -->
 <view class='list'>
   <block wx:if='{{detail[0]==undefined}}'>
     <text class='tips'>没有订单信息</text>

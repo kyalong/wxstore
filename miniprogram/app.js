@@ -39,7 +39,7 @@ App({
         next: 0
       }
     }).then(res => {
-        this.firstitems(res.result.data)
+      try{this.firstitems(res.result.data)}catch(e){}
     })
     wx.cloud.callFunction({
       name: 'orderseri',
@@ -69,6 +69,5 @@ App({
     userInfo: '',
     count: '',
     userid: '',
-    items: ''
   }
 })

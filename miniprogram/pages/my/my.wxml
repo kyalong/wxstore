@@ -11,7 +11,7 @@
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </block>
 </view>
-<view class='orderbar' catchtap='gotodetail' data-status='0'>
+<view class='orderbar' catchtap='gotodetail' data-status='0' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='100'>
   <text>我的订单</text>
   <text>全部订单</text>
 </view>
@@ -35,14 +35,14 @@
 </view>
 <view class='docker'>
   <!-- <view class='btn' bindtap='auth' hover-class='hoverc'>收藏夹</view> -->
-  <view class='btn' bindtap='card' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
+  <view class='btn' bindtap='card' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='100'>
     <text>优惠券</text> </view>
-  <view class='btn' bindtap='address' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
+  <view class='btn' bindtap='address' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='100'>
     <text>收货地址</text> </view>
-  <view class='btn' bindtap='feedback' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
+  <view class='btn' bindtap='feedback' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='100'>
     <text>建议反馈</text> </view>
-  <view class='btn' bindtap='csc' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
+  <view class='btn' bindtap='csc' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='100'>
     <text>联系商家</text> </view>
-  <view class='btn' bindtap='backend' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50' wx:if='{{manager=="o16wQ5bh2mf_w7Xgxz6AvnBoo0T0"||manager=="ouRbx5Cb3gJjGR8NF5cIytcIKU7o"?true:false}}'>
+  <view class='btn' bindtap='backend' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='300' wx:if='{{manager=="o16wQ5bh2mf_w7Xgxz6AvnBoo0T0"||manager=="ouRbx5Cb3gJjGR8NF5cIytcIKU7o"?true:false}}'>
     <text>进入管理台</text> </view>
 </view>

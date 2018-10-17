@@ -11,26 +11,59 @@ Page({
     items: [{
       "sku": "",
       "shop": "",
-      "fistimage": "g",
+      "fistimage": "https://img.alicdn.com/bao/uploaded/i2/376934515/TB1mwbpcH2pK1RjSZFsXXaNlXXa_!!0-item_pic.jpg_500x500.jpg",
       "price": 245.0,
-      "subtitle": "",
+      "subtitle": "工厂真皮英伦大码男鞋子休闲皮鞋韩版一脚蹬特大号牛皮男士单鞋",
       "detail": [],
       "image": [],
       "createdate": "20181017",
       "title": "舒服",
-      "class": "男装",
-      "visit": 0,
-      "like": 0,
       "group": 0
     }],
+    items1tmp: [{
+      "sku": "",
+      "shop": "",
+      "fistimage": "https://img.alicdn.com/bao/uploaded/i2/376934515/TB1mwbpcH2pK1RjSZFsXXaNlXXa_!!0-item_pic.jpg_500x500.jpg",
+      "price": 245.0,
+      "subtitle": "工厂真皮英伦大码男鞋子休闲皮鞋韩版一脚蹬特大号牛皮男士单鞋",
+      "detail": [],
+      "image": [],
+      "createdate": "20181017",
+      "title": "舒服",
+      "group": 0
+    }],
+    items2tmp: [
+      [{
+        "sku": "",
+        "shop": "",
+        "fistimage": "https://img.alicdn.com/bao/uploaded/i2/376934515/TB1esMCiCMmBKNjSZTEXXasKpXa_!!0-item_pic.jpg_500x500.jpg",
+        "price": 204.0,
+        "subtitle": "夏季新款工厂断码欧美男鞋运动鞋透气休闲系带厚底鞋运动鞋网鞋",
+        "detail": [],
+        "image": [],
+        "title": "舒服",
+        "group": 0
+      }, {
+        "sku": "",
+        "shop": "",
+        "fistimage": "https://img.alicdn.com/bao/uploaded/i2/376934515/O1CN011jDuhiB4CpkHc7H_!!0-item_pic.jpg_500x500.jpg",
+        "price": 168.0,
+        "subtitle": "2018秋季新款断码处理真皮女鞋学生鞋韩版厚底休闲运动鞋女单鞋",
+        "detail": [],
+        "image": [],
+        "title": "舒服",
+        "group": 0
+      }]
+    ],
     w: app.globalData.sysw,
-    h: app.globalData.sysh - 64,
+    h: wx.getSystemInfoSync().windowHeight - 64,
     popup: 'none',
     maskinfo: '',
     masknum: 1,
     animationData: '',
     islist: false,
-    currentpage: 0
+    currentpage: 0,
+    progress: 0
   },
   itemdetail: function(e) {
     if (e.currentTarget.dataset.id) {
@@ -44,45 +77,37 @@ Page({
     }
 
   },
-  changemode: function(e) {
-    if (this.data.islist) {
-      this.setData({
-        islist: false,
-      })
-      this._observer = wx.createIntersectionObserver(this)
-      this._observer.relativeTo('.view').observe('.intersection', (res) => {
-        if (res.intersectionRatio > 0) {
-          this.setData({
-            title: '今日推荐',
-            opc: 1
-          })
-        } else {
-          this.setData({
-            title: '',
-            opc: 0
-          })
-        }
-      })
-    } else {
-      if (this._observer) {
-        this._observer.disconnect()
-      }
-      this.setData({
-        islist: true,
-        title: '',
-        opc: 0
-      })
-    }
+  // changemode: function(e) {
+  //   if (this.data.islist) {
+  //     this.setData({
+  //       islist: false,
+  //     })
+  //     this._observer = wx.createIntersectionObserver(this)
+  //     this._observer.relativeTo('.view').observe('.intersection', (res) => {
+  //       if (res.intersectionRatio > 0) {
+  //         this.setData({
+  //           title: '今日推荐',
+  //           opc: 1
+  //         })
+  //       } else {
+  //         this.setData({
+  //           title: '',
+  //           opc: 0
+  //         })
+  //       }
+  //     })
+  //   } else {
+  //     if (this._observer) {
+  //       this._observer.disconnect()
+  //     }
+  //     this.setData({
+  //       islist: true,
+  //       title: '',
+  //       opc: 0
+  //     })
+  //   }
 
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  async tmps() {
-    return await db.collection('item').where({
-      createdate: _.in(['20181012', '20181002', '20181003'])
-    }).skip(50).get()
-  },
+  // },
   addcart: function(e) {
     let animation = this.animation
     animation.translateY(-this.data.h).opacity(1).step({
@@ -185,24 +210,24 @@ Page({
       })
     }
   },
-  refresh: function(e) {
-    // console.log(e)
+  refresh: function(e) {},
+  loadcard: function(e) {},
+  onLoad: function(options) {
+
   },
-  loadcard: function(e) {
-    wx.cloud.callFunction({
-      name: 'getdata',
-      data: {
-        next: this.data.currentpage + 1
-      }
-    }).then(res => {
-      this.data.items = [...this.data.items, ...res.result.data]
-      wx.setStorage({
-        key: 'cache',
-        data: this.data.items,
-        success: () => {
-          wx.hideLoading()
-        }
-      })
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+    // wx.cloud.callFunction({
+    //   name: 'getdata',
+    //   data: {
+    //     next: this.data.currentpage
+    //   }
+    // }).then(res => {
+    app.firstitems = res => {
+      this.data.items = res
       let items1 = (function(data) {
         let arr = []
         for (let j in data) {
@@ -227,74 +252,19 @@ Page({
         return arrs
       })(this.data.items)
       this.setData({
-        currentpage: this.data.currentpage + 1,
         items: this.data.items,
         items1: items1,
         items2: items2,
       })
-    })
-  },
-  onLoad: function(options) {
-    wx.showLoading({
-      title: '拼命加载中',
-      mask: true,
-      durition: 300,
-      success: (rp) => {
-        // wx.cloud.callFunction({
-        //   name: 'getdata',
-        //   data: {
-        //     next: this.data.currentpage
-        //   }
-        // }).then(res => {
-        app.firstitems = res => {
-          this.data.items = res
-          let items1 = (function(data) {
-            let arr = []
-            for (let j in data) {
-              if (j % 3 == 0) {
-                arr.push(data[j])
-              }
-            }
-            return arr
-          })(this.data.items)
-          let items2 = (function(data) {
-            let arr = []
-            let arrs = []
-            for (let j in data) {
-              if ((j + 3) % 3 != 0) {
-                arr.push(data[j])
-              }
-            }
-            let t = arr.length
-            for (let i = 0; i < t / 2; i++) {
-              arrs.push(arr.slice(2 * i, 2 * (i + 1)))
-            }
-            return arrs
-          })(this.data.items)
-          this.setData({
-            items: this.data.items,
-            items1: items1,
-            items2: items2,
-          })
-          wx.setStorage({
-            key: 'cache',
-            data: this.data.items,
-            success: () => {
-              wx.hideLoading()
-            }
-          })
+      wx.setStorage({
+        key: 'cache',
+        data: this.data.items,
+        success: () => {
+          wx.hideLoading()
         }
-        // })
-
-      }
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
+      })
+    }
+    // })
   },
 
   /** 
@@ -302,15 +272,68 @@ Page({
    */
   onShow: function() {
 
-    this.setData({
-      h: wx.getSystemInfoSync().windowHeight - 64
-    })
+    // this.setData({
+    //   h: wx.getSystemInfoSync().windowHeight - 64
+    // })
     let animation = wx.createAnimation({
       duration: 200,
       timingFunction: 'linear',
     })
     this.animation = animation
     this._observer = wx.createIntersectionObserver(this)
+    wx.createIntersectionObserver().relativeToViewport({
+      bottom: 1300
+    }).observe('.end', (res) => {
+      wx.cloud.callFunction({
+        name: 'getdata',
+        data: {
+          next: this.data.currentpage + 1
+        }
+      }).then(res => {
+        try {
+          this.data.items = [...this.data.items, ...res.result.data]
+        } catch (e) {
+          console.log('end')
+        }
+        wx.setStorage({
+          key: 'cache',
+          data: this.data.items,
+          success: () => {
+            wx.hideLoading()
+          }
+        })
+        let items1 = (function(data) {
+          let arr = []
+          for (let j in data) {
+            if (j % 3 == 0) {
+              arr.push(data[j])
+            }
+          }
+          return arr
+        })(this.data.items)
+        let items2 = (function(data) {
+          let arr = []
+          let arrs = []
+          for (let j in data) {
+            if ((j + 3) % 3 != 0) {
+              arr.push(data[j])
+            }
+          }
+          let t = arr.length
+          for (let i = 0; i < t / 2; i++) {
+            arrs.push(arr.slice(2 * i, 2 * (i + 1)))
+          }
+          return arrs
+        })(this.data.items)
+        this.setData({
+          currentpage: this.data.currentpage + 1,
+          items: this.data.items,
+          items1: items1,
+          items2: items2,
+
+        })
+      })
+    })
     this._observer.relativeTo('.view').observe('.intersection', (res) => {
       if (res.intersectionRatio > 0) {
         this.setData({

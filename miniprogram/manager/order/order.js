@@ -15,7 +15,8 @@ Page({
     w: app.globalData.sysw,
     h: app.globalData.sysh,
     detail: null,
-    num: ''
+    num: '',
+    progress: 0
   },
   backhome: function(e) {
     wx.navigateBack({
@@ -29,36 +30,20 @@ Page({
     wx.showLoading({
       title: '拼命加载中',
       success: res => {
-        if (e.currentTarget.dataset.title == 0) {
-          wx.cloud.callFunction({
-            name: 'getorder',
-            data: {
-              status: _.in([0, 1, 2, 3])
-            }
-          }).then(res => {
-            this.setData({
-              totop: 0,
-              detail: res.result.data,
-              title: e.currentTarget.dataset.title
-            })
-            wx.hideLoading()
+        wx.cloud.callFunction({
+          name: 'getorder',
+          data: {
+            status: e.currentTarget.dataset.title == 0 ? _.in([0, 1, 2, 3]) : Number(e.currentTarget.dataset.title) - 1
+          }
+        }).then(res => {
+          this.setData({
+            totop: 0,
+            detail: res.result.data,
+            title: e.currentTarget.dataset.title,
+            // progress: 100,
           })
-        } else {
-          wx.cloud.callFunction({
-            name: 'getorder',
-            data: {
-              status: Number(e.currentTarget.dataset.title) - 1
-            }
-          }).then(res => {
-            this.setData({
-              totop: 0,
-              title: e.currentTarget.dataset.title,
-              detail: res.result.data
-            })
-            wx.hideLoading()
-          })
-        }
-
+          wx.hideLoading()
+        })
       }
     })
 
@@ -79,13 +64,14 @@ Page({
           this.setData({
             totop: 0,
             title: this.data.title,
-            detail: res.result.data
+            detail: res.result.data,
+            // progress: 100,
           })
         })
       })
     }
   },
-  formsubmit:function(e){
+  formsubmit: function(e) {
     console.log(e.detail.value.total)
   },
 
@@ -111,33 +97,19 @@ Page({
     wx.showLoading({
       title: '拼命加载中',
       success: res => {
-        if (options.status == 0) {
-          wx.cloud.callFunction({
-            name: 'getorder',
-            data: {
-              status: 0,
-            }
-          }).then(res => {
-              this.setData({
-                title: options.status,
-                detail: res.result.data.data
-              })
-              wx.hideLoading()
+        wx.cloud.callFunction({
+          name: 'getorder',
+          data: {
+            status: options.status == 0 ? 0 : Number(options.status) - 1,
+          }
+        }).then(res => {
+          this.setData({
+            title: options.status,
+            detail: res.result.data.data
           })
-        } else {
-          wx.cloud.callFunction({
-            name: 'getorder',
-            data: {
-              status: Number(options.status) - 1
-            }
-          }).then(res => {
-            this.setData({
-              title: options.status,
-              detail: res.result.data.data
-            })
-            wx.hideLoading()
-          })
-        }
+          wx.hideLoading()
+        })
+
 
       }
     })

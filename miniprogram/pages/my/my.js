@@ -17,18 +17,33 @@ Page({
   },
   csc: function(e) {
     wx.navigateTo({
-      url: '../csc/csc',
+      url: '../csc/csc?s=9',
     })
   },
   backend: function() {
-    wx.redirectTo({
-      url: '/manager/index/index',
+    wx.cloud.callFunction({
+      name: 'static',
+      data: {
+        status: 0,
+      }
+    }).then(res => {
+      app.itemcounts(res.result)
     })
+    setTimeout(() => {
+      wx.redirectTo({
+        url: '/manager/index/index',
+      })
+    }, 400)
+
   },
   gotodetail: function(e) {
-    wx.navigateTo({
-      url: '../orderlist/orderlist?status=' + e.currentTarget.dataset.status,
-    })
+
+    setTimeout(() => {
+      wx.navigateTo({
+        url: '../orderlist/orderlist?status=' + e.currentTarget.dataset.status,
+      })
+    }, 150)
+
   },
   address: function(e) {
     wx.chooseAddress({

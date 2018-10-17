@@ -1,5 +1,5 @@
 // miniprogram/manager/index/index.js
-
+const app = getApp()
 Page({
 
   /**
@@ -14,8 +14,9 @@ Page({
       ['会员管理', ''],
       ['退货管理', '']
     ],
-    titles:'',
-    count: ''
+    titles: '',
+    count: '',
+   
   },
   goto: function(e) {
     switch (e.currentTarget.dataset.index) {
@@ -69,18 +70,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    wx.cloud.callFunction({
-      name: 'static',
-      data: {
-        status: 0,
-      }
-    }).then(res => {
-      this.data.title[0][1] = '('+res.result.ordercount.total+')'
-      this.data.title[1][1] = '('+res.result.itemcount.total+')'
+    // wx.cloud.callFunction({
+    //   name: 'static',
+    //   data: {
+    //     status: 0,
+    //   }
+    // }).then(res => {
+    app.itemcounts = res => {
+      this.data.title[0][1] = '(' + res.ordercount.total + ')'
+      this.data.title[1][1] = '(' + res.itemcount.total + ')'
       this.setData({
+       
         title: this.data.title
       })
-    })
+    }
+    // })
   },
 
   /**
