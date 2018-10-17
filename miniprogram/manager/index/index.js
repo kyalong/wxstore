@@ -1,4 +1,5 @@
 // miniprogram/manager/index/index.js
+
 Page({
 
   /**

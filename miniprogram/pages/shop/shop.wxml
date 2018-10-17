@@ -1,5 +1,4 @@
-<wxs src='shop.wxs' module='m'/>
-
+<wxs src='shop.wxs' module='m' />
 <view class='view' catchtap='changemode'>
   <block wx:if='{{islist}}'>
     <image src='../../images/cardview.png'></image>
@@ -26,7 +25,7 @@
               <view class='itemname'>{{detail.subtitle}}</view>
               <view class='price'>
                 <text>￥{{detail.price}}</text>
-                <view class='icon' catchtap='addcart' data-id='{{detail._id}}' data-sku='{{detail.sku}}'  hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' hover-stop-propagation='true'>
+                <view class='icon' catchtap='addcart' data-id='{{detail._id}}' data-sku='{{detail.sku}}' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' hover-stop-propagation='true'>
                   <image src='../../images/cart2.png'></image>
                 </view>
               </view>
@@ -37,7 +36,15 @@
     </swiper>
   </block>
   <block wx:else>
-    <scroll-view style='height:{{h}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true' enable-back-to-top='true'>
+    <view style='display:flex;align-items:center;margin:0 16px;'>
+      <image src='../../images/csc3.png' style='width:15px;height:15px;margin-right:0.5rem'></image>
+      <swiper style='width:calc(750rpx - 15px);height:25px;font-size:smaller;background-color:#FFCC00' vertical='true' autoplay='true'>
+        <swiper-item style='display:flex;align-items:'>本店因店铺技术升级中,暂时不提供微信支付</swiper-item>
+        <swiper-item style='display:flex;align-items:'>需要购买的亲,请在私人洞府加店家微信购买</swiper-item>
+        <swiper-item style='display:flex;align-items:'>在此期间全场88折,感谢大家支持,尽快完成升级</swiper-item>
+      </swiper>
+    </view>
+    <scroll-view style='height:{{h-25}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true' enable-back-to-top='true' bindscroll='refresh' bindscrolltolower='loadcard'>
       <view class='intersection'>
         <view class='h1' style='height:{{w*(1-1/1.414)}}px'>
           <view class='main'>
@@ -45,16 +52,16 @@
             <view class='subtitle'>今日推荐</view>
           </view>
         </view>
-        <block wx:for='{{items}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
+        <block wx:for='{{items1}}' wx:for-index='sku' wx:for-item='detail' wx:key=''>
           <m1 detail='{{detail}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
           <m2 items='{{items2[sku]}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         </block>
-        <m1 detail='{{items3[0]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+        <!-- <m1 detail='{{items3[0]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         <m2 items='{{m.fen(items3,1,2)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         <m1 detail='{{items3[3]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         <m3 items='{{m.fen(items3,4,3)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
         <m1s detail='{{items3[7]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
-        <m2 items='{{m.fen(items3,8,2)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' />
+        <m2 items='{{m.fen(items3,8,2)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' /> -->
         <!-- <m3 items='{{m.fen(items3,3,3)}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' /> -->
         <!-- <m1s detail='{{items3[10]}}' h='{{h}}' w='{{w}}' bindaddcart='addcart' binditemdetail='itemdetail' /> -->
         <view class='end'>

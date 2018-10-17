@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    s: true
   },
   goback: function(e) {
     wx.navigateBack({
@@ -16,15 +16,20 @@ Page({
     wx.saveImageToPhotosAlbum({
       filePath: '/images/cscs.png',
       success: (res) => {
-
         wx.showToast({
           title: '保存成功，马上联系',
           duration: 1000,
           success: (res) => {
+            if (e.currentTarget.dataset.to == 1) {
+              wx.navigateBack({
+                delta: 1
+              })
+            } else {
+              wx.switchTab({
+                url: '../my/my',
+              })
+            }
 
-            wx.navigateBack({
-              delta: 1
-            })
           }
         })
       }
@@ -34,7 +39,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log(options)
+    this.setData({
+      s: options.s
+    })
   },
 
   /**

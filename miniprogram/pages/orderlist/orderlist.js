@@ -14,7 +14,8 @@ Page({
     title: 0,
     w: app.globalData.sysw,
     h: app.globalData.sysh,
-    detail: null
+    detail: null,
+    manager: ''
   },
 
   selected: function(e) {
@@ -121,7 +122,8 @@ Page({
    */
   onReady: function() {
     this.setData({
-      h: wx.getSystemInfoSync().windowHeight
+      h: wx.getSystemInfoSync().windowHeight,
+      manager: app.globalData.userid
     })
   },
 

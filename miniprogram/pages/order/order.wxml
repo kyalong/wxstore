@@ -1,4 +1,5 @@
-<view class='view' >
+<wxs src='../../zujian/m.wxs' module='m' />
+<view class='view'>
   <image src='../../images/choose.png' catchtap='backhome'></image>
 </view>
 <scroll-view style='height:{{h-40}}px;' scroll-y='true' enable-back-to-top='true'>
@@ -33,7 +34,8 @@
         <text>颜色:{{detail.color}}</text>
       </view>
       <view class='num'>
-        <text>￥{{detail.price}}</text>
+        <text>￥{{m.fix(detail.price)}}</text>
+        <text style='text-decoration: line-through;color:grey;font-size:smaller;text-align:right'>￥{{detail.price}}</text>
         <text>x {{detail.num}}</text>
       </view>
     </view>
@@ -51,7 +53,7 @@
   </view>
   <view class='total'>
     <text>合计</text>
-    <text>￥{{total-costoff}}</text>
+    <text>￥{{m.fix(total)-costoff}}</text>
   </view>
 </scroll-view>
 <button class='submit' bindtap='formsubmit' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-items='{{items}}' data-total='{{total}}' data-actualtotal='{{total-costoff}}' data-='{{addressid}}'>提交订单</button>

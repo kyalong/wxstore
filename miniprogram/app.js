@@ -33,27 +33,31 @@ App({
         })
       }
     })
-
-    db.collection('orderseri').where({
-      date: String(tomorrow(0) / 1000)
-    }).get().then(res => {
-      if (res.data.length > 0) {
-        this.globalData.count = res.data[0]._id
+    wx.cloud.callFunction({
+      name: 'getdata',
+      data: {
+        next: 0
+      }
+    }).then(res => {
+        this.firstitems(res.result.data)
+    })
+    wx.cloud.callFunction({
+      name: 'orderseri',
+      data: {
+        gets: 0,
+      }
+    }).then(res => {
+      if (res.result.data) {
+        this.globalData.count = res.result.data[0]._id
         console.log('获取当前订单号')
       } else {
-        db.collection('orderseri').add({
-          data: {
-            'date': String(tomorrow(0) / 1000),
-            'num': 1
-          }
-        }).then(res => {
-          this.globalData.count=res._id
-        })
+        console.log('初始化订单号')
+        this.globalData.count = res.result._id
       }
     })
     wx.cloud.callFunction({
-      name:'login'
-    }).then(res=>{
+      name: 'login'
+    }).then(res => {
       this.globalData.userid = res.result.openid
     })
   },
@@ -64,6 +68,7 @@ App({
     cartlist: '',
     userInfo: '',
     count: '',
-    userid:''
+    userid: '',
+    items: ''
   }
 })

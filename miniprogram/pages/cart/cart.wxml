@@ -1,4 +1,5 @@
 <wxs src='cart.wxs' module='m1' />
+<wxs src='../../zujian/m.wxs' module='m' />
 <view class='view' catchtap='backhome'>
   <text style='opacity:{{opc}}'>{{title}}{{itemnum}}</text>
   <!-- <image src='../../images/choose.png'></image> -->
@@ -28,7 +29,7 @@
               <text>{{detail.title}}</text>
               <text>尺码:{{detail.size}}</text>
               <text>颜色:{{detail.color}}</text>
-              <text>￥{{detail.price}}</text>
+              <text>￥{{m.fix(detail.price)}}</text>
             </view>
             <view class='num'>
               <text catchtap='add' data-id='{{detail._id}}'>+</text>
@@ -50,6 +51,6 @@
   <view class='tipview' hover-class='tiphover' hover='true' catchtap='backhome'>去逛逛</view>
 </view>
 <view class='detail' wx:if='{{isnull}}'>
-  <text>合计:￥{{total}}</text>
+  <text>合计:￥{{m.fix(total)}}</text>
   <view class='buy' catchtap='buy' data-list='{{m1.json(newitems)}}' data-total='{{total}}' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100'>去结算</view>
 </view>

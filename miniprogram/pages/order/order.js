@@ -18,7 +18,7 @@ Page({
     address: '新增收货地址',
     haveaddr: true,
     addressid: '',
-    costoff: 20
+    costoff: 0
 
 
   },
@@ -85,9 +85,10 @@ Page({
       db.collection('orderseri').doc(app.globalData.count).get().then(
         res => {
           let serinumid = res.data._id
+          let nums = res.data.nums
           db.collection('order').add({
             data: {
-              serinum: tomorrow(res.data.num),
+              serinum: tomorrow(res.data.nums),
               createtime: Date.parse(new Date()),
               paytime: '',
               delivertime: '',
@@ -124,23 +125,29 @@ Page({
                   })
                 })
                 if (res.confirm) {
-                  wx.scanCode({
-                    success: (res) => {
-                      console.log(res.result)
-                      wx.request({
-                        url: res.result,
-                        success: res => {
-                          console.log(res)
-                        }
-                      })
-                      console.log('ok')
-                      wx.navigateTo({
-                        url: '../orderlist/orderlist?status=' + (status + 2),
-                        success: res => {
-                          wx.hideLoading()
-                        }
-                      })
-                    }
+                  // wx.scanCode({
+                  //   success: (res) => {
+                  //     console.log(res.result)
+                  //     wx.request({
+                  //       url: res.result,
+                  //       success: res => {
+                  //         console.log(res)
+                  //       }
+                  //     })
+                  //     // wx.navigateTo({
+                  //     //   url: '../csc/csc',
+                  //     // })
+                  //     console.log('ok')
+                  //     wx.navigateTo({
+                  //       url: '../orderlist/orderlist?status=' + (status + 2),
+                  //       success: res => {
+                  //         wx.hideLoading()
+                  //       }
+                  //     })
+                  //   }
+                  // })
+                  wx.navigateTo({
+                    url: '../csc/csc?s=8',
                   })
                 } else {
                   wx.showLoading({
@@ -160,12 +167,15 @@ Page({
 
               }
             })
-
-            db.collection('orderseri').doc(serinumid).update({
+            wx.cloud.callFunction({
+              name: 'modifyseri',
               data: {
-                num: _.inc(1)
+                serinumid: serinumid,
+                nums: nums + 1
               }
-            }).then(data => {})
+            }).then(data => {
+              console.log(data)
+            })
           })
         }
       )

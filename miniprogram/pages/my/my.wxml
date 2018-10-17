@@ -43,6 +43,6 @@
     <text>建议反馈</text> </view>
   <view class='btn' bindtap='csc' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50'>
     <text>联系商家</text> </view>
-  <view class='btn' bindtap='backend' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50' wx:if='{{manager=="ouRbx5BO4OYR-_UpUJbAJbe176GA"||manager=="ouRbx5Cb3gJjGR8NF5cIytcIKU7o"?true:false}}'>
+  <view class='btn' bindtap='backend' hover='true' hover-class='hoverc' hover-start-time='10' hover-stay-time='50' wx:if='{{manager=="o16wQ5bh2mf_w7Xgxz6AvnBoo0T0"||manager=="ouRbx5Cb3gJjGR8NF5cIytcIKU7o"?true:false}}'>
     <text>进入管理台</text> </view>
 </view>

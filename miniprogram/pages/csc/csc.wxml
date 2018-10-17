@@ -1,3 +1,8 @@
 <view style='height:1334rpx;background-color:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center' catchtap='goback'>
-  <image src='../../images/cscs.png' style='width:300px;height:399px;z-index:2' catchtap='adduser'></image>
+  <block wx:if='{{s==9}}'>
+    <image src='../../images/cscs.png' style='width:300px;height:399px;z-index:2' catchtap='adduser' data-to='1'></image>
+  </block>
+  <block wx:else>
+    <image src='../../images/paycode.png' style='width:300px;height:399px;z-index:2' catchtap='adduser' data-to='2'></image>
+  </block>
 </view>

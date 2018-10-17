@@ -45,7 +45,7 @@
             <text>合计:￥ {{item.actualtotal}}</text>
           </view>
           <view class='card status'>
-            <button id='payoff' catchtap='status' data-num='{{item._id}}' data-status='1' wx:if='{{item.status==0?true:false}}'>
+            <button id='payoff' catchtap='status' data-num='{{item._id}}' data-status='1' wx:if='{{item.status==0&&manager=="o16wQ5bh2mf_w7Xgxz6AvnBoo0T0"?true:false}}'>
               <text>确认支付</text>
             </button>
             <button id='del' catchtap='status' data-num='{{item._id}}' data-status='9' wx:if='{{item.status==0||item.status==1?true:false}}'>

@@ -8,7 +8,21 @@ const db = wx.cloud.database({
 const _ = db.command
 Page({
   data: {
-    items: '',
+    items: [{
+      "sku": "",
+      "shop": "",
+      "fistimage": "g",
+      "price": 245.0,
+      "subtitle": "",
+      "detail": [],
+      "image": [],
+      "createdate": "20181017",
+      "title": "舒服",
+      "class": "男装",
+      "visit": 0,
+      "like": 0,
+      "group": 0
+    }],
     w: app.globalData.sysw,
     h: app.globalData.sysh - 64,
     popup: 'none',
@@ -16,7 +30,7 @@ Page({
     masknum: 1,
     animationData: '',
     islist: false,
-
+    currentpage: 0
   },
   itemdetail: function(e) {
     if (e.currentTarget.dataset.id) {
@@ -78,21 +92,39 @@ Page({
     wx.getStorage({
       key: 'cache',
       success: res => {
-        this.setData({
-          maskinfo: [(function(data, sku) {
+        try {
+          (function(data, sku) {
             for (let i of data) {
               if (i.sku == sku) {
                 return i
               }
             }
-          })(res.data, sku)],
-          popup: 'flex'
-        })
-        setTimeout(() => {
+          })(res.data, sku)[0]
           this.setData({
-            animationData: animation.export(),
+            maskinfo: [(function(data, sku) {
+              for (let i of data) {
+                if (i.sku == sku) {
+                  return i
+                }
+              }
+
+            })(res.data, sku)],
+            popup: 'flex'
           })
-        }, 100)
+        } catch (e) {
+          db.collection('item').doc(id).get().then(res => {
+            this.setData({
+              maskinfo: [res.data],
+              popup: 'flex',
+            })
+          })
+        } finally {
+          setTimeout(() => {
+            this.setData({
+              animationData: animation.export(),
+            })
+          }, 100)
+        }
       },
       fail: res => {
         if (e.currentTarget.dataset.id) {
@@ -153,56 +185,106 @@ Page({
       })
     }
   },
+  refresh: function(e) {
+    // console.log(e)
+  },
+  loadcard: function(e) {
+    wx.cloud.callFunction({
+      name: 'getdata',
+      data: {
+        next: this.data.currentpage + 1
+      }
+    }).then(res => {
+      this.data.items = [...this.data.items, ...res.result.data]
+      wx.setStorage({
+        key: 'cache',
+        data: this.data.items,
+        success: () => {
+          wx.hideLoading()
+        }
+      })
+      let items1 = (function(data) {
+        let arr = []
+        for (let j in data) {
+          if (j % 3 == 0) {
+            arr.push(data[j])
+          }
+        }
+        return arr
+      })(this.data.items)
+      let items2 = (function(data) {
+        let arr = []
+        let arrs = []
+        for (let j in data) {
+          if ((j + 3) % 3 != 0) {
+            arr.push(data[j])
+          }
+        }
+        let t = arr.length
+        for (let i = 0; i < t / 2; i++) {
+          arrs.push(arr.slice(2 * i, 2 * (i + 1)))
+        }
+        return arrs
+      })(this.data.items)
+      this.setData({
+        currentpage: this.data.currentpage + 1,
+        items: this.data.items,
+        items1: items1,
+        items2: items2,
+      })
+    })
+  },
   onLoad: function(options) {
     wx.showLoading({
       title: '拼命加载中',
       mask: true,
-      success: () => {
-        wx.cloud.callFunction({
-          name: 'getdata',
-          data: {
-            class: '男装'
-          }
-        }).then(res => {
-          // let newdatas = util.random(res.result.data)
-          let newdatas = (function(data, gp) {
-            if (gp == 9) {
-              return data
-            }
+      durition: 300,
+      success: (rp) => {
+        // wx.cloud.callFunction({
+        //   name: 'getdata',
+        //   data: {
+        //     next: this.data.currentpage
+        //   }
+        // }).then(res => {
+        app.firstitems = res => {
+          this.data.items = res
+          let items1 = (function(data) {
             let arr = []
-            for (let i of data) {
-              if (i.group == gp) {
-                arr.push(i)
+            for (let j in data) {
+              if (j % 3 == 0) {
+                arr.push(data[j])
               }
             }
             return arr
-          })(res.result.data, 9)
-
-          this.setData({
-            items: newdatas.slice(0, 16),
-            items2: (function(data) {
-              let arr = []
-              let t = data.length / 2
-              let i = 0
-              while (i < t) {
-                let s1 = data.shift()
-                let s2 = data.shift()
-                arr.push([s1, s2])
-                i += 1
+          })(this.data.items)
+          let items2 = (function(data) {
+            let arr = []
+            let arrs = []
+            for (let j in data) {
+              if ((j + 3) % 3 != 0) {
+                arr.push(data[j])
               }
-              return arr
-            })(newdatas.slice(16, 48)),
-            items3: newdatas.slice(48, 59)
+            }
+            let t = arr.length
+            for (let i = 0; i < t / 2; i++) {
+              arrs.push(arr.slice(2 * i, 2 * (i + 1)))
+            }
+            return arrs
+          })(this.data.items)
+          this.setData({
+            items: this.data.items,
+            items1: items1,
+            items2: items2,
           })
           wx.setStorage({
             key: 'cache',
-            data: newdatas,
+            data: this.data.items,
             success: () => {
               wx.hideLoading()
             }
           })
-
-        })
+        }
+        // })
 
       }
     })
@@ -211,12 +293,15 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {},
+  onReady: function() {
+
+  },
 
   /** 
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+
     this.setData({
       h: wx.getSystemInfoSync().windowHeight - 64
     })

@@ -169,7 +169,8 @@ Page({
           })
 
         } catch (e) {
-          db.collection('item').doc(options.itemid).get().then(res => {
+
+          db.collection('item').doc(String(options.itemid)).get().then(res => {
             this.setData({
               items: [res.data],
               imagelist: res.data.image.slice(1, )
