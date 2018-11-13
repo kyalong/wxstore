@@ -33,12 +33,13 @@ Page({
         wx.cloud.callFunction({
           name: 'getorder',
           data: {
-            status: e.currentTarget.dataset.title == 0 ? _.in([0, 1, 2, 3]) : Number(e.currentTarget.dataset.title) - 1
+            status: e.currentTarget.dataset.title == 0 ? _.in([0, 1, 2, 3, 9]) : Number(e.currentTarget.dataset.title) - 1
           }
         }).then(res => {
+          console.log(res)
           this.setData({
             totop: 0,
-            detail: res.result.data,
+            detail: res.result.data.data,
             title: e.currentTarget.dataset.title,
             // progress: 100,
           })
@@ -59,12 +60,12 @@ Page({
       }).then(res => {
         wx.cloud.callFunction({
           name: 'getorder',
-          status: this.data.title == 0 ? _.in([0, 1, 2, 3]) : Number(this.data.title) - 1
+          status: this.data.title == 0 ? _.in([0, 1, 2, 3, 9]) : Number(this.data.title) - 1
         }).then(res => {
           this.setData({
             totop: 0,
             title: this.data.title,
-            detail: res.result.data,
+            detail: res.result.data.data,
             // progress: 100,
           })
         })
@@ -100,7 +101,7 @@ Page({
         wx.cloud.callFunction({
           name: 'getorder',
           data: {
-            status: options.status == 0 ? 0 : Number(options.status) - 1,
+            status: options.status == 0 ? _.in([0, 1, 2, 3, 9]) : Number(options.status) - 1,
           }
         }).then(res => {
           this.setData({

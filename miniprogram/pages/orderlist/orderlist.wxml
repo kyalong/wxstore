@@ -35,7 +35,7 @@
                 <text>颜色:{{detail.color}}</text>
               </view>
               <view class='num'>
-                <text>￥{{detail.price}}</text>
+                <text>￥{{detail.costprice}}</text>
                 <text>x {{detail.num}}</text>
               </view>
             </view>

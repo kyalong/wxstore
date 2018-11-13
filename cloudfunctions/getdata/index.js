@@ -25,21 +25,28 @@ exports.main = async(event, context) => {
       return {
         data: acc.data.concat(cur.data),
         errMsg: acc.errMsg,
+        count:countResult
       }
     })
   } else {
     const count = await db.collection('item').where({
-      class: _.in(['女鞋','男装'])
+      class: _.in(['女鞋', '男装'])
     }).count()
     if (event.next < Math.ceil(count.total / MAX_LIMIT)) {
-      return await db.collection('item').field({
+       let result = await db.collection('item').field({
         class: false,
         like: false,
         visit: false,
         createdate: false
       }).where({
-        class: _.in(['女鞋','男装'])
+        class: _.in(['女鞋', '男装'])
       }).skip(event.next * MAX_LIMIT).limit(MAX_LIMIT).get()
+      for (let i of result.data) {
+        i.costprice = (i.price * 0.8).toFixed(2)
+      }
+      return result
+
+
     }
   }
 

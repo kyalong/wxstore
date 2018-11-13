@@ -6,7 +6,7 @@
 <view class='page1'>
   <view class='main'>
     <block wx:for='{{features}}' wx:key=''>
-      <view class='feature' data-feature='{{index}}' hover='true' hover-class='hoverc' catchtap='feature' style='{{feature==index?"background-color: #a16b47;color: white;":""}}'>{{item}}</view>
+      <view class='feature' data-feature='{{index}}' catchtap='feature' style='{{feature==index?"background-color: #a16b47;color: white;":""}}' hover='true' hover-class='hoverc'>{{item}}</view>
     </block>
   </view>
   <view class='addspu' wx:if='{{list&&feature==0}}'>

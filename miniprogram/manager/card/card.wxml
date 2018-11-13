@@ -1,0 +1,5 @@
+<view class='view'>
+  <image src='../../images/choose.png' catchtap='backhome'></image>
+  <text>卡券管理</text>
+</view>
+

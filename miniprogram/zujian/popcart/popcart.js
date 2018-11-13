@@ -85,7 +85,8 @@ Component({
           shop: encodeURIComponent(e.currentTarget.dataset.shop),
           sku:e.currentTarget.dataset.sku,
           colorindex: e.currentTarget.dataset.colorindex,
-          sizeindex: e.currentTarget.dataset.colorindex,
+          sizeindex: e.currentTarget.dataset.sizeindex,
+          costprice: e.currentTarget.dataset.costprice,
 
         }
       }).then(res => {

@@ -1,0 +1,42 @@
+<view class='view'>
+  <image src='../../images/choose.png' catchtap='backhome'></image>
+  <text>会员中心</text>
+</view>
+
+<view class='card'>
+  <view class='title'>天涯若比邻</view>
+  <view class='level'>{{levels[level]}}</view>
+  <!-- <view class='level'>FF-20181028-00001</view> -->
+  <view>
+    <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../images/my3.png'}}"></image>
+    <view class='point'>积分：{{point}}</view>
+    <view class='shop'>咫尺杂货铺</view>
+  </view>
+</view>
+<view class='rights'>
+  <view>
+    <text>专属特权</text>
+    <text class='jiuse'>积分使用记录</text>
+  </view>
+  <view>
+    <block wx:for='{{rights[level]}}' wx:key=''>
+      <view class='right'>
+        <view class='icons' catchtap='xize'>{{index}}</view>
+        <text>{{item}}</text>
+      </view>
+    </block>
+  </view>
+</view>
+<navigator class='navi' open-type='switchTab' url='../shop/shop'>去逛逛</navigator>
+<block wx:if='{{xize}}'>
+  <view class='xizes' catchtap='cancel'>
+    <block wx:for='{{xizes}}' wx:key='' wx:for-item='itemss' wx:for-index='indexss'>
+      <view class='xize' wx:for='{{itemss}}' wx:key=''>
+        <text>{{index}}</text>
+        <text>{{item}}</text>
+      </view>
+    </block>
+    <view class='cancel' catchtap='cancel'>X</view>
+  </view>
+  
+</block>

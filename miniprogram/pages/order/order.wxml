@@ -1,4 +1,4 @@
-<wxs src='../../zujian/m.wxs' module='m' />
+
 <view class='view'>
   <image src='../../images/choose.png' catchtap='backhome'></image>
 </view>
@@ -34,7 +34,7 @@
         <text>颜色:{{detail.color}}</text>
       </view>
       <view class='num'>
-        <text>￥{{m.fix(detail.price)}}</text>
+        <text>￥{{detail.costprice}}</text>
         <text style='text-decoration: line-through;color:grey;font-size:smaller;text-align:right'>￥{{detail.price}}</text>
         <text>x {{detail.num}}</text>
       </view>
@@ -48,12 +48,16 @@
     <text>红包优惠券</text>
     <text>￥{{costoff}}</text>
   </view>
+   <view class='deliver'>
+    <text>会员积分抵扣</text>
+    <text>￥{{costoff}}</text>
+  </view>
   <view class='mark'>
     <input placeholder='备注'></input>
   </view>
   <view class='total'>
     <text>合计</text>
-    <text>￥{{m.fix(total)-costoff}}</text>
+    <text>￥{{total-costoff}}</text>
   </view>
 </scroll-view>
 <button class='submit' bindtap='formsubmit' hover='true' hover-class='hoverb' hover-start-time='50' hover-stay-time='100' data-items='{{items}}' data-total='{{total}}' data-actualtotal='{{total-costoff}}' data-='{{addressid}}'>提交订单</button>

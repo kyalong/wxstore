@@ -10,7 +10,7 @@ const _ = db.command
 exports.main = async(event, context) => {
   const countResult = await db.collection('order').count()
   const data = await db.collection('order').where({
-    status: event.status
+    status:event.status
   }).orderBy('serinum', 'desc').get()
   return {
     count: countResult,

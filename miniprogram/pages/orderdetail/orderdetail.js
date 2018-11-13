@@ -37,7 +37,7 @@ Page({
   },
   wechat: function(e) {
     wx.navigateTo({
-      url: '/pages/csc/csc',
+      url: '/pages/csc/csc?s=9',
     })
   },
   onLoad: function(options) {

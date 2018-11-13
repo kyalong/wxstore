@@ -1,6 +1,6 @@
 <wxs src='../orderlist/m.wxs' module='m' />
 <wxs src='time.wxs' module='m1' />
-<view class='view' >
+<view class='view'>
   <image src='../../images/choose.png' catchtap='backhome'></image>
   <text style='opacity:{{opc}}'>{{title}}</text>
 </view>
@@ -14,7 +14,7 @@
     <view class='wuliu' catchtap='wuliu'>
       <image src='../../images/rec.png' style='height:30px;width:30px;'></image>
       <text>物流信息</text>
-     
+
       <image src='../../images/choose.png' style='height:30px;width:30px;'></image>
     </view>
     <block wx:for="{{addrs}}" wx:key=''>
@@ -44,7 +44,7 @@
               <text>颜色:{{detail.color}}</text>
             </view>
             <view class='num'>
-              <text>￥{{detail.price}}</text>
+              <text>￥{{detail.costprice}}</text>
               <text>x {{detail.num}}</text>
             </view>
           </view>
@@ -58,13 +58,14 @@
         <text>配送方式</text>
         <text>包邮</text>
       </view>
-      <view class='deliver'>
-        <text>红包优惠券</text>
-        <text>-￥{{item.total-item.actualtotal}}</text>
-      </view>
+
       <view class='total'>
         <text>总价</text>
         <text>￥{{item.total}}</text>
+      </view>
+      <view class='deliver'>
+        <text>红包优惠券</text>
+        <text>-￥{{item.total-item.actualtotal}}</text>
       </view>
       <view class='actualtotal'>
         <text>实付</text>
@@ -96,8 +97,8 @@
           <text>签收时间:</text>
           <text>{{m1.time(item.recievetime)}}</text>
         </view>
-        <view class='contact' catchtap='wechat'>
-          <view style='border-right:solid 1px #f6f6f6'>
+        <view class='contact'>
+          <view style='border-right:solid 1px #f6f6f6' catchtap='wechat'>
             <image src='../../images/csc2.png'></image> 商家微信</view>
           <view catchtap='dial'>
             <image src='../../images/phone.png'></image> 拨打电话</view>

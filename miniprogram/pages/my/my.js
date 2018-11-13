@@ -20,6 +20,16 @@ Page({
       url: '../csc/csc?s=9',
     })
   },
+  vipcard: function (e) {
+    wx.navigateTo({
+      url: '../vipcard/vipcard',
+    })
+  },
+  card: function (e) {
+    wx.navigateTo({
+      url: '../ticket/ticket',
+    })
+  },
   backend: function() {
     wx.cloud.callFunction({
       name: 'static',

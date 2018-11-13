@@ -22,7 +22,7 @@
   <block wx:else>
     <scroll-view scroll-y scroll-into-view="{{toview}}" enable-back-to-top="true" style='height:{{h-64-77-37}}px;' scroll-with-animation='true' class='scroll-view' scroll-top='{{totop}}'>
       <block wx:for="{{detail}}" wx:key='id'>
-        <view class='main' id='s{{item._id}}' wx:if='{{item.status==9?false:true}}' data-orderid='{{item._id}}'>
+        <view class='main' id='s{{item._id}}' wx:if='{{title!=0&&item.status==9?false:true}}' data-orderid='{{item._id}}'>
           <view class='card serinum'>
             <text class='svgicon'></text>
             <text catchlongtap='copy'>订单号: {{item.serinum}}</text>

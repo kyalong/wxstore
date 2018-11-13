@@ -58,6 +58,7 @@ Page({
           console.log(res.result)
           this.setData({
             spulist: res.result.data,
+            spucount: res.result.count.total
           })
           wx.hideLoading()
         })

@@ -2,3 +2,66 @@
   <image src='../../images/choose.png' catchtap='backhome'></image>
   <text>财务管理</text>
 </view>
+
+<view class='table'>
+  <view class='left simple'>
+    <text>昨天</text>
+    <block wx:for='{{yesterday}}' wx:key=''>
+      <view>
+        <text>{{index}}：￥</text>
+        <text>{{item}}</text>
+      </view>
+    </block>
+  </view>
+  <view class='right simple'>
+    <text>今天</text>
+    <block wx:for='{{today}}' wx:key=''>
+      <view>
+        <text>{{index}}：￥</text>
+        <text>{{item}}</text>
+      </view>
+    </block>
+  </view>
+</view>
+
+
+<view class='progress'>
+  <view>本周</view>
+  <view class='circles'>
+    <view class='circle'>50%</view>
+  </view>
+  <view class='content'>
+    <view>预定销售额：￥{{nums}}</view>
+    <view>完成销售额：￥{{nums}}</view>
+  </view>
+</view>
+<view class='progress'>
+  <view>本月</view>
+  <view class='circles'>
+    <view class='circle'>50%</view>
+  </view>
+  <view class='content'>
+    <view>预定销售额：￥{{nums}}</view>
+    <view>完成销售额：￥{{nums}}</view>
+  </view>
+</view>
+<view class='progress'>
+  <view>本季</view>
+  <view class='circles'>
+    <view class='circle'>50%</view>
+  </view>
+  <view class='content'>
+    <view>预定销售额：￥{{nums}}</view>
+    <view>完成销售额：￥{{nums}}</view>
+  </view>
+</view>
+<view class='progress'>
+  <view>本年</view>
+  <view class='circles'>
+    <view class='circle'>50%</view>
+  </view>
+  <view class='content'>
+    <view>预定销售额：￥{{nums}}</view>
+    <view>完成销售额：￥{{nums}}</view>
+  </view>
+</view>

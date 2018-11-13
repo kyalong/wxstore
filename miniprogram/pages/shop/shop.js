@@ -24,9 +24,9 @@ Page({
     items1tmp: [{
       "sku": "",
       "shop": "",
-      "fistimage": "https://img.alicdn.com/bao/uploaded/i2/376934515/TB1mwbpcH2pK1RjSZFsXXaNlXXa_!!0-item_pic.jpg_500x500.jpg",
-      "price": 245.0,
-      "subtitle": "工厂真皮英伦大码男鞋子休闲皮鞋韩版一脚蹬特大号牛皮男士单鞋",
+      "fistimage": "../../images/logo.png",
+      "price": 0,
+      "subtitle": "咫尺精品铺",
       "detail": [],
       "image": [],
       "createdate": "20181017",
@@ -138,7 +138,7 @@ Page({
             popup: 'flex'
           })
         } catch (e) {
-          db.collection('item').doc(id).get().then(res => {
+          db.collection('item').doc(e.currentTarget.dataset.id ? e.currentTarget.dataset.id : e.detail.itemid).get().then(res => {
             this.setData({
               maskinfo: [res.data],
               popup: 'flex',
@@ -153,31 +153,18 @@ Page({
         }
       },
       fail: res => {
-        if (e.currentTarget.dataset.id) {
-          db.collection('item').doc(e.currentTarget.dataset.id).get().then(res => {
-            this.setData({
-              maskinfo: [res.data],
-              popup: 'flex',
-            })
-            setTimeout(() => {
-              this.setData({
-                animationData: animation.export(),
-              })
-            }, 100)
+        db.collection('item').doc(e.currentTarget.dataset.id ? e.currentTarget.dataset.id : e.detail.itemid).get().then(res => {
+          this.setData({
+            maskinfo: [res.data],
+            popup: 'flex',
           })
-        } else {
-          db.collection('item').doc(e.detail.itemid).get().then(res => {
+          setTimeout(() => {
             this.setData({
-              maskinfo: [res.data],
-              popup: 'flex',
+              animationData: animation.export(),
             })
-            setTimeout(() => {
-              this.setData({
-                animationData: animation.export(),
-              })
-            }, 100)
-          })
-        }
+          }, 100)
+        })
+
       }
     })
 
@@ -305,7 +292,7 @@ Page({
           }
           return arrs
         })(this.data.items)
-       
+
         this.setData({
           // currentpage: 1,
           items: this.data.items,

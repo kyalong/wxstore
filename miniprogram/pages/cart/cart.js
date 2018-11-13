@@ -46,9 +46,9 @@ Page({
       total: (function(data) {
         let total = 0
         for (let i of data) {
-          total += JSON.parse(i).price * JSON.parse(i).num
+          total += JSON.parse(i).costprice * JSON.parse(i).num
         }
-        return total
+        return total.toFixed(2)
       })(e.detail.value),
       newitems: (function(data) {
         let total = []
@@ -124,9 +124,9 @@ Page({
           total: (function(res) {
             let total = 0
             for (let i of res) {
-              total += i.price * i.num
+              total += i.costprice * i.num
             }
-            return total
+            return total.toFixed(2)
           })(res.data)
         })
       }
@@ -147,9 +147,9 @@ Page({
         total: (function(res) {
           let total = 0
           for (let i of res) {
-            total += i.price * i.num
+            total += i.costprice * i.num
           }
-          return total
+          return total.toFixed(2)
         })(this.data.items)
       })
     }
@@ -184,21 +184,21 @@ Page({
         for (let j of currentlist) {
           if (id == j._id) {
             j.num = i.num
-            totals += j.price * j.num
+            totals += j.costprice * j.num
           } else {
-            totals += j.price * j.num
+            totals += j.costprice * j.num
           }
         }
       }
     }
     this.setData({
       items: this.data.items,
-      total: currentlist[0] != undefined ? totals : (function(res) {
+      total: currentlist[0] != undefined ? totals.toFixed(2) : (function(res) {
         let total = 0
         for (let i of res) {
-          total += i.price * i.num
+          total += i.costprice * i.num
         }
-        return total
+        return total.toFixed(2)
       })(this.data.items)
     })
   },
@@ -216,9 +216,9 @@ Page({
         for (let j of currentlist) {
           if (id == j._id) {
             j.num = i.num
-            totals += j.price * j.num
+            totals += j.costprice * j.num
           } else {
-            totals += j.price * j.num
+            totals += j.costprice * j.num
           }
         }
       } else if (i._id == id && i.num == 1) {
@@ -230,9 +230,9 @@ Page({
       total: currentlist[0] ? totals : (function(res) {
         let total = 0
         for (let i of res) {
-          total += i.price * i.num
+          total += i.costprice * i.num
         }
-        return total
+        return total.toFixed(2)
       })(this.data.items)
     })
 

@@ -1,31 +1,26 @@
-// miniprogram/manager/income/income.js
-
+// miniprogram/pages/ticket/ticket.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    yesterday: {
-      '成本': 10,
-      '收入': 100,
-      '利润': 90
+    price: {
+      10: 100,
+      20: 200,
+      30: 300
     },
-    today: {
-      '成本': 10,
-      '收入': 100,
-      '利润': 90
-    },
-    nums:0
+    expired: '2018.10.11 00:00-2018.11.11 23:59'
   },
-  backhome: function (e) {
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  backhome: function(e) {
     wx.navigateBack({
       delta: 1
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
 
   },
@@ -34,7 +29,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
- 
+
   },
 
   /**

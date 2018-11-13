@@ -1,6 +1,6 @@
 function fix(num) {
-  var newnum = num*0.88
-  return newnum.toFixed(0)
+  var newnum = num
+  return newnum
 }
 module.exports = {
   fix: fix

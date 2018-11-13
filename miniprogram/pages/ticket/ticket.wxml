@@ -1,0 +1,19 @@
+<view class='view'>
+  <image src='../../images/choose.png' catchtap='backhome'></image>
+  <text>卡券中心</text>
+</view>
+<view class='tickets'>
+  <block wx:for='{{price}}' wx:key=''>
+    <view class='ticket'>
+      <view class='expired'>{{expired}}</view>
+      <view class='maincontent'>
+        <view class='content'>
+          <text>￥{{index}}</text>
+          <text>满{{item}}可用</text> </view>
+        <view class='btn'>
+          <navigator class='navi' open-type='switchTab' url='../shop/shop'>去使用</navigator>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

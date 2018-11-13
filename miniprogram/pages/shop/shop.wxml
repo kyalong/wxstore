@@ -36,14 +36,14 @@
     </swiper>
   </block>
   <block wx:else>
-    <view style='display:flex;align-items:center;margin:0 16px;'>
+    <!-- <view style='display:flex;align-items:center;margin:0 16px;'>
       <image src='../../images/csc3.png' style='width:20px;height:20px;margin-right:0.5rem'></image>
       <swiper style='width:calc(750rpx - 15px);height:25px;font-size:smaller;background-color:#FFCC00' vertical='true' autoplay='true'>
         <swiper-item style='display:flex;align-items:'>本店因店铺技术升级中,暂时不提供微信支付</swiper-item>
         <swiper-item style='display:flex;align-items:'>需要购买的亲,请在私人洞府加店家微信购买</swiper-item>
         <swiper-item style='display:flex;align-items:'>在此期间全场88折,感谢大家支持,尽快完成升级</swiper-item>
       </swiper>
-    </view>
+    </view> -->
     <scroll-view style='height:{{h-25}}px;width:{{w}}px' scroll-y='true' scroll-with-animation='true' enable-back-to-top='true' bindscroll='refresh' bindscrolltolower='loadcard'>
       <view class='intersection'>
         <view class='h1' style='height:{{w*(1-1/1.414)}}px'>

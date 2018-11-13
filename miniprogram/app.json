@@ -14,7 +14,12 @@
     "manager/item/item",
     "manager/income/income",
     "manager/index/index",
-    "pages/csc/csc"
+    "pages/csc/csc",
+    "manager/card/card",
+    "manager/rma/rma",
+    "manager/vip/vip",
+    "pages/vipcard/vipcard",
+    "pages/ticket/ticket"
   ],
   "window": {
     "backgroundColor": "#ffffff",
