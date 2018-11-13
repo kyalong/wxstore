@@ -37,7 +37,7 @@
   </block>
   <block wx:else>
     <view style='display:flex;align-items:center;margin:0 16px;'>
-      <image src='../../images/csc3.png' style='width:15px;height:15px;margin-right:0.5rem'></image>
+      <image src='../../images/csc3.png' style='width:20px;height:20px;margin-right:0.5rem'></image>
       <swiper style='width:calc(750rpx - 15px);height:25px;font-size:smaller;background-color:#FFCC00' vertical='true' autoplay='true'>
         <swiper-item style='display:flex;align-items:'>本店因店铺技术升级中,暂时不提供微信支付</swiper-item>
         <swiper-item style='display:flex;align-items:'>需要购买的亲,请在私人洞府加店家微信购买</swiper-item>

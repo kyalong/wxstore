@@ -6,6 +6,7 @@ const db = wx.cloud.database({
   env: 'boutique1'
 })
 const _ = db.command
+
 Page({
   data: {
     items: [{
@@ -213,19 +214,6 @@ Page({
   refresh: function(e) {},
   loadcard: function(e) {},
   onLoad: function(options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-    // wx.cloud.callFunction({
-    //   name: 'getdata',
-    //   data: {
-    //     next: this.data.currentpage
-    //   }
-    // }).then(res => {
     app.firstitems = res => {
       this.data.items = res
       let items1 = (function(data) {
@@ -264,30 +252,29 @@ Page({
         }
       })
     }
-    // })
   },
 
-  /** 
-   * 生命周期函数--监听页面显示
+  /**
+   * 生命周期函数--监听页面初次渲染完成
    */
-  onShow: function() {
+  onReady: function() {
+    // wx.cloud.callFunction({
+    //   name: 'getdata',
+    //   data: {
+    //     next: this.data.currentpage
+    //   }
+    // }).then(res => {
 
-    // this.setData({
-    //   h: wx.getSystemInfoSync().windowHeight - 64
     // })
-    let animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: 'linear',
-    })
-    this.animation = animation
-    this._observer = wx.createIntersectionObserver(this)
     wx.createIntersectionObserver().relativeToViewport({
-      bottom: 1300
+      bottom: 1334
     }).observe('.end', (res) => {
+
+      this.data.currentpage += 1
       wx.cloud.callFunction({
         name: 'getdata',
         data: {
-          next: this.data.currentpage + 1
+          next: this.data.currentpage
         }
       }).then(res => {
         try {
@@ -295,13 +282,6 @@ Page({
         } catch (e) {
           console.log('end')
         }
-        wx.setStorage({
-          key: 'cache',
-          data: this.data.items,
-          success: () => {
-            wx.hideLoading()
-          }
-        })
         let items1 = (function(data) {
           let arr = []
           for (let j in data) {
@@ -325,15 +305,40 @@ Page({
           }
           return arrs
         })(this.data.items)
+       
         this.setData({
-          currentpage: this.data.currentpage + 1,
+          // currentpage: 1,
           items: this.data.items,
           items1: items1,
           items2: items2,
 
         })
+        wx.setStorage({
+          key: 'cache',
+          data: this.data.items,
+          success: () => {
+            wx.hideLoading()
+          }
+        })
       })
     })
+  },
+
+  /** 
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+
+    // this.setData({
+    //   h: wx.getSystemInfoSync().windowHeight - 64
+    // })
+    let animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: 'linear',
+    })
+    this.animation = animation
+    this._observer = wx.createIntersectionObserver(this)
+
     this._observer.relativeTo('.view').observe('.intersection', (res) => {
       if (res.intersectionRatio > 0) {
         this.setData({

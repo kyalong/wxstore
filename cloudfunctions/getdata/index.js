@@ -29,7 +29,7 @@ exports.main = async(event, context) => {
     })
   } else {
     const count = await db.collection('item').where({
-      class: '男装'
+      class: _.in(['女鞋','男装'])
     }).count()
     if (event.next < Math.ceil(count.total / MAX_LIMIT)) {
       return await db.collection('item').field({
@@ -38,7 +38,7 @@ exports.main = async(event, context) => {
         visit: false,
         createdate: false
       }).where({
-        class: '男装'
+        class: _.in(['女鞋','男装'])
       }).skip(event.next * MAX_LIMIT).limit(MAX_LIMIT).get()
     }
   }
